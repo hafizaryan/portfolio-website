@@ -39,7 +39,7 @@ function showSuccessNotification() {
   notification.className = "fixed top-6 right-6 z-[200] animate-slide-in";
   notification.innerHTML = `
       <div class="bg-surface border border-border rounded-lg shadow-lg px-6 py-4 flex items-center gap-3 max-w-sm">
-          <div class="flex-shrink-0 text-green-400">
+          <div class="flex-shrink-0 text-emerald-700 dark:text-green-400">
               <i class="fa-solid fa-check text-xl"></i>
           </div>
           <div class="flex-1">

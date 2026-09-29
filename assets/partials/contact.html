@@ -10,28 +10,28 @@
     class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center px-4">
     <div class="bg-bg border border-border max-w-xl w-full relative p-6">
         <button aria-label="Close contact modal" data-close-contact
-            class="absolute top-3 right-3 text-gray-400 hover:text-white transition">
+            class="absolute top-3 right-3 text-slate-600 dark:text-gray-400 hover:text-white transition">
             <i class="fa-solid fa-times text-xl"></i>
         </button>
 
         <div class="mb-6">
             <h2 class="text-2xl font-bold text-white mb-2">Let's Work Together</h2>
-            <p class="text-gray-400 text-sm">
+            <p class="text-slate-600 dark:text-gray-400 text-sm">
                 Have an interesting project or just want to discuss technology? Send me a message.
             </p>
         </div>
 
         <form id="contact-form" action="https://formspree.io/f/xvzpvywr" method="POST" class="space-y-5">
             <div>
-                <label class="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                <label class="block text-sm font-medium text-slate-600 dark:text-gray-400 mb-2">Email</label>
                 <input type="email" name="email" required
-                    class="w-full bg-zinc-900 border border-border p-3 text-white focus:outline-none focus:border-white transition"
+                    class="w-full bg-white dark:bg-zinc-900 border border-border p-3 text-white focus:outline-none focus:border-white transition"
                     placeholder="Enter Your Email">
             </div>
             <div>
-                <label class="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                <label class="block text-sm font-medium text-slate-600 dark:text-gray-400 mb-2">Message</label>
                 <textarea name="message" rows="4" required
-                    class="w-full bg-zinc-900 border border-border p-3 text-white focus:outline-none focus:border-white transition"
+                    class="w-full bg-white dark:bg-zinc-900 border border-border p-3 text-white focus:outline-none focus:border-white transition"
                     placeholder="Enter Your Message"></textarea>
             </div>
             <button type="submit" class="w-full bg-white text-black font-bold py-3 hover:bg-gray-200 transition">
@@ -42,60 +42,88 @@
 </div>
 
 <!-- Footer -->
-<footer class="border-t border-border bg-gradient-to-b from-zinc-950 to-bg">
-    <div class="max-w-6xl mx-auto px-4 py-12">
-        <div class="grid md:grid-cols-3 gap-10 mb-10">
-            <div>
+<footer class="border-t border-border bg-surface">
+    <div class="max-w-6xl mx-auto px-4 py-14">
+        <div class="grid md:grid-cols-12 gap-10 mb-12">
+            <!-- Col 1: Brand & Bio -->
+            <div class="md:col-span-5 space-y-4">
                 <a href="#"
-                    class="inline-block text-xl font-bold text-white tracking-tight border border-white px-3 py-1 font-mono mb-4">
+                    class="inline-block text-xl font-bold text-white tracking-tight border border-white px-3 py-1 font-mono hover:bg-white hover:text-black transition-colors">
                     &lt;hafiz /&gt;
                 </a>
-                <p class="text-sm text-gray-400 leading-relaxed max-w-sm">
-                    Thanks for visiting my portfolio, support me by following me on my social media and give me a star
-                    on my projects.
+                <p class="text-sm text-slate-600 dark:text-gray-400 leading-relaxed max-w-sm">
+                    Web developer specializing in building modern, performant, and user-centric digital experiences. Thanks for stopping by!
                 </p>
-            </div>
-
-            <div>
-                <h3 class="text-white font-semibold mb-4">Quick Links</h3>
-                <div class="grid grid-cols-2 gap-2 text-sm">
-                    <a href="#about" class="text-gray-400 hover:text-white transition">About</a>
-                    <a href="#projects" class="text-gray-400 hover:text-white transition">Projects</a>
-                    <a href="#work" class="text-gray-400 hover:text-white transition">Work</a>
-                    <a href="#skills" class="text-gray-400 hover:text-white transition">Skills</a>
-                    <a href="#education" class="text-gray-400 hover:text-white transition">Education</a>
-                    <a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a>
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 border border-border bg-bg text-xs font-medium text-slate-700 dark:text-gray-300">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span>Available for projects & roles</span>
                 </div>
             </div>
 
-            <div>
-                <h3 class="text-white font-semibold mb-4">Connect</h3>
-                <div class="flex items-center gap-3 mb-5">
-                    <a href="https://github.com/hafizaryan" target="_blank"
-                        class="h-10 w-10 border border-border text-gray-300 hover:text-white hover:border-white transition inline-flex items-center justify-center">
-                        <i class="fa-brands fa-github"></i>
+            <!-- Col 2: Navigation -->
+            <div class="md:col-span-4 space-y-4">
+                <h3 class="text-white font-semibold text-xs uppercase tracking-widest">Navigation</h3>
+                <div class="grid grid-cols-2 gap-y-2.5 gap-x-4 text-sm">
+                    <a href="#about" class="text-slate-600 dark:text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1.5 group">
+                        <span class="text-slate-400 dark:text-zinc-600 group-hover:text-white transition-colors text-xs font-mono">/</span> About
                     </a>
-                    <a href="https://www.linkedin.com/in/hafizaryan/" target="_blank"
-                        class="h-10 w-10 border border-border text-gray-300 hover:text-white hover:border-white transition inline-flex items-center justify-center">
-                        <i class="fa-brands fa-linkedin-in"></i>
+                    <a href="#projects" class="text-slate-600 dark:text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1.5 group">
+                        <span class="text-slate-400 dark:text-zinc-600 group-hover:text-white transition-colors text-xs font-mono">/</span> Projects
                     </a>
-                    <a href="https://www.instagram.com/hafizaryan_/" target="_blank"
-                        class="h-10 w-10 border border-border text-gray-300 hover:text-white hover:border-white transition inline-flex items-center justify-center">
-                        <i class="fa-brands fa-instagram"></i>
+                    <a href="#work" class="text-slate-600 dark:text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1.5 group">
+                        <span class="text-slate-400 dark:text-zinc-600 group-hover:text-white transition-colors text-xs font-mono">/</span> Experience
+                    </a>
+                    <a href="#skills" class="text-slate-600 dark:text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1.5 group">
+                        <span class="text-slate-400 dark:text-zinc-600 group-hover:text-white transition-colors text-xs font-mono">/</span> Skills
+                    </a>
+                    <a href="#education" class="text-slate-600 dark:text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1.5 group">
+                        <span class="text-slate-400 dark:text-zinc-600 group-hover:text-white transition-colors text-xs font-mono">/</span> Education
+                    </a>
+                    <a href="#contact" class="text-slate-600 dark:text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1.5 group">
+                        <span class="text-slate-400 dark:text-zinc-600 group-hover:text-white transition-colors text-xs font-mono">/</span> Contact
                     </a>
                 </div>
-                <a href="#" id="support-link"
-                    class="inline-flex items-center gap-2 text-sm text-gray-300 border border-border px-4 py-2 hover:border-white hover:text-white transition">
-                    <i class="fa-solid fa-heart"></i>
-                    Support Me
-                </a>
+            </div>
+
+            <!-- Col 3: Social & Support -->
+            <div class="md:col-span-3 space-y-4">
+                <h3 class="text-white font-semibold text-xs uppercase tracking-widest">Connect</h3>
+                <div class="flex items-center gap-3">
+                    <a href="https://github.com/hafizaryan" target="_blank" aria-label="GitHub"
+                        class="h-10 w-10 border border-border bg-bg text-slate-700 dark:text-gray-300 hover:text-white hover:border-white hover:bg-surface transition-all inline-flex items-center justify-center">
+                        <i class="fa-brands fa-github text-base"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/hafizaryan/" target="_blank" aria-label="LinkedIn"
+                        class="h-10 w-10 border border-border bg-bg text-slate-700 dark:text-gray-300 hover:text-white hover:border-white hover:bg-surface transition-all inline-flex items-center justify-center">
+                        <i class="fa-brands fa-linkedin-in text-base"></i>
+                    </a>
+                    <a href="https://www.instagram.com/hafizaryan_/" target="_blank" aria-label="Instagram"
+                        class="h-10 w-10 border border-border bg-bg text-slate-700 dark:text-gray-300 hover:text-white hover:border-white hover:bg-surface transition-all inline-flex items-center justify-center">
+                        <i class="fa-brands fa-instagram text-base"></i>
+                    </a>
+                </div>
+                <div>
+                    <a href="#" id="support-link"
+                        class="inline-flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-gray-300 border border-border bg-bg px-4 py-2.5 hover:border-white hover:text-white hover:bg-surface transition-all group">
+                        <i class="fa-solid fa-heart text-rose-500 group-hover:scale-110 transition-transform"></i>
+                        <span>Support Me</span>
+                    </a>
+                </div>
             </div>
         </div>
 
-        <div class="border-t border-border pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            <p class="text-sm text-gray-500">
-                © 2026 Hafiz Aryan Siregar
+        <!-- Bottom Bar -->
+        <div class="border-t border-border pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <p class="text-xs text-slate-500 dark:text-gray-500">
+                © 2026 Hafiz Aryan Siregar. All rights reserved.
             </p>
+            <a href="#" class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-gray-400 hover:text-white transition-colors">
+                <span>Back to top</span>
+                <i class="fa-solid fa-arrow-up text-[10px]"></i>
+            </a>
         </div>
     </div>
 </footer>

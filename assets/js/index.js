@@ -1,16 +1,29 @@
 tailwind.config = {
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
         sans: ["Plus Jakarta Sans", "sans-serif"],
       },
       colors: {
-        // Custom Monochrome Palette based on Tailwind Zinc
-        bg: "#09090b", // Very Dark (Background)
-        surface: "#18181b", // Dark Gray (Card)
-        border: "#27272a", // Borders
-        muted: "#a1a1aa", // Secondary Text
-        white: "#fafafa", // Primary Text
+        // Dynamic colors controlled by CSS variables
+        bg: "var(--color-bg)",
+        surface: "var(--color-surface)",
+        border: "var(--color-border)",
+        muted: "var(--color-muted)",
+        white: "var(--color-white)",
+        black: "var(--color-black)",
+        gray: {
+          200: "var(--color-gray-200)",
+          300: "var(--color-gray-300)",
+          400: "var(--color-gray-400)",
+          500: "var(--color-gray-500)",
+        },
+        zinc: {
+          700: "var(--color-zinc-700)",
+          800: "var(--color-zinc-800)",
+          900: "var(--color-zinc-900)",
+        }
       },
     },
   },
@@ -70,7 +83,7 @@ function setupProjectModal() {
     if (tech) {
       tech.split(',').map((s) => s.trim()).filter(Boolean).forEach((t) => {
         const span = document.createElement('span');
-        span.className = 'border border-border px-2 py-1 text-xs text-gray-300';
+        span.className = 'bg-surface border border-border px-2.5 py-1 text-xs font-mono text-slate-700 dark:text-gray-300';
         span.textContent = t;
         techEl.appendChild(span);
       });
@@ -133,7 +146,13 @@ function setupProjectModal() {
         buttons.forEach((b) => {
           const pressed = b === btn;
           b.setAttribute('aria-pressed', String(pressed));
-          b.classList.toggle('border-white', pressed);
+          if (pressed) {
+            b.classList.remove('border-border', 'text-slate-600', 'dark:text-gray-400');
+            b.classList.add('border-white', 'text-white', 'shadow-sm');
+          } else {
+            b.classList.remove('border-white', 'text-white', 'shadow-sm');
+            b.classList.add('border-border', 'text-slate-600', 'dark:text-gray-400');
+          }
         });
 
         // Show/Hide cards
@@ -255,6 +274,7 @@ function initInteractiveUI() {
   setupSupportModal();
   setupTilt();
   hydrateRepoStats();
+  setupTheme();
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -306,4 +326,37 @@ function setupSupportModal() {
     }
   });
 }
+
+// Theme Toggle
+function setupTheme() {
+  const toggleBtn = document.getElementById("theme-toggle");
+  if (!toggleBtn) return;
+
+  // The user requested light theme by default for everything
+  // So if there's no saved theme, default to light
+  const savedTheme = localStorage.getItem("theme");
+  const defaultDark = savedTheme === "dark";
+
+  if (defaultDark) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+  updateThemeIcon();
+
+  toggleBtn.addEventListener("click", () => {
+    document.documentElement.classList.toggle("dark");
+    const isDark = document.documentElement.classList.contains("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    updateThemeIcon();
+  });
+
+  function updateThemeIcon() {
+    const isDark = document.documentElement.classList.contains("dark");
+    toggleBtn.innerHTML = isDark 
+      ? '<i class="fa-solid fa-moon"></i>'
+      : '<i class="fa-solid fa-sun"></i>';
+  }
+}
+
         

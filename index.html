@@ -65,10 +65,11 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.jpg">
-    <link rel="icon" type="image/jpg" sizes="32x32" href="assets/favicon.jpg">
-    <link rel="icon" type="image/jpg" sizes="16x16" href="assets/favicon.jpg">
-    <link rel="manifest" href="assets/images/site.webmanifest">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.png">
+    <link rel="manifest" href="site.webmanifest">
 
 </head>
 
@@ -91,25 +92,34 @@
                     class="text-2xl font-bold text-white tracking-tight border border-white px-3 py-1 font-mono">
                     &lt;hafiz /&gt;
                 </a>
-                <!-- Desktop Menu -->
-                <div class="hidden lg:flex space-x-8 text-sm font-medium" id="navbar-desktop">
-                    <a href="#" id="nav-intro" class="hover:text-white transition-colors">Intro</a>
-                    <a href="#about" id="nav-about" class="hover:text-white transition-colors">About</a>
-                    <a href="#work" id="nav-work" class="hover:text-white transition-colors">Work</a>
-                    <a href="#projects" id="nav-projects" class="hover:text-white transition-colors">Projects</a>
-                    <a href="#education" id="nav-education" class="hover:text-white transition-colors">Education</a>
-                    <a href="#certification" id="nav-certification"
-                        class="hover:text-white transition-colors">Certification</a>
-                    <a href="#skills" id="nav-skills" class="hover:text-white transition-colors">Skills</a>
-                    <a href="#organization" id="nav-organization"
-                        class="hover:text-white transition-colors">Organization</a>
-                    <a href="#awards" id="nav-awards" class="hover:text-white transition-colors">Awards</a>
-                    <a href="#contact" id="nav-contact" class="hover:text-white transition-colors">Contact</a>
+                <div class="flex items-center gap-6">
+                    <!-- Desktop Menu -->
+                    <div class="hidden lg:flex space-x-8 text-sm font-medium" id="navbar-desktop">
+                        <a href="#" id="nav-intro" class="hover:text-white transition-colors">Intro</a>
+                        <a href="#about" id="nav-about" class="hover:text-white transition-colors">About</a>
+                        <a href="#work" id="nav-work" class="hover:text-white transition-colors">Work</a>
+                        <a href="#projects" id="nav-projects" class="hover:text-white transition-colors">Projects</a>
+                        <a href="#education" id="nav-education" class="hover:text-white transition-colors">Education</a>
+                        <a href="#certification" id="nav-certification"
+                            class="hover:text-white transition-colors">Certification</a>
+                        <a href="#skills" id="nav-skills" class="hover:text-white transition-colors">Skills</a>
+                        <a href="#organization" id="nav-organization"
+                            class="hover:text-white transition-colors">Organization</a>
+                        <a href="#awards" id="nav-awards" class="hover:text-white transition-colors">Awards</a>
+                        <a href="#contact" id="nav-contact" class="hover:text-white transition-colors">Contact</a>
+                    </div>
+
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="text-white text-xl hover:opacity-75 transition-opacity"
+                        aria-label="Toggle Theme">
+                        <i class="fa-solid fa-sun"></i>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button onclick="toggleMenu()" class="lg:hidden text-white text-2xl">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
                 </div>
-                <!-- Mobile Menu Button -->
-                <button onclick="toggleMenu()" class="lg:hidden text-white text-2xl">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
             </div>
         </div>
         <!-- Mobile Dropdown -->
@@ -149,21 +159,21 @@
         class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center px-4">
         <div class="bg-bg border border-border max-w-5xl w-full relative p-0 md:p-6">
             <button aria-label="Close project modal" data-close-project
-                class="absolute top-3 right-3 text-gray-400 hover:text-white transition">
+                class="absolute top-3 right-3 text-slate-600 dark:text-gray-400 hover:text-white transition">
                 <i class="fa-solid fa-times text-xl"></i>
             </button>
             <div class="grid md:grid-cols-2 gap-0 md:gap-6">
                 <div class="border-b md:border-b-0 md:border-r border-border">
-                    <div class="relative aspect-video bg-zinc-900">
+                    <div class="relative aspect-video bg-slate-100 dark:bg-zinc-900">
                         <img id="project-modal-image" src="" alt="" class="absolute inset-0 w-full h-full object-cover">
                     </div>
                 </div>
                 <div class="p-6 space-y-4">
                     <div>
-                        <p class="text-xs uppercase tracking-[0.2em] text-gray-500 mb-1">Project</p>
+                        <p class="text-xs uppercase tracking-[0.2em] text-slate-600 dark:text-gray-500 mb-1">Project</p>
                         <h3 id="project-modal-title" class="text-2xl font-bold text-white">Title</h3>
                     </div>
-                    <p id="project-modal-desc" class="text-sm text-gray-400 leading-relaxed"></p>
+                    <p id="project-modal-desc" class="text-sm text-slate-600 dark:text-gray-400 leading-relaxed"></p>
                     <div>
                         <h4 class="text-white font-semibold mb-2 text-sm uppercase tracking-wider">Tech Stack</h4>
                         <div id="project-modal-tech" class="flex flex-wrap gap-2"></div>
@@ -171,7 +181,8 @@
                     <div>
                         <h4 class="text-white font-semibold mb-2 text-sm uppercase tracking-wider">Key Features</h4>
                         <ul id="project-modal-features"
-                            class="list-disc list-inside text-sm space-y-2 text-gray-400 marker:text-white"></ul>
+                            class="list-disc list-inside text-sm space-y-2 text-slate-600 dark:text-gray-400 marker:text-white">
+                        </ul>
                     </div>
                     <div class="flex flex-wrap gap-3 pt-2">
                         <a id="project-modal-repo" href="#" target="_blank"
@@ -193,18 +204,18 @@
         class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center px-4">
         <div class="bg-bg border border-border max-w-sm w-full relative p-6">
             <button aria-label="Close support modal" data-close-support
-                class="absolute top-3 right-3 text-gray-400 hover:text-white transition">
+                class="absolute top-3 right-3 text-slate-600 dark:text-gray-400 hover:text-white transition">
                 <i class="fa-solid fa-times text-xl"></i>
             </button>
             <div class="text-center space-y-4">
                 <div>
-                    <p class="text-xs uppercase tracking-[0.2em] text-gray-500 mb-1">Support</p>
+                    <p class="text-xs uppercase tracking-[0.2em] text-slate-600 dark:text-gray-500 mb-1">Support</p>
                     <h3 class="text-xl font-bold text-white">Scan QRIS</h3>
                 </div>
-                <div class="border border-border p-3 bg-zinc-900">
+                <div class="border border-border p-3 bg-white dark:bg-zinc-900">
                     <img src="assets/images/qris.jpeg" alt="QRIS Support" class="w-full h-full object-contain">
                 </div>
-                <p class="text-sm text-gray-400 leading-relaxed">
+                <p class="text-sm text-slate-600 dark:text-gray-400 leading-relaxed">
                     Terima kasih sudah mendukung. Scan kode QR untuk mengirim apresiasi.
                 </p>
             </div>
