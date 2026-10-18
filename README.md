@@ -1,151 +1,44 @@
-# 🌟 Portfolio - Hafiz Aryan Siregar
+# Portofolio Hafiz Aryan Siregar
 
-> Personal portfolio website showcasing my journey as a Web Developer and Software Tester
+Repositori ini adalah kode sumber situs portofolio pribadi Hafiz Aryan Siregar yang tayang melalui GitHub Pages di alamat https://hafizaryan.github.io.
 
-## 🌐 Live Demo
+Situs ini menampilkan profil, latar belakang, proyek yang pernah dikerjakan, galeri kegiatan, sertifikat, dan resume dari seorang Web Developer dan Software Tester.
 
-Visit my portfolio at: **[hafizaryan.github.io](https://hafizaryan.github.io)**
+## Fitur
 
-## 👨‍💻 About Me
+- Halaman utama satu berkas (`index.html`) dengan konten yang dimuat dari berkas parsial di `assets/partials/` melalui `partials-loader.js`.
+- Animasi saat halaman digulir menggunakan pustaka AOS (Animate On Scroll).
+- Ikon menggunakan Font Awesome 6.5.1 dari CDN.
+- Dukungan ikon aplikasi web melalui `site.webmanifest` dan berkas favicon.
+- Berkas `robots.txt` untuk pengaturan perayapan mesin pencari.
+- Domain khusus yang diatur melalui berkas `CNAME`.
 
-I am a final year student with experience in Web Development and Software Testing. I have hands-on experience with PHP Framework, JavaScript, SQL, and Google Cloud Platform. This portfolio showcases my projects, skills, and professional journey.
+## Teknologi
 
-## ✨ Portfolio Features
+- HTML5
+- CSS3 (berkas `assets/css/style.css` dan `assets/css/page-animations.css`)
+- JavaScript murni (berkas di `assets/js/`)
+- AOS 2.3.1 untuk animasi scroll
+- Font Awesome untuk ikon
+- GitHub Pages untuk hosting
 
-- **🏠 Intro**: A brief introduction about myself and my background
-- **📖 About**: Detailed information about my background, interests, and experiences
-- **💼 Works**: Recent projects I have worked on with technologies used
-- **🖼️ Gallery**: Photo gallery of my activities, projects, and achievements
-- **📧 Contact**: Interactive contact form to reach me directly
-- **📜 Certificates**: Showcase of my certifications and achievements
-- **📄 Resume**: Downloadable CV and important documents
+## Struktur Folder
 
-## 🛠️ Technologies Used
+- `index.html` - halaman utama portofolio
+- `assets/css/` - stylesheet utama dan animasi halaman
+- `assets/js/` - JavaScript untuk pemuatan parsial, inisialisasi halaman, dan interaksi
+- `assets/partials/` - potongan HTML yang dimuat ke halaman utama
+- `assets/images/` - berkas gambar
+- `CNAME` - konfigurasi domain khusus GitHub Pages
+- `site.webmanifest` - manifest aplikasi web
+- `robots.txt` - aturan perayapan mesin pencari
 
-### Frontend
+## Cara Menjalankan
 
-- **HTML5**: Semantic markup and structure
-- **CSS3**: Advanced styling, animations, and responsive design
-- **JavaScript**: Interactive features and dynamic content
-- **Swiper.js**: Smooth gallery slider functionality
+Situs ini statis dan tidak membutuhkan proses build.
 
-### Design & Assets
+1. Clone repositori ini.
+2. Jalankan server statis, contohnya `python -m http.server 8000` atau `npx serve .`.
+3. Buka `http://localhost:8000` di browser.
 
-- **Google Fonts**: Professional typography
-- **Font Awesome**: Scalable vector icons
-- **Responsive Design**: Mobile-first approach
-
-### Hosting & Deployment
-
-- **GitHub Pages**: Free hosting and continuous deployment
-- **Custom Domain**: Professional web presence
-
-## 📂 Project Structure
-
-```
-hafizaryan.github.io/
-├── index.html              # Main homepage
-├── certificate.html        # Certificates showcase
-├── link.html              # Links page
-├── CNAME                  # Custom domain configuration
-├── favicon.jpg            # Site favicon
-├── site.webmanifest       # Web app manifest
-├── assets/                # Documents and resources
-│   ├── cv.pdf            # Resume/CV
-│   ├── certificates/     # Certificate images
-│   └── gallery/          # Gallery photos
-├── css/                   # Stylesheets
-│   ├── styles.css        # Main styles
-│   ├── link_styles.css   # Link page styles
-│   └── vendor.css        # Third-party styles
-├── images/                # Profile and UI images
-├── js/                    # JavaScript files
-│   ├── main.js           # Main functionality
-│   └── plugins.js        # Plugin configurations
-└── public/                # Public assets
-```
-
-## 🚀 Local Development
-
-To run this project locally:
-
-1. **Clone the repository:**
-
-   ```powershell
-   git clone https://github.com/hafizaryan/hafizaryan.github.io.git
-   ```
-
-2. **Navigate to project directory:**
-
-   ```powershell
-   cd hafizaryan.github.io
-   ```
-
-3. **Start local server:**
-
-   ```powershell
-   # Using Python
-   python -m http.server 8000
-
-   # Using Node.js (if installed)
-   npx serve .
-
-   # Or simply open index.html in your browser
-   start index.html
-   ```
-
-4. **View in browser:**
-   Open `http://localhost:8000` in your web browser
-
-## 📱 Responsive Design
-
-The website is fully responsive and optimized for:
-
-- 🖥️ Desktop computers (1920px+)
-- 💻 Laptops (1024px - 1919px)
-- 📱 Tablets (768px - 1023px)
-- 📱 Mobile devices (320px - 767px)
-
-## 🎯 Key Features
-
-- ⚡ Fast loading and optimized performance
-- 🎨 Modern and clean user interface
-- 📱 Mobile-first responsive design
-- 🖼️ Interactive image gallery with Swiper.js
-- 📧 Working contact form
-- 📜 Certificate showcase
-- 📄 Downloadable resume
-- 🔍 SEO optimized
-- ♿ Accessibility friendly
-
-## 📞 Contact & Connect
-
-- **📧 Email**: [Contact via website form](https://hafizaryan.github.io)
-- **💼 LinkedIn**: [Connect with me](https://linkedin.com/in/hafizaryan)
-- **🐙 GitHub**: [@hafizaryan](https://github.com/hafizaryan)
-- **🌐 Portfolio**: [hafizaryan.github.io](https://hafizaryan.github.io)
-
-## 📈 Skills Highlighted
-
-- **Web Development**: PHP, JavaScript, HTML5, CSS3
-- **Database**: SQL, Database Design
-- **Cloud Computing**: Google Cloud Platform
-- **Software Testing**: Manual & Automated Testing
-- **Version Control**: Git, GitHub
-- **Responsive Design**: Mobile-first approach
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 🙏 Acknowledgments
-
-- Thanks to all the open-source libraries and tools used
-- Inspiration from modern portfolio designs
-- Continuous learning and improvement
-
----
-
-⭐ **If you like this portfolio, please give it a star!** ⭐
-
-_Last updated: June 2025_
+Setiap perubahan yang di-push ke branch utama akan otomatis diterbitkan ulang oleh GitHub Pages.
