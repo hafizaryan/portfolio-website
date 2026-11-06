@@ -1,5 +1,5 @@
 <!-- Hero Section -->
-<section class="min-h-screen flex items-center pt-20 relative overflow-hidden">
+<section class="min-h-screen flex items-center pt-28 pb-20 relative overflow-hidden">
     <div
         class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-800/20 via-bg to-bg">
     </div>
@@ -30,12 +30,27 @@
 
             <!-- Socials -->
             <div class="mt-10 flex gap-6">
-                <a href="https://github.com/hafizaryan" class="text-2xl hover:text-white transition" target="_blank"><i
+                <a href="https://github.com/hafizaryan" class="text-2xl hover:text-white transition" target="_blank" aria-label="GitHub"><i
                         class="fab fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/hafizaryan/" class="text-2xl hover:text-white transition"
-                    target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.instagram.com/hafizaryan_/" class="text-2xl hover:text-white transition"
-                    target="_blank"><i class="fab fa-instagram"></i></a>
+                    target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <!-- Profile Photo -->
+        <div class="relative flex justify-center lg:justify-end" data-aos="fade-left" data-aos-duration="1000"
+            data-aos-delay="150">
+            <div class="relative w-64 sm:w-80 lg:w-[22rem]">
+                <div class="absolute inset-0 translate-x-4 translate-y-4 border border-border"></div>
+                <div class="relative aspect-square overflow-hidden border border-border bg-surface">
+                    <img src="assets/profile_picture.jpg" alt="Hafiz Aryan Siregar"
+                        class="h-full w-full object-cover grayscale">
+                </div>
+                <div class="absolute -bottom-5 -left-5 bg-bg border border-border px-4 py-2.5">
+                    <p class="text-[10px] font-mono uppercase tracking-[0.25em] text-slate-600 dark:text-gray-500">
+                        Hafiz Aryan</p>
+                    <p class="text-sm font-semibold text-white">Web Developer</p>
+                </div>
             </div>
         </div>
     </div>

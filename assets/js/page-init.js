@@ -70,6 +70,8 @@ function setupContactModal() {
   modal.dataset.bound = "true";
 
   const openModal = () => {
+    // Record when the form became visible for the anti-spam timing check
+    modal.dataset.openedAt = String(Date.now());
     modal.classList.remove("hidden");
     document.body.classList.add("overflow-hidden");
   };
@@ -106,6 +108,24 @@ function bindPageEvents() {
     contactForm.dataset.bound = "true";
     contactForm.addEventListener("submit", function (e) {
       e.preventDefault();
+
+      // Anti-spam honeypot check
+      const gotcha = this.elements["_gotcha"] ? this.elements["_gotcha"].value.trim() : "";
+      // Anti-spam timing check: people need more than a few seconds to write a message
+      const modalEl = document.getElementById("contact-modal");
+      const openedAt = Number(modalEl && modalEl.dataset.openedAt) || 0;
+      const tooFast = !openedAt || Date.now() - openedAt < 3000;
+      if (gotcha || tooFast) {
+        // Silently treat as success for automated bot submission without forwarding to Formspree
+        showSuccessNotification();
+        contactForm.reset();
+        const contactModal = document.getElementById("contact-modal");
+        if (contactModal) {
+          contactModal.classList.add("hidden");
+          document.body.classList.remove("overflow-hidden");
+        }
+        return;
+      }
 
       const email = this.elements.email.value;
       const message = this.elements.message.value;

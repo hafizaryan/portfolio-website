@@ -287,16 +287,19 @@ window.addEventListener("DOMContentLoaded", () => {
 window.addEventListener("partials:loaded", initInteractiveUI);
 
 // Hide loading screen when page is fully loaded
-window.addEventListener("load", () => {
+function hideLoadingScreen() {
   const loadingScreen = document.getElementById("loading-screen");
-  if (loadingScreen) {
-    loadingScreen.classList.add("fade-out");
-    // Remove from DOM after animation completes
-    setTimeout(() => {
-      loadingScreen.remove();
-    }, 500);
-  }
-});
+  if (!loadingScreen) return;
+  loadingScreen.classList.add("fade-out");
+  // Remove from DOM after animation completes
+  setTimeout(() => {
+    loadingScreen.remove();
+  }, 500);
+}
+
+window.addEventListener("load", hideLoadingScreen);
+// Fallback so the loader never gets stuck on slow external assets
+setTimeout(hideLoadingScreen, 4000);
 
 function setupSupportModal() {
   const supportLink = document.getElementById("support-link");

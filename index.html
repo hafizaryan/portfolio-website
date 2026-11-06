@@ -6,6 +6,10 @@
         if (window.location.hostname === 'hafizaryan.github.io') {
             window.location.replace('https://hafizaryansiregar.my.id' + window.location.pathname + window.location.search);
         }
+        // Apply the saved theme before first paint so the skeleton matches it
+        try {
+            if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+        } catch (e) { }
     </script>
     <meta charset="UTF-8">
     <title>Portfolio Hafiz Aryan Siregar</title>
@@ -48,7 +52,6 @@
     <meta name="twitter:description"
         content="Kenali Hafiz Aryan Siregar, developer & cloud engineer profesional. Temukan karya, keahlian, dan cara berkolaborasi.">
     <meta name="twitter:image" content="https://hafizaryan.github.io/images/twitter-card.jpg">
-    <meta name="twitter:creator" content="@hafizaryan_">
 
     <!-- Plus Jakarta Sans Font Preload & Stylesheet -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,22 +73,51 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico?v=3">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=3">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=3">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png?v=3">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png?v=3">
     <link rel="manifest" href="site.webmanifest">
 
 </head>
 
 <body class="bg-bg text-muted font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden w-full">
 
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div style="text-align: center;">
-            <div class="loader"></div>
-            <div class="loading-logo">&lt;hafiz /&gt;</div>
-            <div class="loading-text">Loading...</div>
+    <!-- Loading Screen: skeleton shimmer that mirrors the navbar and hero layout -->
+    <div id="loading-screen" role="status" aria-live="polite" aria-label="Loading page">
+        <span class="sr-only">Loading...</span>
+        <div class="sk-nav" aria-hidden="true">
+            <div class="sk-wrap sk-nav-inner">
+                <div class="sk sk-circle"></div>
+                <div class="sk-nav-links">
+                    <div class="sk sk-line sk-w-12"></div>
+                    <div class="sk sk-line sk-w-12"></div>
+                    <div class="sk sk-line sk-w-12"></div>
+                    <div class="sk sk-line sk-w-16"></div>
+                    <div class="sk sk-line sk-w-16"></div>
+                </div>
+                <div class="sk sk-icon"></div>
+            </div>
+        </div>
+        <div class="sk-wrap sk-hero" aria-hidden="true">
+            <div class="sk-hero-text">
+                <div class="sk sk-pill"></div>
+                <div class="sk sk-title sk-w-80"></div>
+                <div class="sk sk-title sk-w-60"></div>
+                <div class="sk sk-line sk-w-100"></div>
+                <div class="sk sk-line sk-w-90"></div>
+                <div class="sk sk-line sk-w-50"></div>
+                <div class="sk-row">
+                    <div class="sk sk-btn"></div>
+                    <div class="sk sk-btn"></div>
+                </div>
+                <div class="sk-row">
+                    <div class="sk sk-icon"></div>
+                    <div class="sk sk-icon"></div>
+                </div>
+            </div>
+            <div class="sk sk-photo"></div>
         </div>
     </div>
 
@@ -93,9 +125,10 @@
     <nav class="fixed w-full z-50 glass-nav border-b border-border">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4">
             <div class="flex justify-between h-20 items-center">
-                <a href="#"
-                    class="text-2xl font-bold text-white tracking-tight border border-white px-3 py-1 font-mono">
-                    &lt;hafiz /&gt;
+                <a href="#" aria-label="Hafiz Aryan Siregar - Home"
+                    class="group inline-flex items-center">
+                    <img src="assets/profile_picture.jpg" alt="Hafiz Aryan Siregar"
+                        class="h-11 w-11 rounded-full object-cover border border-border group-hover:border-white transition-colors">
                 </a>
                 <div class="flex items-center gap-6">
                     <!-- Desktop Menu -->
