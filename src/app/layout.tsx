@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Schibsted_Grotesk, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteSkeleton } from "@/components/site-skeleton";
+import { GithubIoRedirect } from "@/components/github-io-redirect";
 import "./globals.css";
 
 const schibsted = Schibsted_Grotesk({
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           {children}
           <SiteSkeleton />
         </ThemeProvider>
+        <GithubIoRedirect />
         <noscript>
           <style>{".site-skeleton{display:none!important}"}</style>
         </noscript>
