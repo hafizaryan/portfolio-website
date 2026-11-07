@@ -86,7 +86,7 @@ export function Navbar() {
       </nav>
 
       {open && (
-        <div className="mx-auto mt-2 max-w-[1040px] rounded-3xl border border-white/15 bg-[#090a0c]/95 px-4 py-1 text-white shadow-2xl shadow-black/20 backdrop-blur-xl md:hidden">
+        <div className="navbar-glass mx-auto mt-2 max-w-[1040px] rounded-3xl px-4 py-1 text-white md:hidden">
           <div className="flex flex-col">
             {links.map((l) => (
               <a
@@ -98,6 +98,15 @@ export function Navbar() {
                 {l.label}
               </a>
             ))}
+            <div className="my-2 mt-3 border-t border-white/15 pt-3">
+              <a
+                href="#contact"
+                onClick={() => setOpen(false)}
+                className="block rounded-full bg-white px-3 py-2 text-center text-xs font-medium text-[#090a0c] transition-colors hover:bg-white/85"
+              >
+                {t("contact")}
+              </a>
+            </div>
           </div>
         </div>
       )}

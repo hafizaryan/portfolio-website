@@ -80,7 +80,6 @@ export function Hero() {
             className="max-w-none whitespace-nowrap text-4xl font-semibold leading-[1.02] tracking-[-0.035em] sm:text-5xl lg:text-5xl"
           >
             {t("name")}
-            <span className="text-accent">.</span>
           </h1>
 
           <p
@@ -97,15 +96,32 @@ export function Hero() {
             className="mt-9 flex flex-wrap gap-3"
           >
             <a
-              href="#experience"
+              href="#projects"
               className="rounded-md bg-ink px-5 py-3 text-sm font-medium text-ink-invert transition-all hover:bg-accent hover:text-white hover:shadow-[0_0_20px_-3px_var(--accent-glow)]"
             >
-              {t("viewExperience")}
+              {t("viewProjects")}
             </a>
             <a
               href="#contact"
-              className="rounded-md border border-rule px-5 py-3 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+              className="flex items-center gap-2 rounded-md border border-rule px-5 py-3 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
             >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z" />
+                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                <path d="M16 13H8" />
+                <path d="M16 17H8" />
+                <path d="M10 9H8" />
+              </svg>
               {t("contactMe")}
             </a>
           </div>

@@ -73,6 +73,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 100px; /* navbar fixed 50px + jarak top-4/offset */
   overflow-x: hidden;
 }
 

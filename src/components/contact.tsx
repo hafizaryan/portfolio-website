@@ -141,7 +141,14 @@ export function Contact() {
             {t("title")}
           </h2>
           <p className="mt-3 max-w-[40ch] text-muted">{t("lead")}</p>
-          <div className="mt-8 flex gap-3">
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a
+              href="mailto:mail@hafizaryansiregar.my.id"
+              className="inline-flex items-center gap-2 rounded-md border border-rule px-4 py-2 text-sm transition-colors hover:border-accent hover:text-accent"
+            >
+              <i className="fa-solid fa-envelope" aria-hidden="true" />
+              mail@hafizaryansiregar.my.id
+            </a>
             <a
               href="https://github.com/hafizaryan"
               target="_blank"
