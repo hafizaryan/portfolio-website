@@ -137,6 +137,8 @@
     "send": "Kirim pesan",
     "sending": "Mengirim…",
     "sent": "Pesan terkirim. Terima kasih.",
+    "successTitle": "Berhasil!",
+    "close": "Tutup",
     "error": "Terjadi kesalahan. Silakan coba lagi.",
     "fillFields": "Mohon isi kedua kolom."
   },

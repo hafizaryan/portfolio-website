@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import portrait from "@/assets/portrait.jpg";
+import icon from "../app/icon.png";
 
 export function About() {
   const t = useTranslations("about");
@@ -19,9 +19,9 @@ export function About() {
             <p>{t("intro")}</p>
             <p className="mt-6">{t("focus")}</p>
           </div>
-          <div className="about-photo hidden w-full overflow-hidden rounded-2xl bg-base md:block">
+          <div className="about-photo hidden w-full overflow-hidden rounded-full bg-base md:block">
             <Image
-              src={portrait}
+              src={icon}
               alt={t("title")}
               sizes="(max-width: 768px) 100vw, 14rem"
               className="aspect-square h-auto w-full object-cover"

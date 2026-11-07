@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 
 type ProjectKey = "foodinary" | "daisy" | "lab";
@@ -40,29 +40,58 @@ const projects: Project[] = [
 // Jarak sticky dari atas viewport (match dengan `top-24` = 6rem = 96px).
 const STICKY_TOP = 80;
 
+// Seberapa besar bagian kartu yang masih terlihat agar dianggap "muncul".
+const ACTIVE_VISIBLE_RATIO = 0.5;
+
 export function Projects() {
   const t = useTranslations("projects");
   const stackRef = useRef<HTMLDivElement>(null);
+  const [activeKey, setActiveKey] = useState<ProjectKey>(projects[0].key);
 
   // Satu useEffect kecil: progres scale pada kartu yang sedang tertutup.
   useEffect(() => {
     const root = stackRef.current;
     if (!root) return;
 
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (reduceMotion) return;
-
     const cards = Array.from(
       root.querySelectorAll<HTMLElement>("[data-stack-card]"),
     );
     if (cards.length === 0) return;
 
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduceMotion) return;
+
     let frame = 0;
 
     const update = () => {
       frame = 0;
+
+      // Kartu yang sedang "muncul": kartu pertama yang masih terlihat
+      // lebih dari setengahnya (belum tertutup kartu berikutnya).
+      let nextActive: ProjectKey = projects[projects.length - 1].key;
+      for (let i = 0; i < projects.length; i++) {
+        const card = cards[i];
+        const next = cards[i + 1];
+        if (!card) break;
+
+        const rect = card.getBoundingClientRect();
+        if (!next) {
+          nextActive = projects[i].key;
+          break;
+        }
+
+        const nextTop = next.getBoundingClientRect().top;
+        const visible =
+          Math.min(Math.max(nextTop - rect.top, 0), rect.height) / rect.height;
+        if (visible >= ACTIVE_VISIBLE_RATIO) {
+          nextActive = projects[i].key;
+          break;
+        }
+      }
+      setActiveKey((prev) => (prev === nextActive ? prev : nextActive));
+
       for (let i = 0; i < cards.length; i++) {
         const card = cards[i];
         const isLast = i === cards.length - 1;
@@ -113,17 +142,33 @@ export function Projects() {
           </h2>
           <p className="mt-6 max-w-[32ch] text-muted">{t("lead")}</p>
           <ol className="mt-10 border-l border-rule">
-            {projects.map((project, index) => (
-              <li
-                key={project.key}
-                className="flex items-center gap-3 py-3 pl-5 text-sm text-muted"
-              >
-                <span className="font-mono text-[11px]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span>{t(`${project.key}.name`)}</span>
-              </li>
-            ))}
+            {projects.map((project, index) => {
+              const isActive = project.key === activeKey;
+              return (
+                <li
+                  key={project.key}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`flex items-center gap-3 py-3 pl-5 text-sm transition-colors ${
+                    isActive ? "text-ink" : "text-muted"
+                  }`}
+                >
+                  <span
+                    className={`font-mono text-[11px] ${
+                      isActive ? "text-ink" : ""
+                    }`}
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    className={
+                      isActive ? "font-medium" : undefined
+                    }
+                  >
+                    {t(`${project.key}.name`)}
+                  </span>
+                </li>
+              );
+            })}
           </ol>
         </div>
 

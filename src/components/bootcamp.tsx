@@ -9,7 +9,7 @@ type Entry = {
 
 const entries: Entry[] = [
   { key: "codingcamp", period: "Jan-Jun 2025" },
-  { key: "bangkit", period: "Aug 2024-Jan 2025" },
+  { key: "bangkit", period: "Aug 2024 - Jan 2025" },
 ];
 
 export function Bootcamp() {

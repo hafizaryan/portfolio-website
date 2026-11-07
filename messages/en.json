@@ -137,6 +137,8 @@
     "send": "Send message",
     "sending": "Sending…",
     "sent": "Message sent. Thank you.",
+    "successTitle": "Success!",
+    "close": "Close",
     "error": "Something went wrong. Please try again.",
     "fillFields": "Please fill in both fields."
   },

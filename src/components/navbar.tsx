@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ThemeToggle } from "./theme-toggle";
 import { LocaleSwitch } from "./locale-switch";
+import icon from "../app/icon.png";
 
 export function Navbar() {
   const t = useTranslations("nav");
@@ -22,8 +23,14 @@ export function Navbar() {
       <nav
         className="navbar-glass mx-auto flex h-[50px] max-w-[1040px] items-center justify-between rounded-full px-3 text-white md:px-4"
       >
-        <a href="#top" className="shrink-0 text-sm font-medium tracking-tight">
-          Hafiz Aryan Siregar<span className="font-bold text-accent">.</span>
+        <a href="#top" className="shrink-0" aria-label="Hafiz Aryan Siregar">
+          <img
+            src={icon.src}
+            alt="Hafiz Aryan Siregar"
+            width={32}
+            height={32}
+            className="h-8 w-8 rounded-full object-cover"
+          />
         </a>
 
         <div className="hidden items-center gap-5 md:flex">

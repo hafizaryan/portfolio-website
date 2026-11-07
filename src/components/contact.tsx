@@ -1,16 +1,72 @@
 "use client";
 
-import { useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
 
 const FORMSPREE = "https://formspree.io/f/xvzpvywr";
+
+// Jeda minimal antar kirim (detik). Tersimpan di localStorage,
+// jadi tetap berlaku walau halaman di-refresh.
+const COOLDOWN_SECONDS = 60;
+
+// Batas panjang pesan (karakter).
+const MESSAGE_MAX_LENGTH = 2000;
 
 type Status = "idle" | "sending" | "sent" | "error";
 
 export function Contact() {
   const t = useTranslations("contact");
   const [status, setStatus] = useState<Status>("idle");
+  const [cooldown, setCooldown] = useState(0);
   const openedAt = useRef(Date.now());
+  const closeTimer = useRef<number | null>(null);
+  const lastSent = useRef<{ email: string; message: string } | null>(null);
+
+  function dismissPopup() {
+    if (closeTimer.current !== null) {
+      window.clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+    setStatus((s) => (s === "sent" ? "idle" : s));
+  }
+
+  // Pulihkan cooldown dari sesi sebelumnya (localStorage).
+  useEffect(() => {
+    const last = Number(window.localStorage.getItem("contact-last-sent") || 0);
+    const remaining = Math.ceil(
+      (last + COOLDOWN_SECONDS * 1000 - Date.now()) / 1000,
+    );
+    if (remaining > 0) setCooldown(remaining);
+  }, []);
+
+  // Hitung mundur cooldown.
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const id = window.setTimeout(() => setCooldown((v) => v - 1), 1000);
+    return () => window.clearTimeout(id);
+  }, [cooldown]);
+
+  // Tutup popup otomatis setelah 5 detik.
+  useEffect(() => {
+    if (status !== "sent") return;
+    closeTimer.current = window.setTimeout(dismissPopup, 5000);
+    return () => {
+      if (closeTimer.current !== null) {
+        window.clearTimeout(closeTimer.current);
+        closeTimer.current = null;
+      }
+    };
+  }, [status]);
+
+  // Tutup popup dengan tombol Escape.
+  useEffect(() => {
+    if (status !== "sent") return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") dismissPopup();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [status]);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -31,8 +87,24 @@ export function Contact() {
     }
 
     const email = (data.get("email") as string)?.trim();
-    const message = (data.get("message") as string)?.trim();
+    const message = (data.get("message") as string)?.trim().slice(0, MESSAGE_MAX_LENGTH);
     if (!email || !message) {
+      setStatus("error");
+      return;
+    }
+
+    // Anti-spam: jeda minimal antar kirim.
+    if (cooldown > 0) {
+      setStatus("error");
+      return;
+    }
+
+    // Anti-spam: tolak pesan duplikat yang persis sama dengan kirim terakhir.
+    if (
+      lastSent.current &&
+      lastSent.current.email === email.toLowerCase() &&
+      lastSent.current.message === message
+    ) {
       setStatus("error");
       return;
     }
@@ -46,6 +118,9 @@ export function Contact() {
       });
       if (res.ok) {
         setStatus("sent");
+        lastSent.current = { email: email.toLowerCase(), message };
+        setCooldown(COOLDOWN_SECONDS);
+        window.localStorage.setItem("contact-last-sent", String(Date.now()));
         form.reset();
       } else {
         setStatus("error");
@@ -140,11 +215,48 @@ export function Contact() {
             aria-live="polite"
             className="min-h-5 text-sm text-muted"
           >
-            {status === "sent" && <span className="text-accent font-medium">{t("sent")}</span>}
             {status === "error" && t("error")}
           </p>
         </form>
       </div>
+
+      {status === "sent" && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-[60] flex items-center justify-center px-5"
+        >
+          <div
+            aria-hidden="true"
+            onClick={dismissPopup}
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          />
+          <div className="relative z-10 w-full max-w-xs rounded-[1.5rem] border border-rule bg-surface-raised p-7 text-center shadow-2xl shadow-black/30">
+            <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-success/40 bg-[var(--success-glow)]">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M5 13l4 4L19 7"
+                  stroke="var(--success)"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+            <h3 className="mt-4 text-lg font-semibold" style={{ color: "var(--success)" }}>
+              {t("successTitle")}
+            </h3>
+            <p className="mt-2 text-sm text-muted">{t("sent")}</p>
+            <button
+              type="button"
+              onClick={dismissPopup}
+              className="mt-6 w-full rounded-md border border-rule bg-base px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent"
+            >
+              {t("close")}
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
