@@ -1,267 +1,205 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth overflow-x-hidden">
+<html lang="en">
 
 <head>
     <script>
         if (window.location.hostname === 'hafizaryan.github.io') {
             window.location.replace('https://hafizaryansiregar.my.id' + window.location.pathname + window.location.search);
         }
-        // Apply the saved theme before first paint so the skeleton matches it
-        try {
-            if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
-        } catch (e) { }
     </script>
     <meta charset="UTF-8">
-    <title>Portfolio Hafiz Aryan Siregar</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="Hafiz Aryan Siregar | Full Stack Web Developer, Cloud Engineer & Software Tester">
-    <meta name="description"
-        content="Portfolio profesional Hafiz Aryan Siregar. Temukan beragam proyek inovatif di bidang web development, cloud computing, dan software testing. Web developer & cloud engineer dengan pengalaman CodeIgniter, PHP, JavaScript, Google Cloud Platform, API, dan QA.">
-    <meta name="keywords"
-        content="Hafiz Aryan Siregar, Portfolio, Full Stack Developer, Web Developer, Cloud Engineer, Software Tester, QA, JavaScript, PHP, CodeIgniter, Google Cloud Platform, Indonesia, Software Developer, Frontend Developer, Backend Developer, IT Portfolio, Project Portfolio, Software Quality Assurance, Tech Enthusiast, Programmer Indonesia, Portofolio Pengembang Web">
-
+    <title>Under Maintenance | Hafiz Aryan Siregar</title>
+    <meta name="description" content="The portfolio of Hafiz Aryan Siregar is being revamped. Please check back soon.">
     <meta name="author" content="Hafiz Aryan Siregar">
-    <meta name="robots"
-        content="noindex, nofollow, noarchive, nosnippet, noimageindex, max-image-preview:none, max-snippet:0, max-video-preview:0">
-    <meta name="googlebot"
-        content="noindex, nofollow, noarchive, nosnippet, noimageindex, max-image-preview:none, max-snippet:0, max-video-preview:0">
-    <meta name="language" content="id-ID">
-    <meta name="distribution" content="global">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow, noarchive">
 
-    <link rel="canonical" href="https://hafizaryan.github.io/">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://hafizaryan.github.io/">
-    <meta property="og:title"
-        content="Hafiz Aryan Siregar | Full Stack Web Developer, Cloud Engineer & Software Tester">
-    <meta property="og:description"
-        content="Kunjungi portfolio Hafiz Aryan Siregar, web developer dan cloud engineer profesional Indonesia. Lihat pengalaman, proyek, dan kontak.">
-    <meta property="og:image" content="https://hafizaryan.github.io/images/og-image.jpg">
-    <meta property="og:site_name" content="Portfolio Hafiz Aryan Siregar">
-    <meta property="og:locale" content="id_ID">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://hafizaryan.github.io/">
-    <meta name="twitter:title" content="Hafiz Aryan Siregar | Full Stack Developer & Cloud Engineer">
-    <meta name="twitter:description"
-        content="Kenali Hafiz Aryan Siregar, developer & cloud engineer profesional. Temukan karya, keahlian, dan cara berkolaborasi.">
-    <meta name="twitter:image" content="https://hafizaryan.github.io/images/twitter-card.jpg">
-
-    <!-- Plus Jakarta Sans Font Preload & Stylesheet -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com" defer></script>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/page-animations.css">
-
-    <!-- JavaScript -->
-    <script src="assets/js/partials-loader.js" defer></script>
-    <script src="assets/js/index.js" defer></script>
-    <script src="assets/js/page-init.js" defer></script>
-
-    <!-- AOS Animation CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico?v=3">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=3">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=3">
-    <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png?v=3">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png?v=3">
     <link rel="manifest" href="site.webmanifest">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --surface: #f1f5f9;
+            --border: #e2e8f0;
+            --text: #0f172a;
+            --muted: #475569;
+            --accent: #047857;
+            --accent-bg: #d1fae5;
+            --accent-border: #6ee7b7;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #09090b;
+                --surface: #18181b;
+                --border: #27272a;
+                --text: #fafafa;
+                --muted: #a1a1aa;
+                --accent: #4ade80;
+                --accent-bg: rgba(20, 83, 45, 0.3);
+                --accent-border: #4ade80;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.25rem;
+            background: var(--bg);
+            color: var(--muted);
+            font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        main {
+            width: 100%;
+            max-width: 34rem;
+            text-align: center;
+        }
+
+        .avatar {
+            width: 6rem;
+            height: 6rem;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            object-fit: cover;
+            background: var(--surface);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--accent-border);
+            border-radius: 9999px;
+            background: var(--accent-bg);
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .dot {
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            background: currentColor;
+            animation: pulse 1.6s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            50% { opacity: 0.3; }
+        }
+
+        h1 {
+            color: var(--text);
+            font-size: clamp(2rem, 6vw, 2.75rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .id {
+            margin-top: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 2.5rem;
+        }
+
+        .links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.65rem 1.1rem;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: border-color 0.2s;
+        }
+
+        .links a:hover,
+        .links a:focus-visible {
+            border-color: var(--text);
+        }
+
+        .links svg {
+            width: 1rem;
+            height: 1rem;
+            fill: currentColor;
+        }
+
+        footer {
+            margin-top: 3rem;
+            font-size: 0.8rem;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .dot { animation: none; }
+        }
+    </style>
 </head>
 
-<body class="bg-bg text-muted font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden w-full">
+<body>
+    <main>
+        <img class="avatar" src="assets/profile_picture.jpg" alt="Hafiz Aryan Siregar" width="96" height="96">
 
-    <!-- Loading Screen: skeleton shimmer that mirrors the navbar and hero layout -->
-    <div id="loading-screen" role="status" aria-live="polite" aria-label="Loading page">
-        <span class="sr-only">Loading...</span>
-        <div class="sk-nav" aria-hidden="true">
-            <div class="sk-wrap sk-nav-inner">
-                <div class="sk sk-circle"></div>
-                <div class="sk-nav-links">
-                    <div class="sk sk-line sk-w-12"></div>
-                    <div class="sk sk-line sk-w-12"></div>
-                    <div class="sk sk-line sk-w-12"></div>
-                    <div class="sk sk-line sk-w-16"></div>
-                    <div class="sk sk-line sk-w-16"></div>
-                </div>
-                <div class="sk sk-icon"></div>
-            </div>
+        <div class="badge"><span class="dot" aria-hidden="true"></span>Under Maintenance</div>
+
+        <h1>A new version is on the way.</h1>
+        <p>I'm currently revamping this portfolio. Please check back soon.</p>
+        <p class="id" lang="id">Situs ini sedang diperbarui. Silakan kembali lagi nanti.</p>
+
+        <div class="links">
+            <a href="https://github.com/hafizaryan" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+                </svg>
+                GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/hafizaryan/" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" />
+                </svg>
+                LinkedIn
+            </a>
         </div>
-        <div class="sk-wrap sk-hero" aria-hidden="true">
-            <div class="sk-hero-text">
-                <div class="sk sk-pill"></div>
-                <div class="sk sk-title sk-w-80"></div>
-                <div class="sk sk-title sk-w-60"></div>
-                <div class="sk sk-line sk-w-100"></div>
-                <div class="sk sk-line sk-w-90"></div>
-                <div class="sk sk-line sk-w-50"></div>
-                <div class="sk-row">
-                    <div class="sk sk-btn"></div>
-                    <div class="sk sk-btn"></div>
-                </div>
-                <div class="sk-row">
-                    <div class="sk sk-icon"></div>
-                    <div class="sk sk-icon"></div>
-                </div>
-            </div>
-            <div class="sk sk-photo"></div>
-        </div>
-    </div>
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 glass-nav border-b border-border">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4">
-            <div class="flex justify-between h-20 items-center">
-                <a href="#" aria-label="Hafiz Aryan Siregar - Home"
-                    class="group inline-flex items-center">
-                    <img src="assets/profile_picture.jpg" alt="Hafiz Aryan Siregar"
-                        class="h-11 w-11 rounded-full object-cover border border-border group-hover:border-white transition-colors">
-                </a>
-                <div class="flex items-center gap-6">
-                    <!-- Desktop Menu -->
-                    <div class="hidden lg:flex space-x-8 text-sm font-medium" id="navbar-desktop">
-                        <a href="#" id="nav-intro" class="hover:text-white transition-colors">Intro</a>
-                        <a href="#about" id="nav-about" class="hover:text-white transition-colors">About</a>
-                        <a href="#work" id="nav-work" class="hover:text-white transition-colors">Work</a>
-                        <a href="#projects" id="nav-projects" class="hover:text-white transition-colors">Projects</a>
-                        <a href="#education" id="nav-education" class="hover:text-white transition-colors">Education</a>
-                        <a href="#certification" id="nav-certification"
-                            class="hover:text-white transition-colors">Certification</a>
-                        <a href="#skills" id="nav-skills" class="hover:text-white transition-colors">Skills</a>
-                        <a href="#organization" id="nav-organization"
-                            class="hover:text-white transition-colors">Organization</a>
-                        <a href="#awards" id="nav-awards" class="hover:text-white transition-colors">Awards</a>
-                        <a href="#contact" id="nav-contact" class="hover:text-white transition-colors">Contact</a>
-                    </div>
-
-                    <!-- Theme Toggle -->
-                    <button id="theme-toggle" class="text-white text-xl hover:opacity-75 transition-opacity"
-                        aria-label="Toggle Theme">
-                        <i class="fa-solid fa-sun"></i>
-                    </button>
-
-                    <!-- Mobile Menu Button -->
-                    <button onclick="toggleMenu()" class="lg:hidden text-white text-2xl">
-                        <i class="fa-solid fa-bars"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Mobile Dropdown -->
-        <div id="mobile-menu"
-            class="hidden lg:hidden bg-bg border-b border-border absolute w-full transition-all duration-300 ease-out opacity-100">
-            <div class="px-4 py-4 space-y-4 flex flex-col text-lg">
-                <a href="#" id="mobile-nav-intro" class="block text-white">Intro</a>
-                <a href="#about" id="mobile-nav-about" class="block text-white">About</a>
-                <a href="#work" id="mobile-nav-work" class="block text-white">Work</a>
-                <a href="#projects" id="mobile-nav-projects" class="block text-white">Projects</a>
-                <a href="#education" id="mobile-nav-education" class="block text-white">Education</a>
-                <a href="#certification" id="mobile-nav-certification" class="block text-white">Certification</a>
-                <a href="#skills" id="mobile-nav-skills" class="block text-white">Skills</a>
-                <a href="#organization" id="mobile-nav-organization" class="block text-white">Organization</a>
-                <a href="#language-publication" id="mobile-nav-language-publication"
-                    class="block text-white">Language</a>
-                <a href="#awards" id="mobile-nav-awards" class="block text-white">Awards</a>
-                <a href="#contact" id="mobile-nav-contact" class="block text-white">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <div data-partial="assets/partials/intro.html"></div>
-    <div data-partial="assets/partials/about.html"></div>
-    <div data-partial="assets/partials/work.html"></div>
-    <div data-partial="assets/partials/projects.html"></div>
-    <div data-partial="assets/partials/education.html"></div>
-    <div data-partial="assets/partials/certification.html"></div>
-    <div data-partial="assets/partials/skills.html"></div>
-    <div data-partial="assets/partials/organization.html"></div>
-    <div data-partial="assets/partials/language.html"></div>
-    <div data-partial="assets/partials/awards.html"></div>
-    <div data-partial="assets/partials/contact.html"></div>
-
-    <!-- Project Modal -->
-    <div id="project-modal"
-        class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center px-4">
-        <div class="bg-bg border border-border max-w-5xl w-full relative p-0 md:p-6">
-            <button aria-label="Close project modal" data-close-project
-                class="absolute top-3 right-3 text-slate-600 dark:text-gray-400 hover:text-white transition">
-                <i class="fa-solid fa-times text-xl"></i>
-            </button>
-            <div class="grid md:grid-cols-2 gap-0 md:gap-6">
-                <div class="border-b md:border-b-0 md:border-r border-border">
-                    <div class="relative aspect-video bg-slate-100 dark:bg-zinc-900">
-                        <img id="project-modal-image" src="" alt="" class="absolute inset-0 w-full h-full object-cover">
-                    </div>
-                </div>
-                <div class="p-6 space-y-4">
-                    <div>
-                        <p class="text-xs uppercase tracking-[0.2em] text-slate-600 dark:text-gray-500 mb-1">Project</p>
-                        <h3 id="project-modal-title" class="text-2xl font-bold text-white">Title</h3>
-                    </div>
-                    <p id="project-modal-desc" class="text-sm text-slate-600 dark:text-gray-400 leading-relaxed"></p>
-                    <div>
-                        <h4 class="text-white font-semibold mb-2 text-sm uppercase tracking-wider">Tech Stack</h4>
-                        <div id="project-modal-tech" class="flex flex-wrap gap-2"></div>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-semibold mb-2 text-sm uppercase tracking-wider">Key Features</h4>
-                        <ul id="project-modal-features"
-                            class="list-disc list-inside text-sm space-y-2 text-slate-600 dark:text-gray-400 marker:text-white">
-                        </ul>
-                    </div>
-                    <div class="flex flex-wrap gap-3 pt-2">
-                        <a id="project-modal-repo" href="#" target="_blank"
-                            class="bg-white text-black px-4 py-2 font-bold hover:bg-gray-200 transition inline-flex items-center gap-2">
-                            <i class="fa-brands fa-github"></i> View Repository
-                        </a>
-                        <a id="project-modal-demo" href="#" target="_blank"
-                            class="border border-white text-white px-4 py-2 font-bold hover:bg-white hover:text-black transition inline-flex items-center gap-2">
-                            <i class="fa-solid fa-up-right-from-square"></i> Live Demo
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Support Modal -->
-    <div id="support-modal"
-        class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center px-4">
-        <div class="bg-bg border border-border max-w-sm w-full relative p-6">
-            <button aria-label="Close support modal" data-close-support
-                class="absolute top-3 right-3 text-slate-600 dark:text-gray-400 hover:text-white transition">
-                <i class="fa-solid fa-times text-xl"></i>
-            </button>
-            <div class="text-center space-y-4">
-                <div>
-                    <p class="text-xs uppercase tracking-[0.2em] text-slate-600 dark:text-gray-500 mb-1">Support</p>
-                    <h3 class="text-xl font-bold text-white">Scan QRIS</h3>
-                </div>
-                <div class="border border-border p-3 bg-white dark:bg-zinc-900">
-                    <img src="assets/images/qris.jpeg" alt="QRIS Support" class="w-full h-full object-contain">
-                </div>
-                <p class="text-sm text-slate-600 dark:text-gray-400 leading-relaxed">
-                    Terima kasih sudah mendukung. Scan kode QR untuk mengirim apresiasi.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <footer>&copy; 2026 Hafiz Aryan Siregar</footer>
+    </main>
 </body>
 
 </html>
