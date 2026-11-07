@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "title": "Hafiz Aryan Siregar | Web Developer",
+    "description": "Hafiz Aryan Siregar is a web developer who builds enterprise web applications people rely on at work."
+  },
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "experience": "Experience",
+    "education": "Education",
+    "bootcamp": "Bootcamp",
+    "skills": "Skills",
+    "contact": "Contact"
+  },
+  "about": {
+    "title": "About",
+    "intro": "I'm Hafiz Aryan Siregar, a web developer focused on building practical applications for people and teams.",
+    "focus": "My work spans web development, cloud computing, data, and computer vision, from early ideas to production-ready projects.",
+    "stats": {
+      "experience": { "value": "1+", "label": "year experience" },
+      "projects": { "value": "4", "label": "projects" },
+      "technologies": { "value": "5", "label": "core technologies" }
+    }
+  },
+  "hero": {
+    "name": "Hafiz Aryan Siregar",
+    "headline": "Web developer building applications people rely on at work.",
+    "viewProjects": "View projects",
+    "viewExperience": "View experience",
+    "contactMe": "Resume"
+  },
+  "projects": {
+    "title": "Projects",
+    "lead": "A few things I've built, from idea to production.",
+    "repo": "Repo",
+    "demo": "Demo",
+    "foodinaryChip": "Recipe found from photo",
+    "foodinary": {
+      "name": "Foodinary",
+      "desc": "A web app that recognises a dish from a photo and guides you to cook Indonesian food at home."
+    },
+    "daisy": {
+      "name": "Daisy",
+      "desc": "A mobile app that identifies common skin conditions from a photo and suggests care."
+    },
+    "lab": {
+      "name": "Laboratory Management System",
+      "desc": "A web application, built as an undergraduate thesis, that makes academic lab administration and scheduling easier to run."
+    }
+  },
+  "experience": {
+    "title": "Experience",
+    "lead": "My professional experience building useful web applications.",
+    "categories": { "work": "Work", "study": "Education", "bootcamp": "Bootcamp" },
+    "now": "now",
+    "items": {
+      "pertamina": {
+        "role": "Web Developer Intern",
+        "org": "PT Pertamina Patra Niaga"
+      },
+      "pertaminaCurrent": {
+        "role": "Web Developer",
+        "org": "PT Pertamina Patra Niaga"
+      },
+      "exchange": {
+        "role": "Joint Mobility Academic Exchange",
+        "org": "Universiti Malaysia Terengganu"
+      },
+      "codingcamp": {
+        "role": "Full Stack Developer",
+        "org": "Coding Camp powered by DBS Foundation"
+      },
+      "degree": {
+        "role": "Bachelor of Computer Science (S.Kom)",
+        "org": "UIN Sultan Syarif Kasim Riau"
+      },
+      "bangkit": {
+        "role": "Cloud Computing Cohort",
+        "org": "Bangkit Academy"
+      },
+      "lab": {
+        "role": "Full Stack Developer",
+        "org": "Computer Laboratory of Information Systems, UIN Suska Riau"
+      }
+    }
+  },
+  "education": {
+    "title": "Education",
+    "lead": "My academic foundation in computer science.",
+    "items": {
+      "degree": {
+        "role": "Bachelor of Computer Science (S.Kom)",
+        "org": "UIN Sultan Syarif Kasim Riau"
+      }
+    }
+  },
+  "bootcamp": {
+    "title": "Bootcamp",
+    "lead": "Technical programs that strengthened my practical development skills.",
+    "items": {
+      "codingcamp": {
+        "role": "Full Stack Developer",
+        "org": "Coding Camp powered by DBS Foundation"
+      },
+      "bangkit": {
+        "role": "Cloud Computing Cohort",
+        "org": "Bangkit Academy"
+      }
+    }
+  },
+  "skills": {
+    "title": "Skills",
+    "groups": {
+      "frontend": "Front-end",
+      "backend": "Back-end",
+      "data": "Data",
+      "cloud": "Cloud & tools",
+      "ai": "AI tools"
+    },
+    "certsTitle": "Certifications",
+    "publicationTitle": "Publication",
+    "certs": {
+      "dbs": "Full Stack Developer, Coding Camp powered by DBS Foundation",
+      "dicoding": "Web Development Intermediate, Dicoding Indonesia",
+      "google": "Google Cloud Computing Foundations, Google",
+      "udemy": "GitHub Actions for CI/CD, Udemy"
+    },
+    "publication": "Comparison of Classification Algorithm Performance for Diabetes Prediction (SINTA 3)"
+  },
+  "contact": {
+    "title": "Let's talk.",
+    "lead": "Have a project in mind, or just want to say hello? Send a message.",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "message": "Message",
+    "messagePlaceholder": "What would you like to build?",
+    "send": "Send message",
+    "sending": "Sending…",
+    "sent": "Message sent. Thank you.",
+    "error": "Something went wrong. Please try again.",
+    "fillFields": "Please fill in both fields."
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "support": "Support me",
+    "supportText": "Thanks for the support. Scan the QR code to send your appreciation.",
+    "backToTop": "Back to top",
+    "theme": "Toggle theme",
+    "close": "Close"
+  }
+}
