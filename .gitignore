@@ -1,0 +1,27 @@
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Local environment
+.env*.local
+
+# Logs
+*.log
+
+# Local browser test artifacts
+.playwright-mcp/
+
+# Dev/review artifacts (screenshots, references, scratch notes)
+anim-check.txt
+*-reference*.png
+*-preview*.png
+openbot-reference.png
+project-stack-*.png
+projects-sticky-*.png
+ui-review-*.png
+
+# OS files
+.DS_Store
+Thumbs.db

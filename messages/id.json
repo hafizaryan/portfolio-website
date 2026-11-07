@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "title": "Hafiz Aryan Siregar | Web Developer",
+    "description": "Hafiz Aryan Siregar adalah web developer yang membangun aplikasi web enterprise yang diandalkan orang di tempat kerja."
+  },
+  "nav": {
+    "about": "Tentang",
+    "projects": "Proyek",
+    "experience": "Pengalaman",
+    "education": "Pendidikan",
+    "bootcamp": "Bootcamp",
+    "skills": "Keahlian",
+    "contact": "Kontak"
+  },
+  "about": {
+    "title": "Tentang",
+    "intro": "Saya Hafiz Aryan Siregar, web developer yang berfokus membangun aplikasi praktis untuk orang dan tim.",
+    "focus": "Pekerjaan saya mencakup pengembangan web, cloud computing, data, dan computer vision, dari ide awal hingga proyek siap digunakan.",
+    "stats": {
+      "experience": { "value": "1+", "label": "tahun pengalaman" },
+      "projects": { "value": "4", "label": "proyek" },
+      "technologies": { "value": "5", "label": "teknologi utama" }
+    }
+  },
+  "hero": {
+    "name": "Hafiz Aryan Siregar",
+    "headline": "Web developer yang membangun aplikasi yang diandalkan orang di tempat kerja.",
+    "viewProjects": "Lihat proyek",
+    "viewExperience": "Lihat pengalaman",
+    "contactMe": "Resume"
+  },
+  "projects": {
+    "title": "Proyek",
+    "lead": "Beberapa yang pernah saya bangun, dari ide sampai produksi.",
+    "repo": "Repo",
+    "demo": "Demo",
+    "foodinaryChip": "Resep ditemukan dari foto",
+    "foodinary": {
+      "name": "Foodinary",
+      "desc": "Aplikasi web yang mengenali masakan dari foto dan memandu Anda memasak makanan Indonesia di rumah."
+    },
+    "daisy": {
+      "name": "Daisy",
+      "desc": "Aplikasi mobile yang mengenali masalah kulit umum dari foto dan memberi saran perawatan."
+    },
+    "lab": {
+      "name": "Sistem Manajemen Laboratorium",
+      "desc": "Aplikasi web, dibuat sebagai proyek tesis, yang membuat administrasi dan penjadwalan laboratorium akademik lebih mudah dijalankan."
+    }
+  },
+  "experience": {
+    "title": "Pengalaman",
+    "lead": "Pengalaman profesional saya dalam membangun aplikasi web yang bermanfaat.",
+    "categories": { "work": "Kerja", "study": "Pendidikan", "bootcamp": "Bootcamp" },
+    "now": "kini",
+    "items": {
+      "pertamina": {
+        "role": "Web Developer Intern",
+        "org": "PT Pertamina Patra Niaga"
+      },
+      "pertaminaCurrent": {
+        "role": "Web Developer",
+        "org": "PT Pertamina Patra Niaga"
+      },
+      "exchange": {
+        "role": "Joint Mobility Academic Exchange",
+        "org": "Universiti Malaysia Terengganu"
+      },
+      "codingcamp": {
+        "role": "Full Stack Developer",
+        "org": "Coding Camp powered by DBS Foundation"
+      },
+      "degree": {
+        "role": "Sarjana Komputer (S.Kom)",
+        "org": "UIN Sultan Syarif Kasim Riau"
+      },
+      "bangkit": {
+        "role": "Cloud Computing Cohort",
+        "org": "Bangkit Academy"
+      },
+      "lab": {
+        "role": "Full Stack Developer",
+        "org": "Laboratorium Komputer Sistem Informasi, UIN Suska Riau"
+      }
+    }
+  },
+  "education": {
+    "title": "Pendidikan",
+    "lead": "Dasar akademik saya di bidang ilmu komputer.",
+    "items": {
+      "degree": {
+        "role": "Sarjana Komputer (S.Kom)",
+        "org": "UIN Sultan Syarif Kasim Riau"
+      }
+    }
+  },
+  "bootcamp": {
+    "title": "Bootcamp",
+    "lead": "Program teknis yang memperkuat kemampuan praktis saya dalam pengembangan.",
+    "items": {
+      "codingcamp": {
+        "role": "Full Stack Developer",
+        "org": "Coding Camp powered by DBS Foundation"
+      },
+      "bangkit": {
+        "role": "Cloud Computing Cohort",
+        "org": "Bangkit Academy"
+      }
+    }
+  },
+  "skills": {
+    "title": "Keahlian",
+    "groups": {
+      "frontend": "Front-end",
+      "backend": "Back-end",
+      "data": "Data",
+      "cloud": "Cloud & tools",
+      "ai": "Tools AI"
+    },
+    "certsTitle": "Sertifikat",
+    "publicationTitle": "Publikasi",
+    "certs": {
+      "dbs": "Full Stack Developer, Coding Camp powered by DBS Foundation",
+      "dicoding": "Belajar Pengembangan Web Intermediate, Dicoding Indonesia",
+      "google": "Google Cloud Computing Foundations, Google",
+      "udemy": "GitHub Actions untuk CI/CD, Udemy"
+    },
+    "publication": "Comparison of Classification Algorithm Performance for Diabetes Prediction (SINTA 3)"
+  },
+  "contact": {
+    "title": "Mari bicara.",
+    "lead": "Punya proyek, atau sekadar ingin menyapa? Kirim pesan.",
+    "email": "Email",
+    "emailPlaceholder": "anda@contoh.com",
+    "message": "Pesan",
+    "messagePlaceholder": "Apa yang ingin Anda bangun?",
+    "send": "Kirim pesan",
+    "sending": "Mengirim…",
+    "sent": "Pesan terkirim. Terima kasih.",
+    "error": "Terjadi kesalahan. Silakan coba lagi.",
+    "fillFields": "Mohon isi kedua kolom."
+  },
+  "footer": {
+    "rights": "Hak cipta dilindungi.",
+    "support": "Dukung saya",
+    "supportText": "Terima kasih atas dukungannya. Scan kode QR untuk mengirim apresiasi.",
+    "backToTop": "Kembali ke atas",
+    "theme": "Ganti tema",
+    "close": "Tutup"
+  }
+}
