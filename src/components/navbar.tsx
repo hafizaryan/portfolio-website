@@ -86,7 +86,7 @@ export function Navbar() {
       </nav>
 
       {open && (
-        <div className="navbar-glass mx-auto mt-2 max-w-[1040px] rounded-3xl px-4 py-1 text-white md:hidden">
+        <div className="navbar-menu-glass mx-auto mt-2 max-w-[1040px] rounded-3xl px-4 py-1 text-white md:hidden">
           <div className="flex flex-col">
             {links.map((l) => (
               <a
