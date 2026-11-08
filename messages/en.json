@@ -29,6 +29,10 @@
     "viewExperience": "View experience",
     "contactMe": "Resume"
   },
+  "recommendations": {
+    "title": "Recommendations",
+    "lead": "A few words from people who worked with me closely."
+  },
   "projects": {
     "title": "Projects",
     "lead": "A few things I've built, from idea to production.",

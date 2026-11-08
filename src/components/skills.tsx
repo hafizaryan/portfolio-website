@@ -14,6 +14,10 @@ const skillGroups: {
       { name: "JavaScript", icon: "devicon-javascript-plain colored" },
       { name: "Vue", icon: "devicon-vuejs-plain colored" },
       { name: "Blazor", icon: "devicon-blazor-original colored" },
+      {
+        name: "Next.js",
+        image: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/nextdotjs.svg",
+      },
     ],
   },
   {
@@ -25,6 +29,7 @@ const skillGroups: {
       { name: "Node.js", icon: "devicon-nodejs-plain colored" },
       { name: "Laravel", icon: "devicon-laravel-plain colored" },
       { name: "CodeIgniter", icon: "devicon-codeigniter-plain colored" },
+      { name: "Python", icon: "devicon-python-plain colored" },
     ],
   },
   {
@@ -33,7 +38,6 @@ const skillGroups: {
       { name: "MySQL", icon: "devicon-mysql-plain colored" },
       { name: "SQL Server", icon: "devicon-microsoftsqlserver-plain colored" },
       { name: "Firebase", icon: "devicon-firebase-plain colored" },
-      { name: "Supabase", icon: "devicon-supabase-plain colored" },
       { name: "MongoDB", icon: "devicon-mongodb-plain colored" },
     ],
   },
@@ -41,7 +45,23 @@ const skillGroups: {
     key: "cloud",
     items: [
       { name: "Google Cloud", icon: "devicon-googlecloud-plain colored" },
+      { name: "Azure", icon: "devicon-azure-plain colored" },
+      {
+        name: "Azure DevOps",
+        image: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/azuredevops.svg",
+      },
       { name: "Docker", icon: "devicon-docker-plain colored" },
+      { name: "Postman", icon: "devicon-postman-plain colored" },
+      { name: "Jira", icon: "devicon-jira-plain colored" },
+      {
+        name: "Vercel",
+        image: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/vercel.svg",
+      },
+      { name: "Laragon", image: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/laragon.svg" },
+      {
+        name: "VS Code",
+        image: "/skills/vscode.svg",
+      },
       { name: "Git", icon: "devicon-git-plain colored" },
       { name: "SSMS", icon: "devicon-microsoftsqlserver-plain colored" },
       { name: "Visual Studio", icon: "devicon-visualstudio-plain colored" },
@@ -58,13 +78,13 @@ const skillGroups: {
       { name: "Copilot", icon: "fa-brands fa-github text-purple-500" },
       { name: "MCP", icon: "fa-solid fa-plug text-blue-500" },
       {
+        name: "Meta Muse",
+        image: "/skills/metamuse.png",
+      },
+      {
         name: "Hermes",
         image:
           "https://raw.githubusercontent.com/NousResearch/hermes-agent/main/assets/icon-master.svg",
-      },
-      {
-        name: "ChatGPT Codex",
-        image: "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/openai.svg",
       },
       {
         name: "OpenCode",
@@ -116,7 +136,10 @@ export function Skills() {
                         width="16"
                         height="16"
                         className={`h-4 w-4 object-contain ${
-                          item.name === "ChatGPT Codex" ||
+                          item.name === "Next.js" ||
+                          item.name === "Azure DevOps" ||
+                          item.name === "Vercel" ||
+                          item.name === "Laragon" ||
                           item.name === "OpenCode" ||
                           item.name === "Claude"
                             ? "dark:invert"

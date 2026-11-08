@@ -7,6 +7,7 @@ import { Education } from "@/components/education";
 import { Bootcamp } from "@/components/bootcamp";
 import { Projects } from "@/components/projects";
 import { Skills } from "@/components/skills";
+import { Recommendations } from "@/components/recommendations";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
 import { routing } from "@/i18n/routing";
@@ -56,6 +57,7 @@ export default async function Home({
         <Bootcamp />
         <Projects />
         <Skills />
+        <Recommendations />
         <Contact />
       </main>
       <Footer />

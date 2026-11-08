@@ -133,7 +133,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="mx-auto max-w-[1120px] scroll-mt-0 border-t border-rule px-5 py-12 md:px-8 md:py-16"
+      className="mx-auto max-w-[1120px] scroll-mt-0 px-5 py-12 md:px-8 md:py-16"
     >
       <div className="contact-card grid grid-cols-1 gap-12 rounded-[2rem] p-8 md:p-10 lg:grid-cols-2">
         <div data-aos="fade-right">

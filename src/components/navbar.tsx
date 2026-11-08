@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ThemeToggle } from "./theme-toggle";
 import { LocaleSwitch } from "./locale-switch";
@@ -9,6 +9,7 @@ import icon from "../app/icon.png";
 export function Navbar() {
   const t = useTranslations("nav");
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("");
 
   const links = [
     { href: "#about", label: t("about") },
@@ -17,6 +18,27 @@ export function Navbar() {
     { href: "#bootcamp", label: t("bootcamp") },
     { href: "#projects", label: t("projects") },
   ];
+
+  // Scroll-spy: tandai link yang section-nya sedang lewat garis navbar.
+  useEffect(() => {
+    const ids = links.map((l) => l.href.slice(1));
+    const onScroll = () => {
+      const y = 140; // posisi garis navbar + scroll offset
+      let current = "";
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= y) current = id;
+      }
+      setActive(current);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
 
   return (
     <header className="fixed inset-x-0 top-4 z-50 px-4">
@@ -34,15 +56,24 @@ export function Navbar() {
         </a>
 
         <div className="hidden items-center gap-5 md:flex">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-xs text-white/65 transition-colors hover:text-white"
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) => {
+            const isActive = active === l.href.slice(1);
+            return (
+              <a
+                key={l.href}
+                href={l.href}
+                aria-current={isActive ? "true" : undefined}
+                className={
+                  "text-xs transition-colors " +
+                  (isActive
+                    ? "font-semibold text-white"
+                    : "text-white/65 hover:text-white")
+                }
+              >
+                {l.label}
+              </a>
+            );
+          })}
           <div className="flex items-center gap-2 border-l border-white/15 pl-3">
             <span className="[&_button]:!text-white/70 [&_button:hover]:!text-white">
               <LocaleSwitch />
@@ -88,16 +119,25 @@ export function Navbar() {
       {open && (
         <div className="navbar-menu-glass mx-auto mt-2 max-w-[1040px] rounded-3xl px-4 py-1 text-white md:hidden">
           <div className="flex flex-col">
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="py-2.5 text-xs text-white/70 transition-colors hover:text-white"
-              >
-                {l.label}
-              </a>
-            ))}
+            {links.map((l) => {
+              const isActive = active === l.href.slice(1);
+              return (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  aria-current={isActive ? "true" : undefined}
+                  onClick={() => setOpen(false)}
+                  className={
+                    "py-2.5 text-xs transition-colors " +
+                    (isActive
+                      ? "font-semibold text-white"
+                      : "text-white/70 hover:text-white")
+                  }
+                >
+                  {l.label}
+                </a>
+              );
+            })}
             <div className="my-2 mt-3 border-t border-white/15 pt-3">
               <a
                 href="#contact"

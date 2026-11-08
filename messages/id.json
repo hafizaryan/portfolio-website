@@ -29,6 +29,10 @@
     "viewExperience": "Lihat pengalaman",
     "contactMe": "Resume"
   },
+  "recommendations": {
+    "title": "Rekomendasi",
+    "lead": "Beberapa kata dari orang yang pernah bekerja sama dengan saya."
+  },
   "projects": {
     "title": "Proyek",
     "lead": "Beberapa yang pernah saya bangun, dari ide sampai produksi.",
