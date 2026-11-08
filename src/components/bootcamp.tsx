@@ -18,7 +18,7 @@ export function Bootcamp() {
   return (
     <section
       id="bootcamp"
-      className="mx-auto max-w-[1120px] scroll-mt-0 border-t border-rule px-5 py-12 md:px-8 md:py-16"
+      className="mx-auto max-w-[1120px] scroll-mt-0 px-5 py-10 md:px-8 md:py-14"
     >
       <div data-aos="fade-up">
         <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">

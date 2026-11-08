@@ -105,7 +105,7 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="mx-auto max-w-[1120px] scroll-mt-0 border-t border-rule px-5 py-12 md:px-8 md:py-16"
+      className="mx-auto max-w-[1120px] scroll-mt-0 px-5 py-10 md:px-8 md:py-14"
     >
       <div data-aos="fade-up">
         <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
@@ -114,20 +114,20 @@ export function Skills() {
       </div>
 
       <div className="mt-10">
-        <dl data-aos="fade-right" data-aos-delay="100" className="space-y-5">
+        <dl data-aos="fade-right" data-aos-delay="100" className="space-y-8 md:space-y-10">
           {skillGroups.map((g) => (
             <div
               key={g.key}
-              className="group grid grid-cols-1 gap-3 border-b border-rule pb-5 transition-colors hover:border-accent/40 sm:grid-cols-[10rem_1fr] sm:gap-8"
+              className="grid grid-cols-1 gap-3 sm:grid-cols-[10rem_1fr] sm:gap-8"
             >
-              <dt className="font-medium transition-colors group-hover:text-accent">
+              <dt className="font-medium">
                 {t(`groups.${g.key}`)}
               </dt>
               <dd className="flex flex-wrap gap-2">
                 {g.items.map((item) => (
                   <span
                     key={item.name}
-                    className="inline-flex items-center gap-2 rounded-md border border-rule px-2.5 py-1.5 text-sm text-muted"
+                    className="inline-flex cursor-default items-center gap-2 rounded-md border border-rule px-2.5 py-1.5 text-sm text-muted transition-colors hover:border-accent hover:text-accent"
                   >
                     {item.image ? (
                       <img

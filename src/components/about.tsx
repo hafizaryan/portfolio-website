@@ -8,9 +8,9 @@ export function About() {
   return (
     <section
       id="about"
-      className="mx-auto max-w-[1120px] scroll-mt-0 px-5 pb-10 pt-8 md:px-8 md:pb-16 md:pt-12"
+      className="mx-auto max-w-[1120px] scroll-mt-0 px-5 py-10 md:px-8 md:py-14"
     >
-      <div className="grid gap-10 border-t border-rule pt-4 md:grid-cols-[0.25fr_0.75fr] md:items-start md:gap-16 md:pt-6">
+      <div className="grid gap-10 md:grid-cols-[0.25fr_0.75fr] md:items-start md:gap-16">
         <h2 data-aos="fade-up" data-aos-anchor-placement="top-center" className="text-3xl font-semibold tracking-tight md:text-4xl">
           {t("title")}
         </h2>
