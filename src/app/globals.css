@@ -290,6 +290,15 @@ body {
   }
 }
 
+/* Isi kutipan: selalu kontras maksimal (putih bersih di dark, hitam pekat di light) */
+.quote-text {
+  color: var(--ink);
+}
+
+.dark .quote-text {
+  color: #ffffff;
+}
+
 .project-stack {
   isolation: isolate;
 }

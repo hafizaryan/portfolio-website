@@ -74,11 +74,11 @@ export function Recommendations() {
                 key={person.name}
                 aria-hidden={!isActive}
                 className={
-                  "col-start-1 row-start-1 mx-auto max-w-[60ch] px-5 text-center transition-opacity duration-500 ease-out md:px-0 " +
-                  (isActive ? "opacity-100" : "pointer-events-none opacity-0")
+                  "col-start-1 row-start-1 mx-auto max-w-[60ch] px-5 text-center text-ink transition-opacity duration-500 ease-out md:px-0 " +
+                  (isActive ? "opacity-100" : "opacity-0")
                 }
               >
-                <div className="quote-text text-sm leading-relaxed md:text-base">
+                <div className="quote-text text-sm leading-relaxed md:text-[1rem]">
                   <p>&ldquo;{person.quote}&rdquo;</p>
                 </div>
                 <figcaption className="mt-4 text-xs">
