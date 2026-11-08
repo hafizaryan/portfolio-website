@@ -225,7 +225,7 @@ export function Projects() {
                     )}
                   </div>
                   <div className="max-w-[54ch]">
-                    <p className="text-sm leading-6 text-muted md:text-base">
+                    <p className="text-sm leading-6 text-muted md:text-[1rem]">
                       {t(`${p.key}.desc`)}
                     </p>
                     <div className="mt-5 flex flex-wrap gap-1.5">
