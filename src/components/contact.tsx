@@ -168,8 +168,8 @@ export function Contact() {
               LinkedIn
             </a>
           </div>
-          {/* Pet dekoratif, hanya tampil di light mode */}
-          <div className="footer-pet-track contact-pet mt-auto pt-8 dark:hidden" aria-hidden="true">
+          {/* Pet dekoratif, hanya tampil di light mode desktop */}
+          <div className="footer-pet-track contact-pet mt-auto hidden pt-8 md:block dark:hidden" aria-hidden="true">
             <span className="footer-pet">
               <svg
                 className="footer-pet-sprite"

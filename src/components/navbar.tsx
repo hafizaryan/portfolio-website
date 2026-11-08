@@ -9,6 +9,8 @@ import icon from "../app/icon.png";
 export function Navbar() {
   const t = useTranslations("nav");
   const [open, setOpen] = useState(false);
+  const [menuMounted, setMenuMounted] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
   const [active, setActive] = useState("");
 
   const links = [
@@ -39,6 +41,32 @@ export function Navbar() {
       window.removeEventListener("resize", onScroll);
     };
   }, []);
+
+  // Tutup menu mobile saat user scroll.
+  useEffect(() => {
+    if (!open) return;
+    const close = () => setOpen(false);
+    window.addEventListener("scroll", close, { passive: true });
+    return () => window.removeEventListener("scroll", close);
+  }, [open]);
+
+  // Animasi mount/unmount menu mobile agar transisi open/close lebih smooth.
+  useEffect(() => {
+    if (open) {
+      setMenuMounted(true);
+      let inner = 0;
+      const outer = requestAnimationFrame(() => {
+        inner = requestAnimationFrame(() => setMenuVisible(true));
+      });
+      return () => {
+        cancelAnimationFrame(outer);
+        cancelAnimationFrame(inner);
+      };
+    }
+    setMenuVisible(false);
+    const id = window.setTimeout(() => setMenuMounted(false), 220);
+    return () => window.clearTimeout(id);
+  }, [open]);
 
   return (
     <header className="fixed inset-x-0 top-4 z-50 px-4">
@@ -116,8 +144,16 @@ export function Navbar() {
         </div>
       </nav>
 
-      {open && (
-        <div className="navbar-menu-glass mx-auto mt-2 max-w-[1040px] rounded-3xl px-4 py-1 text-white md:hidden">
+      {menuMounted && (
+        <div
+          className={
+            "navbar-menu-glass mx-auto mt-2 max-w-[1040px] rounded-3xl px-4 py-1 text-white transition-all duration-200 ease-out md:hidden " +
+            (menuVisible
+              ? "translate-y-0 opacity-100"
+              : "pointer-events-none -translate-y-2 opacity-0")
+          }
+          aria-hidden={!open}
+        >
           <div className="flex flex-col">
             {links.map((l) => {
               const isActive = active === l.href.slice(1);
