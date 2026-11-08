@@ -1,13 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
-import qris from "@/assets/qris.jpeg";
 
 export function Footer() {
   const t = useTranslations("footer");
-  const [open, setOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const footerRef = useRef<HTMLElement>(null);
 
@@ -55,49 +52,11 @@ export function Footer() {
         ref={footerRef}
         className="site-footer fixed inset-x-0 bottom-0 z-10 w-full border-t border-black bg-black text-white"
       >
-      <div className="mx-auto flex max-w-[1120px] flex-col gap-4 px-5 py-10 text-sm text-muted md:flex-row md:items-center md:justify-between md:px-8">
+      <div className="mx-auto flex max-w-[1120px] flex-col gap-4 px-5 py-10 text-sm text-muted md:flex-row md:items-center md:justify-end md:px-8">
         <p>© 2026 Hafiz Aryan Siregar. {t("rights")}</p>
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="self-start transition-colors hover:text-accent md:self-auto"
-        >
-          {t("support")}
-        </button>
       </div>
 
       </footer>
-      {open && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 backdrop-blur-sm"
-          onClick={() => setOpen(false)}
-          role="dialog"
-          aria-modal="true"
-        >
-          <div
-            className="w-full max-w-sm rounded-xl border border-rule bg-base p-6 text-center"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="mx-auto w-full max-w-[16rem] rounded-lg border border-rule bg-white p-3">
-              <Image
-                src={qris}
-                alt="QRIS"
-                className="h-auto w-full"
-                sizes="256px"
-              />
-            </div>
-            <p className="mt-4 text-sm text-muted">{t("supportText")}</p>
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              aria-label={t("close")}
-              className="mt-5 rounded-md border border-rule px-4 py-2 text-sm transition-colors hover:border-ink"
-            >
-              {t("close")}
-            </button>
-          </div>
-        </div>
-      )}
       {showBackToTop && (
         <a
           href="#top"
