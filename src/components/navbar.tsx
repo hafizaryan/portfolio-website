@@ -130,7 +130,7 @@ export function Navbar() {
             aria-label="Menu"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="flex h-8 w-8 items-center justify-center text-white"
+            className="hidden h-8 w-8 items-center justify-center text-white"
           >
             <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
               <path

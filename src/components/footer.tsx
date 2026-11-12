@@ -52,7 +52,7 @@ export function Footer() {
         ref={footerRef}
         className="site-footer fixed inset-x-0 bottom-0 z-10 w-full border-t border-black bg-black text-white"
       >
-      <div className="mx-auto flex max-w-[1120px] flex-col gap-4 px-5 py-10 text-sm text-muted md:flex-row md:items-center md:justify-end md:px-8">
+      <div className="mx-auto flex max-w-[1120px] flex-col gap-4 px-5 py-10 text-sm text-muted pb-28 md:flex-row md:items-center md:justify-end md:px-8 md:pb-10">
         <p>© 2026 Hafiz Aryan Siregar. {t("rights")}</p>
       </div>
 
@@ -61,7 +61,7 @@ export function Footer() {
         <a
           href="#top"
           aria-label={t("backToTop")}
-          className="fixed bottom-6 right-6 z-[60] flex h-12 w-12 items-center justify-center rounded-full border border-white/25 bg-black text-white shadow-lg transition-transform hover:scale-105"
+          className="fixed bottom-24 right-6 z-[60] md:bottom-6 flex h-12 w-12 items-center justify-center rounded-full border border-white/25 bg-black text-white shadow-lg transition-transform hover:scale-105"
         >
           <svg
             width="18"

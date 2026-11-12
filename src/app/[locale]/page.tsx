@@ -10,6 +10,7 @@ import { Skills } from "@/components/skills";
 import { Recommendations } from "@/components/recommendations";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
+import { MobileDock } from "@/components/mobile-dock";
 import { routing } from "@/i18n/routing";
 
 export function generateStaticParams() {
@@ -61,6 +62,7 @@ export default async function Home({
         <Contact />
       </main>
       <Footer />
+      <MobileDock />
     </>
   );
 }
