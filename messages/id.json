@@ -25,6 +25,8 @@
   "hero": {
     "name": "Hafiz Aryan Siregar",
     "headline": "Web developer yang membangun aplikasi yang diandalkan orang di tempat kerja.",
+    "taglineLead": "Membangun aplikasi web",
+    "taglineAccent": "yang diandalkan orang di tempat kerja.",
     "viewProjects": "Lihat proyek",
     "viewExperience": "Lihat pengalaman",
     "contactMe": "Resume"

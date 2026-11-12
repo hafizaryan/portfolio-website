@@ -10,24 +10,30 @@ export function LocaleSwitch() {
   const router = useRouter();
 
   return (
-    <div className="flex items-center gap-1 text-xs font-medium text-white/70">
-      {routing.locales.map((l, i) => (
-        <span key={l} className="flex items-center gap-1">
-          {i > 0 && <span aria-hidden="true">/</span>}
+    <div
+      role="group"
+      aria-label="Language"
+      className="flex items-center gap-0.5 rounded-lg border border-black/10 bg-white p-0.5 text-xs font-semibold"
+    >
+      {routing.locales.map((l) => {
+        const active = locale === l;
+        return (
           <button
+            key={l}
             type="button"
             onClick={() => router.replace(pathname, { locale: l })}
-            aria-current={locale === l}
+            aria-current={active ? "true" : undefined}
             className={
-              locale === l
-                ? "text-ink"
-                : "text-muted transition-colors hover:text-ink"
+              "rounded-md px-2 py-1 transition-colors " +
+              (active
+                ? "bg-[#0d0f12] text-white"
+                : "text-[#8c93a0] hover:text-[#0d0f12]")
             }
           >
             {l.toUpperCase()}
           </button>
-        </span>
-      ))}
+        );
+      })}
     </div>
   );
 }

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { ThemeToggle } from "./theme-toggle";
 import { LocaleSwitch } from "./locale-switch";
 import icon from "../app/icon.png";
 
@@ -103,12 +102,7 @@ export function Navbar() {
             );
           })}
           <div className="flex items-center gap-2 border-l border-white/15 pl-3">
-            <span className="[&_button]:!text-white/70 [&_button:hover]:!text-white">
-              <LocaleSwitch />
-            </span>
-            <span className="[&_button]:!text-white/70 [&_button:hover]:!text-white">
-              <ThemeToggle />
-            </span>
+            <LocaleSwitch />
             <a
               href="#contact"
               className="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-[#090a0c] transition-colors hover:bg-white/85"
@@ -119,12 +113,7 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-2 md:hidden">
-          <span className="[&_button]:!text-white/70 [&_button:hover]:!text-white">
-            <LocaleSwitch />
-          </span>
-          <span className="[&_button]:!text-white/70 [&_button:hover]:!text-white">
-            <ThemeToggle />
-          </span>
+          <LocaleSwitch />
           <button
             type="button"
             aria-label="Menu"

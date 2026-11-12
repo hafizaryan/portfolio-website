@@ -96,39 +96,79 @@ body {
   background-color: var(--base);
 }
 
-.about-photo {
-  border: 1px solid var(--rule);
-  box-shadow: 0 12px 28px rgba(13, 15, 18, 0.1);
-}
 
-.hero-terminal {
-  background: var(--surface-raised);
+/* Hero poster: latar hangat full-bleed, siluet, wordmark besar */
+.hero-poster {
+  --hero-bg: #ffffff;
+  background: var(--hero-bg);
   color: var(--ink);
 }
 
-.hero-terminal__bar {
-  background: var(--surface);
+.dark .hero-poster {
+  --hero-bg: #15120f;
+  color: #ece6dd;
 }
 
-.hero-terminal__cursor {
-  animation: hero-terminal-cursor 1s steps(1, end) infinite;
-}
+/* Siluet PNG berlatar transparan: tampil normal tanpa blend, sehingga
+   seluruh badan (termasuk baju abu-abu) menutup wordmark di belakangnya. */
 
-@keyframes hero-terminal-cursor {
-  50% {
-    opacity: 0;
+/* Desktop: dasar siluet memudar ke putih supaya nyambung ke section
+   berikutnya. Mask di gambar (bukan overlay) agar wordmark tidak ikut pudar. */
+@media (min-width: 768px) {
+  .hero-silhouette {
+    /* Gambar digeser turun 8% (translate-y), jadi 8% terbawah tak terlihat.
+       Pudar hanya di dasar hero (30px + 8svh, di bawah garis dasar wordmark),
+       supaya baju tetap pekat menutupi "aryan". */
+    -webkit-mask-image: linear-gradient(to top, transparent 8%, #000 calc(8% + 30px + 8svh));
+    mask-image: linear-gradient(to top, transparent 8%, #000 calc(8% + 30px + 8svh));
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero-terminal__cursor {
-    animation: none;
+/* Di mobile siluet dipudarkan ke bawah supaya teks tetap terbaca */
+@media (max-width: 767px) {
+  .hero-silhouette {
+    -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
   }
 }
 
-.dark .about-photo {
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+/* Dark mode: siluet tidak ditampilkan */
+.dark .hero-silhouette-wrap {
+  display: none;
 }
+
+/* Wordmark "hafiz aryan" satu baris: dibatasi lebar (≈4.3em per baris)
+   DAN tinggi layar, supaya seluruh hero muat tanpa scroll. Angka px =
+   tinggi elemen lain di hero; line-height 0.8 sehingga dikali 1.25. */
+.hero-wordmark {
+  font-size: clamp(2.5rem, min(19vw, (100svh - 390px) * 1.25), 14.5rem);
+  line-height: 0.8;
+  /* Sama dengan heading lain (semibold, tracking rapat), diperketat untuk ukuran display */
+  letter-spacing: -0.05em;
+}
+
+/* Desktop: tagline dan jaraknya ikut tinggi layar, wordmark dapat sisa ruang */
+@media (min-width: 768px) {
+  .hero-wordmark {
+    font-size: clamp(2.5rem, min((100vw - 64px) / 4.6, (100svh - 160px - 16svh) * 1.25), 14.5rem);
+  }
+
+  .hero-tagline {
+    margin-top: 2.5svh;
+    font-size: clamp(1.25rem, 4.2svh, 2rem);
+  }
+
+}
+
+/* "aryan" sebagai garis luar, hanya di desktop.
+   Di mobile hurufnya solid seperti huruf lain. */
+@media (min-width: 768px) {
+  .hero-outline-accent {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--accent);
+  }
+}
+
 
 .contact-card {
   background: #000000;

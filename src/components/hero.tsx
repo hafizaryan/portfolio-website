@@ -1,222 +1,46 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
-
-const terminalCommand = "whoami";
+import silhouette from "../assets/foto-profil-siluet-hero.png";
 
 export function Hero() {
   const t = useTranslations("hero");
-  const terminalRef = useRef<HTMLElement>(null);
-  const [commandLength, setCommandLength] = useState(0);
-  const [outputLines, setOutputLines] = useState(0);
-
-  useEffect(() => {
-    const terminal = terminalRef.current;
-    if (!terminal) return;
-
-    let started = false;
-    let commandTimer: ReturnType<typeof setTimeout>;
-    let outputTimer: ReturnType<typeof setTimeout>;
-    const outputCount = 6;
-
-    const startTyping = () => {
-      if (started) return;
-      started = true;
-
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        setCommandLength(terminalCommand.length);
-        setOutputLines(outputCount);
-        return;
-      }
-
-      const typeCommand = (length: number) => {
-        setCommandLength(length);
-        if (length < terminalCommand.length) {
-          commandTimer = setTimeout(() => typeCommand(length + 1), 80);
-        } else {
-          const revealOutput = (line: number) => {
-            setOutputLines(line);
-            if (line < outputCount) {
-              outputTimer = setTimeout(() => revealOutput(line + 1), 180);
-            }
-          };
-
-          outputTimer = setTimeout(() => revealOutput(1), 180);
-        }
-      };
-
-      typeCommand(1);
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          startTyping();
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.35 },
-    );
-
-    observer.observe(terminal);
-
-    return () => {
-      observer.disconnect();
-      clearTimeout(commandTimer);
-      clearTimeout(outputTimer);
-    };
-  }, []);
 
   return (
-    <section
-      id="top"
-      className="relative mx-auto max-w-[1120px] px-5 pb-20 pt-36 md:px-8 md:pb-28 md:pt-44"
-    >
-      <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-14">
-        <div>
-          <h1
-            data-aos="fade-up"
-            className="max-w-none whitespace-nowrap text-4xl font-semibold leading-[1.02] tracking-[-0.035em] sm:text-5xl lg:text-5xl"
-          >
-            {t("name")}
-          </h1>
+    <section id="top" className="hero-poster relative isolate overflow-hidden">
+      {/* Siluet besar sebagai jangkar visual, menempel ke dasar hero */}
+      {/* z-[1]: di atas wordmark (teks di belakang foto), di bawah tagline & tautan */}
+      <div
+        className="hero-silhouette-wrap pointer-events-none absolute inset-x-0 bottom-[17rem] z-[1] flex justify-center md:bottom-0"
+        aria-hidden="true"
+      >
+        <Image
+          src={silhouette}
+          alt=""
+          priority
+          sizes="(min-width: 768px) 720px, 85vw"
+          className="hero-silhouette h-auto -scale-x-100 w-[min(130vw,calc(100svh-22rem))] max-w-none md:w-[min(720px,88svh)] md:translate-x-[8%] md:translate-y-[8%]"
+        />
+      </div>
 
-          <p
-            data-aos="fade-up"
-            data-aos-delay="100"
-            className="mt-6 max-w-[42ch] text-lg text-muted md:text-xl"
-          >
-            {t("headline")}
-          </p>
-
-          <div
-            data-aos="fade-up"
-            data-aos-delay="200"
-            className="mt-9 flex flex-wrap gap-3"
-          >
-            <a
-              href="#projects"
-              className="rounded-md bg-ink px-5 py-3 text-sm font-medium text-ink-invert transition-all hover:bg-accent hover:text-white hover:shadow-[0_0_20px_-3px_var(--accent-glow)]"
-            >
-              {t("viewProjects")}
-            </a>
-            <a
-              href="#contact"
-              className="flex items-center gap-2 rounded-md border border-rule px-5 py-3 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z" />
-                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-                <path d="M16 13H8" />
-                <path d="M16 17H8" />
-                <path d="M10 9H8" />
-              </svg>
-              {t("contactMe")}
-            </a>
-          </div>
-
-        </div>
-
-        <figure
-          ref={terminalRef}
-          className="hero-terminal w-full overflow-hidden rounded-2xl border border-rule shadow-[0_14px_35px_rgba(13,15,18,0.10)]"
-          aria-label="Example project code"
+      {/* Tanpa z-index agar tidak membuat stacking context: wordmark bisa turun ke bawah siluet */}
+      <div className="relative mx-auto flex h-[100svh] max-w-[1120px] flex-col justify-end px-5 pb-28 pt-24 md:px-8 md:pb-10">
+        <h1
+          data-aos="fade-up"
+          aria-label={t("name")}
+          className="hero-wordmark relative z-0 select-none whitespace-nowrap font-semibold lowercase text-accent"
         >
-          <div className="hero-terminal__bar flex items-center gap-2 border-b border-rule px-4 py-3">
-            <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" aria-hidden="true" />
-            <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" aria-hidden="true" />
-            <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" aria-hidden="true" />
-          </div>
-          <pre className="whitespace-pre-wrap break-words px-5 py-5 font-mono text-[0.78rem] leading-7 sm:text-sm">
-            <code>
-              <span className="text-accent">{terminalCommand.slice(0, commandLength)}</span>
-              {commandLength === terminalCommand.length && (
-                <>
-                  {"\n\n"}
-                  {outputLines >= 1 && <span className="text-muted">{"{"}</span>}
-                  {outputLines >= 2 && (
-                    <>
-                      {"\n  "}
-                      <span className="text-sky-700 dark:text-sky-300">&quot;role&quot;</span>
-                      <span className="text-muted">: </span>
-                      <span className="text-emerald-600 dark:text-emerald-400">
-                        &quot;Web Developer&quot;
-                      </span>
-                      <span className="text-muted">,</span>
-                    </>
-                  )}
-                  {outputLines >= 3 && (
-                    <>
-                      {"\n  "}
-                      <span className="text-sky-700 dark:text-sky-300">&quot;stack&quot;</span>
-                      <span className="text-muted">: [</span>
-                      <span className="text-emerald-600 dark:text-emerald-400">
-                        &quot;ASP.NET Core&quot;
-                      </span>
-                      <span className="text-muted">, </span>
-                      <span className="text-emerald-600 dark:text-emerald-400">
-                        &quot;Laravel&quot;
-                      </span>
-                      <span className="text-muted">, </span>
-                      <span className="text-emerald-600 dark:text-emerald-400">
-                        &quot;Node.js&quot;
-                      </span>
-                      <span className="text-muted">, </span>
-                      <span className="text-emerald-600 dark:text-emerald-400">
-                        &quot;SQL Server&quot;
-                      </span>
-                      <span className="text-muted">, </span>
-                      <span className="text-emerald-600 dark:text-emerald-400">
-                        &quot;GCP&quot;
-                      </span>
-                      <span className="text-muted">],</span>
-                    </>
-                  )}
-                  {outputLines >= 4 && (
-                    <>
-                      {"\n  "}
-                      <span className="text-sky-700 dark:text-sky-300">&quot;focus&quot;</span>
-                      <span className="text-muted">: </span>
-                      <span className="text-emerald-600 dark:text-emerald-400">
-                        &quot;Backend Engineer &amp; Automation&quot;
-                      </span>
-                      <span className="text-muted">,</span>
-                    </>
-                  )}
-                  {outputLines >= 5 && (
-                    <>
-                      {"\n  "}
-                      <span className="text-sky-700 dark:text-sky-300">&quot;status&quot;</span>
-                      <span className="text-muted">: </span>
-                      <span className="text-emerald-600 dark:text-emerald-400">
-                        &quot;Available for new challenges&quot;
-                      </span>
-                    </>
-                  )}
-                  {outputLines >= 6 && (
-                    <>
-                      {"\n"}
-                      <span className="text-muted">{"}"}</span>
-                    </>
-                  )}
-                </>
-              )}
-              <span className="hero-terminal__cursor" aria-hidden="true">▌</span>
-            </code>
-          </pre>
-        </figure>
+          <span aria-hidden="true">
+            hafiz <span className="hero-outline-accent">aryan</span>
+          </span>
+        </h1>
 
+        <p
+          data-aos="fade-up"
+          data-aos-delay="160"
+          className="hero-tagline relative z-[2] mt-6 max-w-[22ch] text-2xl font-semibold leading-tight tracking-tight"
+        >
+          {t("taglineLead")} <span className="text-accent">{t("taglineAccent")}</span>
+        </p>
       </div>
     </section>
   );
