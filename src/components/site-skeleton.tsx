@@ -58,40 +58,52 @@ export function SiteSkeleton() {
     >
       <span className="sr-only">Loading</span>
 
-      <div className="mx-auto flex h-16 max-w-[1120px] items-center justify-between px-5 md:px-8">
-        <div className="sk-block h-8 w-40" />
-        <div className="hidden items-center gap-8 md:flex">
-          <div className="sk-block h-3 w-16" />
-          <div className="sk-block h-3 w-12" />
-          <div className="sk-block h-3 w-14" />
-          <div className="sk-block h-3 w-16" />
-          <div className="sk-block h-8 w-24" />
+      {/* Hero: latar & ukuran sama dengan .hero-poster */}
+      <div className="hero-poster absolute inset-0">
+        <div className="mx-auto flex h-[100svh] max-w-[1120px] flex-col justify-end px-5 pb-28 pt-24 md:px-8 md:pb-10">
+          {/* Wordmark: font-size ikut .hero-wordmark, jadi ukuran pakai em */}
+          <div className="hero-wordmark">
+            <div className="sk-block h-[0.72em] w-[4.3em] max-w-full rounded-xl" />
+          </div>
+
+          {/* Tagline: 2 baris di mobile, ukuran ikut .hero-tagline di desktop */}
+          <div className="hero-tagline mt-6 max-w-[22ch] text-2xl leading-tight">
+            <div className="sk-block h-[0.9em] w-[15ch]" />
+            <div className="sk-block mt-[0.3em] h-[0.9em] w-[9ch]" />
+          </div>
         </div>
       </div>
 
-      <div className="mx-auto grid max-w-[1120px] items-center gap-14 px-5 pt-16 md:px-8 md:pt-24 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
-        <div>
-          <div className="sk-block h-14 w-[86%] md:h-20" />
-          <div className="sk-block mt-3 h-14 w-[58%] md:h-20" />
-
-          <div className="mt-8 space-y-3">
-            <div className="sk-block h-5 w-full max-w-[27rem]" />
-            <div className="sk-block h-5 w-[70%] max-w-[20rem]" />
+      {/* Navbar */}
+      <header className="fixed inset-x-0 top-4 z-10 px-4">
+        <nav className="navbar-glass mx-auto flex h-[50px] max-w-[1040px] items-center justify-between rounded-full px-3 md:px-4">
+          <div className="sk-block sk-glass h-8 w-8 rounded-full" />
+          <div className="hidden items-center gap-5 md:flex">
+            <div className="sk-block sk-glass h-2.5 w-10" />
+            <div className="sk-block sk-glass h-2.5 w-16" />
+            <div className="sk-block sk-glass h-2.5 w-14" />
+            <div className="sk-block sk-glass h-2.5 w-14" />
+            <div className="sk-block sk-glass h-2.5 w-12" />
+            <div className="flex items-center gap-2 border-l border-white/15 pl-3">
+              <div className="sk-block sk-glass h-6 w-10 rounded-full" />
+              <div className="sk-block sk-glass h-7 w-16 rounded-full" />
+            </div>
           </div>
-
-          <div className="mt-9 flex flex-wrap gap-3">
-            <div className="sk-block h-11 w-36" />
-            <div className="sk-block h-11 w-32" />
+          <div className="md:hidden">
+            <div className="sk-block sk-glass h-6 w-10 rounded-full" />
           </div>
+        </nav>
+      </header>
 
-          <div className="mt-8 flex gap-6">
-            <div className="sk-block h-4 w-14" />
-            <div className="sk-block h-4 w-16" />
-          </div>
-        </div>
-
-        <div className="mx-auto w-full max-w-[18rem] sm:max-w-[22rem] lg:max-w-[24rem]">
-          <div className="sk-block aspect-square w-full rounded-2xl" />
+      {/* Mobile dock */}
+      <div className="fixed inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] z-10 px-4 md:hidden">
+        <div className="navbar-glass mx-auto grid max-w-[420px] grid-cols-4 gap-1 rounded-full p-1.5">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className="flex flex-col items-center gap-1 py-1.5">
+              <div className="sk-block sk-glass h-5 w-5 rounded-md" />
+              <div className="sk-block sk-glass h-2 w-10" />
+            </div>
+          ))}
         </div>
       </div>
     </div>

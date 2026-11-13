@@ -518,8 +518,26 @@ body {
   animation: sk-shimmer 1.4s ease-in-out infinite;
 }
 
+.sk-block.rounded-md {
+  border-radius: 0.375rem;
+}
+
+.sk-block.rounded-xl {
+  border-radius: 0.75rem;
+}
+
 .sk-block.rounded-2xl {
   border-radius: 1rem;
+}
+
+.sk-block.rounded-full {
+  border-radius: 9999px;
+}
+
+/* Blok di atas navbar/dock kaca gelap */
+.sk-block.sk-glass {
+  --sk-base: rgba(255, 255, 255, 0.12);
+  --sk-highlight: rgba(255, 255, 255, 0.24);
 }
 
 @keyframes sk-shimmer {
