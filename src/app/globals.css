@@ -468,22 +468,6 @@ body {
   border-radius: 2px;
 }
 
-@keyframes hero-rise {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero-rise {
-  opacity: 0;
-  animation: hero-rise 320ms var(--ease-out) both;
-}
-
 /* Skeleton loading screen */
 .site-skeleton {
   position: fixed;
@@ -531,68 +515,6 @@ body {
   }
 }
 
-@keyframes device-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.device-marquee {
-  animation: device-marquee 36s linear infinite;
-}
-
-.device-marquee:hover {
-  animation-play-state: paused;
-}
-
-@keyframes recipe-reveal {
-  from {
-    opacity: 0;
-    transform: translateY(16px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.recipe-reveal[data-shown="true"] {
-  animation: recipe-reveal 420ms var(--ease-out) both;
-}
-
-@keyframes scan-beam {
-  0% {
-    top: 0%;
-    opacity: 0;
-  }
-  15% {
-    opacity: 0.8;
-  }
-  85% {
-    opacity: 0.8;
-  }
-  100% {
-    top: 100%;
-    opacity: 0;
-  }
-}
-
-.scan-beam {
-  animation: scan-beam 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
-@keyframes cursor-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-.cursor-blink {
-  animation: cursor-blink 1s steps(2, start) infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -603,15 +525,6 @@ body {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-  }
-  .device-marquee {
-    animation: none !important;
-  }
-  .scan-beam {
-    display: none !important;
-  }
-  .hero-rise {
-    opacity: 1;
   }
   .sk-block {
     animation: none !important;
