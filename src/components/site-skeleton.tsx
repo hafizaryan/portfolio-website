@@ -58,40 +58,49 @@ export function SiteSkeleton() {
     >
       <span className="sr-only">Loading</span>
 
-      <div className="mx-auto flex h-16 max-w-[1120px] items-center justify-between px-5 md:px-8">
-        <div className="sk-block h-8 w-40" />
-        <div className="hidden items-center gap-8 md:flex">
-          <div className="sk-block h-3 w-16" />
-          <div className="sk-block h-3 w-12" />
-          <div className="sk-block h-3 w-14" />
-          <div className="sk-block h-3 w-16" />
-          <div className="sk-block h-8 w-24" />
+      {/* Desktop top navbar skeleton (floating pill) */}
+      <div className="fixed inset-x-0 top-4 z-10 hidden px-4 md:block">
+        <div className="mx-auto flex h-[50px] max-w-[1120px] items-center justify-between rounded-full border border-rule/60 px-4">
+          <div className="sk-block h-8 w-8 !rounded-full" />
+          <div className="flex items-center gap-5">
+            <div className="sk-block h-3 w-12" />
+            <div className="sk-block h-3 w-16" />
+            <div className="sk-block h-3 w-14" />
+            <div className="sk-block h-3 w-14" />
+            <div className="sk-block h-3 w-12" />
+            <div className="flex items-center gap-2 border-l border-rule/60 pl-3">
+              <div className="sk-block h-6 w-14 !rounded-lg" />
+              <div className="sk-block h-7 w-20 !rounded-full" />
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="mx-auto grid max-w-[1120px] items-center gap-14 px-5 pt-16 md:px-8 md:pt-24 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
-        <div>
-          <div className="sk-block h-14 w-[86%] md:h-20" />
-          <div className="sk-block mt-3 h-14 w-[58%] md:h-20" />
-
-          <div className="mt-8 space-y-3">
-            <div className="sk-block h-5 w-full max-w-[27rem]" />
-            <div className="sk-block h-5 w-[70%] max-w-[20rem]" />
-          </div>
-
-          <div className="mt-9 flex flex-wrap gap-3">
-            <div className="sk-block h-11 w-36" />
-            <div className="sk-block h-11 w-32" />
-          </div>
-
-          <div className="mt-8 flex gap-6">
-            <div className="sk-block h-4 w-14" />
-            <div className="sk-block h-4 w-16" />
-          </div>
-        </div>
-
-        <div className="mx-auto w-full max-w-[18rem] sm:max-w-[22rem] lg:max-w-[24rem]">
+      {/* Mobile skeleton: tanpa top navbar, dengan bottom dock & tombol bahasa */}
+      <div className="mx-auto flex h-[100svh] max-w-[1120px] flex-col justify-end px-5 pb-28 pt-10 md:hidden">
+        <div className="mx-auto mb-auto mt-8 w-full max-w-[17rem]">
           <div className="sk-block aspect-square w-full rounded-2xl" />
+        </div>
+        <div className="sk-block h-12 w-[82%]" />
+        <div className="mt-5 space-y-2.5">
+          <div className="sk-block h-5 w-[78%]" />
+          <div className="sk-block h-5 w-[55%]" />
+        </div>
+      </div>
+      <div className="sk-block fixed bottom-24 right-6 h-12 w-12 !rounded-full md:hidden" />
+      <div className="fixed inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] px-4 md:hidden">
+        <div className="sk-block mx-auto h-[54px] max-w-[420px] !rounded-full" />
+      </div>
+
+      {/* Desktop hero skeleton: siluet tengah-bawah + wordmark besar + tagline */}
+      <div className="relative mx-auto hidden h-[100svh] max-w-[1120px] flex-col justify-end px-8 pb-10 pt-24 md:flex">
+        <div className="mx-auto mb-auto mt-4 w-full max-w-[24rem] lg:max-w-[28rem]">
+          <div className="sk-block aspect-[4/5] w-full rounded-2xl" />
+        </div>
+        <div className="sk-block h-28 w-[88%] lg:h-36" />
+        <div className="mt-6 space-y-2.5">
+          <div className="sk-block h-6 w-full max-w-[22rem]" />
+          <div className="sk-block h-6 w-[65%] max-w-[15rem]" />
         </div>
       </div>
     </div>

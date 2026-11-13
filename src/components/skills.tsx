@@ -135,16 +135,7 @@ export function Skills() {
                         alt=""
                         width="16"
                         height="16"
-                        className={`h-4 w-4 object-contain ${
-                          item.name === "Next.js" ||
-                          item.name === "Azure DevOps" ||
-                          item.name === "Vercel" ||
-                          item.name === "Laragon" ||
-                          item.name === "OpenCode" ||
-                          item.name === "Claude"
-                            ? "dark:invert"
-                            : ""
-                        }`}
+                        className="h-4 w-4 object-contain"
                       />
                     ) : (
                       <i className={`${item.icon} text-base`} aria-hidden="true" />

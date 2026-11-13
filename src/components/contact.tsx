@@ -168,28 +168,6 @@ export function Contact() {
               LinkedIn
             </a>
           </div>
-          {/* Pet dekoratif, hanya tampil di light mode desktop */}
-          <div className="footer-pet-track contact-pet mt-auto hidden pt-8 md:block dark:hidden" aria-hidden="true">
-            <span className="footer-pet">
-              <svg
-                className="footer-pet-sprite"
-                width="22"
-                height="18"
-                viewBox="0 0 22 18"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3 7 L1 2 L6 5 L16 5 L21 2 L19 7 L19 14 L16 16 L6 16 L3 14 Z"
-                  fill="currentColor"
-                  fillOpacity="0.9"
-                />
-                <rect x="7" y="9" width="2" height="2" rx="1" className="contact-pet-eye" />
-                <rect x="13" y="9" width="2" height="2" rx="1" className="contact-pet-eye" />
-                <rect x="10" y="12" width="2" height="1.5" rx="0.5" className="contact-pet-eye" fillOpacity="0.7" />
-              </svg>
-            </span>
-          </div>
         </div>
 
         <form

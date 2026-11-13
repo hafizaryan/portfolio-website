@@ -1,10 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { usePathname, useRouter } from "@/i18n/navigation";
 
 export function Footer() {
   const t = useTranslations("footer");
+  const locale = useLocale();
+  const pathname = usePathname();
+  const router = useRouter();
+  const nextLocale = locale === "en" ? "id" : "en";
   const [showBackToTop, setShowBackToTop] = useState(false);
   const footerRef = useRef<HTMLElement>(null);
 
@@ -57,11 +62,23 @@ export function Footer() {
       </div>
 
       </footer>
+      <button
+        type="button"
+        onClick={() => router.replace(pathname, { locale: nextLocale })}
+        aria-label={
+          nextLocale === "id"
+            ? "Ganti ke Bahasa Indonesia"
+            : "Switch to English"
+        }
+        className="fixed bottom-24 right-6 z-[60] flex h-12 w-12 items-center justify-center rounded-full border border-white/25 bg-black font-mono text-xs font-semibold uppercase text-white shadow-lg transition-transform active:scale-95 md:hidden"
+      >
+        {locale.toUpperCase()}
+      </button>
       {showBackToTop && (
         <a
           href="#top"
           aria-label={t("backToTop")}
-          className="fixed bottom-24 right-6 z-[60] md:bottom-6 flex h-12 w-12 items-center justify-center rounded-full border border-white/25 bg-black text-white shadow-lg transition-transform hover:scale-105"
+          className="fixed bottom-6 right-6 z-[60] hidden h-12 w-12 items-center justify-center rounded-full border border-white/25 bg-black text-white shadow-lg transition-transform hover:scale-105 md:flex"
         >
           <svg
             width="18"
