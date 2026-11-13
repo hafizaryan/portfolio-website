@@ -153,23 +153,6 @@ body {
   border-color: rgba(255, 255, 255, 0.28);
 }
 
-.contact-card input,
-.contact-card textarea {
-  border-color: rgba(255, 255, 255, 0.28);
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-}
-
-.contact-card input::placeholder,
-.contact-card textarea::placeholder {
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.contact-card button[type="submit"] {
-  background: #ffffff;
-  color: #000000;
-}
-
 .site-footer {
   color: #ffffff;
 }

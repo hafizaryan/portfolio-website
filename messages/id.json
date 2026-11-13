@@ -98,18 +98,7 @@
   },
   "contact": {
     "title": "Mari bicara.",
-    "lead": "Punya proyek, atau sekadar ingin menyapa? Kirim pesan.",
-    "email": "Email",
-    "emailPlaceholder": "anda@contoh.com",
-    "message": "Pesan",
-    "messagePlaceholder": "Apa yang ingin Anda bangun?",
-    "send": "Kirim pesan",
-    "sending": "Mengirim…",
-    "sent": "Pesan terkirim. Terima kasih.",
-    "successTitle": "Berhasil!",
-    "close": "Tutup",
-    "error": "Terjadi kesalahan. Silakan coba lagi.",
-    "fillFields": "Mohon isi kedua kolom."
+    "lead": "Punya proyek, atau sekadar ingin menyapa? Hubungi langsung melalui tautan di bawah."
   },
   "footer": {
     "rights": "Hak cipta dilindungi.",
