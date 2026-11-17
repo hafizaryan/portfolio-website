@@ -277,10 +277,10 @@ body {
   color: var(--ink);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 899px) {
   .project-card {
     top: 80px;
-    width: calc(100vw - 2rem);
+    width: 100%;
     min-height: 369px;
   }
 }

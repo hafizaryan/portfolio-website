@@ -37,7 +37,7 @@ export function Education() {
               delay={Math.min(i * 0.06, 0.24)}
               className="grid grid-cols-1 gap-2 sm:grid-cols-[9rem_1fr] sm:gap-8"
             >
-              <div className="font-mono text-xs text-muted sm:pt-1.5 sm:text-right">
+              <div className="pl-6 font-mono text-xs text-muted sm:pl-0 sm:pt-1.5 sm:text-right">
                 {entry.period}
               </div>
 
