@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { AnimatePresence, m } from "motion/react";
+import { MotionReveal } from "./motion-reveal";
 
 type Recommender = {
   name: string;
@@ -54,41 +56,39 @@ export function Recommendations() {
     return () => window.clearInterval(id);
   }, [pos]);
 
+  const activePerson = RECOMMENDERS[ROTATE_INDS[pos]];
+
   return (
     <section
       id="recommendations"
       className="mx-auto max-w-[1120px] scroll-mt-0 px-5 py-12 md:px-8 md:py-16"
     >
-      <div data-aos="fade-up">
+      <MotionReveal>
         <h2 className="sr-only">{t("title")}</h2>
         <p className="mx-auto text-center text-muted md:text-lg">{t("lead")}</p>
-      </div>
+      </MotionReveal>
 
       <div className="mt-12">
-        <figure className="grid" aria-live="polite">
-          {ROTATE_INDS.map((idx, pos_) => {
-            const person = RECOMMENDERS[idx];
-            const isActive = pos_ === pos;
-            return (
-              <blockquote
-                key={person.name}
-                aria-hidden={!isActive}
-                className={
-                  "col-start-1 row-start-1 mx-auto max-w-[60ch] px-5 text-center text-ink transition-opacity duration-500 ease-out md:px-0 " +
-                  (isActive ? "opacity-100" : "opacity-0")
-                }
-              >
-                <div className="quote-text text-sm leading-relaxed md:text-[1rem]">
-                  <p>&ldquo;{person.quote}&rdquo;</p>
-                </div>
-                <figcaption className="mt-4 text-xs">
-                  <span className="font-medium text-ink">{person.name}</span>
-                  {", "}
-                  <time className="text-muted">{person.date}</time>
-                </figcaption>
-              </blockquote>
-            );
-          })}
+        <figure className="min-h-[110px]" aria-live="polite">
+          <AnimatePresence mode="wait">
+            <m.blockquote
+              key={activePerson.name}
+              initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -12, filter: "blur(4px)" }}
+              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+              className="mx-auto max-w-[60ch] px-5 text-center text-ink md:px-0"
+            >
+              <div className="quote-text text-sm leading-relaxed md:text-[1rem]">
+                <p>&ldquo;{activePerson.quote}&rdquo;</p>
+              </div>
+              <figcaption className="mt-4 text-xs">
+                <span className="font-medium text-ink">{activePerson.name}</span>
+                {", "}
+                <time className="text-muted">{activePerson.date}</time>
+              </figcaption>
+            </m.blockquote>
+          </AnimatePresence>
         </figure>
         {/* Penanda rotasi: garis kecil, bisa diklik untuk pindah kutipan */}
         <div className="mt-8 flex justify-center gap-2">
@@ -102,15 +102,20 @@ export function Recommendations() {
                 onClick={() => setPos(i)}
                 aria-label={`Show recommendation from ${person.name}`}
                 aria-pressed={isActive}
-                className="cursor-pointer p-2"
+                className="relative cursor-pointer p-2"
               >
                 <span
                   aria-hidden="true"
-                  className={
-                    "block h-0.5 w-6 rounded-full transition-colors duration-500 " +
-                    (isActive ? "bg-ink" : "bg-rule")
-                  }
-                />
+                  className="relative block h-0.5 w-6 overflow-hidden rounded-full bg-rule"
+                >
+                  {isActive && (
+                    <m.span
+                      layoutId="rec-indicator"
+                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                      className="absolute inset-0 rounded-full bg-ink"
+                    />
+                  )}
+                </span>
               </button>
             );
           })}

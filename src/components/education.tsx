@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { MotionReveal } from "./motion-reveal";
 
 type Entry = {
   key: string;
@@ -19,21 +20,21 @@ export function Education() {
       id="education"
       className="mx-auto max-w-[1120px] scroll-mt-0 px-5 py-10 md:px-8 md:py-14"
     >
-      <div data-aos="fade-up">
+      <MotionReveal>
         <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
           {t("title")}
         </h2>
         <p className="mt-3 max-w-[52ch] text-muted">{t("lead")}</p>
-      </div>
+      </MotionReveal>
 
       <ol className="mt-12">
         {entries.map((entry, i) => {
           const isLast = i === entries.length - 1;
           return (
-            <li
+            <MotionReveal
+              as="li"
               key={entry.key}
-              data-aos="fade-up"
-              data-aos-delay={Math.min(i * 60, 240)}
+              delay={Math.min(i * 0.06, 0.24)}
               className="grid grid-cols-1 gap-2 sm:grid-cols-[9rem_1fr] sm:gap-8"
             >
               <div className="font-mono text-xs text-muted sm:pt-1.5 sm:text-right">
@@ -41,12 +42,18 @@ export function Education() {
               </div>
 
               <div
-                className={`relative border-l pl-6 sm:pl-7 ${
-                  isLast ? "border-transparent pb-0" : "border-rule pb-8"
+                className={`relative pl-6 sm:pl-7 ${
+                  isLast ? "pb-0" : "pb-8"
                 }`}
               >
+                {!isLast && (
+                  <span
+                    aria-hidden="true"
+                    className="absolute left-0 top-[11px] -bottom-[11px] w-px -translate-x-1/2 bg-rule"
+                  />
+                )}
                 <span
-                  className="absolute left-0 top-1.5 size-2.5 -translate-x-1/2 rounded-full border-2 border-base bg-muted"
+                  className="absolute left-0 top-1.5 z-10 size-2.5 -translate-x-1/2 rounded-full border-2 border-base bg-muted"
                   aria-hidden="true"
                 />
 
@@ -61,7 +68,7 @@ export function Education() {
                   </p>
                 </div>
               </div>
-            </li>
+            </MotionReveal>
           );
         })}
       </ol>

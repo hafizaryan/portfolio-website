@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import { AnimatePresence, m } from "motion/react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 
 export function Footer() {
@@ -74,29 +75,38 @@ export function Footer() {
       >
         {locale.toUpperCase()}
       </button>
-      {showBackToTop && (
-        <a
-          href="#top"
-          aria-label={t("backToTop")}
-          className="fixed bottom-6 right-6 z-[60] hidden h-12 w-12 items-center justify-center rounded-full border border-white/25 bg-black text-white shadow-lg transition-transform hover:scale-105 md:flex"
-        >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden="true"
+      <AnimatePresence>
+        {showBackToTop && (
+          <m.a
+            key="back-to-top"
+            href="#top"
+            aria-label={t("backToTop")}
+            initial={{ opacity: 0, y: 14, scale: 0.85 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 14, scale: 0.85 }}
+            transition={{ type: "spring", stiffness: 360, damping: 26 }}
+            whileHover={{ scale: 1.07 }}
+            whileTap={{ scale: 0.94 }}
+            className="fixed bottom-6 right-6 z-[60] hidden h-12 w-12 items-center justify-center rounded-full border border-white/25 bg-black text-white shadow-lg md:flex"
           >
-            <path
-              d="M12 19V5M6 11l6-6 6 6"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </a>
-      )}
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 19V5M6 11l6-6 6 6"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </m.a>
+        )}
+      </AnimatePresence>
     </>
   );
 }
