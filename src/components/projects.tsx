@@ -137,7 +137,7 @@ export function Projects() {
             {t("title")}
           </h2>
           <p className="mt-6 max-w-[32ch] text-muted">{t("lead")}</p>
-          <ol className="mt-10 border-l border-rule">
+          <ol className="mt-10 hidden border-l border-rule min-[900px]:block">
             {projects.map((project, index) => {
               const isActive = project.key === activeKey;
               return (
