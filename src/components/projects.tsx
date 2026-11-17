@@ -9,7 +9,6 @@ type Project = {
   key: ProjectKey;
   repo?: string;
   demo?: string;
-  span: string;
   tags: string[];
 };
 
@@ -18,21 +17,18 @@ const projects: Project[] = [
     key: "foodinary",
     repo: "https://github.com/foodinary-project",
     demo: "https://foodinary.vercel.app/",
-    span: "md:col-span-7",
     tags: ["React", "FastAPI", "TensorFlow", "Cloud Run"],
   },
   {
     key: "daisy",
     repo: "https://github.com/daisy-team",
     demo: "https://daisy-ai-system.vercel.app/",
-    span: "md:col-span-5",
     tags: ["Mobile", "TFLite", "FastAPI", "Computer Vision"],
   },
   {
     key: "lab",
     repo: "#",
     demo: "#",
-    span: "md:col-span-12",
     tags: ["PHP", "CodeIgniter", "MySQL", "RBAC Architecture"],
   },
 ];

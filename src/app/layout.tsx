@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { Schibsted_Grotesk, JetBrains_Mono } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
 import { SiteSkeleton } from "@/components/site-skeleton";
 import { GithubIoRedirect } from "@/components/github-io-redirect";
 import "./globals.css";
@@ -19,7 +18,7 @@ const jetbrains = JetBrains_Mono({
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
         <link
           rel="stylesheet"
@@ -33,10 +32,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body className={`${schibsted.variable} ${jetbrains.variable}`}>
-        <ThemeProvider>
-          {children}
-          <SiteSkeleton />
-        </ThemeProvider>
+        {children}
+        <SiteSkeleton />
         <GithubIoRedirect />
         <noscript>
           <style>{".site-skeleton{display:none!important}"}</style>

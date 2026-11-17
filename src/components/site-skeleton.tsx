@@ -74,11 +74,11 @@ export function SiteSkeleton() {
         </div>
       </div>
 
-      {/* Navbar */}
-      <header className="fixed inset-x-0 top-4 z-10 px-4">
-        <nav className="navbar-glass mx-auto flex h-[50px] max-w-[1040px] items-center justify-between rounded-full px-3 md:px-4">
+      {/* Desktop top navbar skeleton (floating glass pill) */}
+      <header className="fixed inset-x-0 top-4 z-10 hidden px-4 md:block">
+        <nav className="navbar-glass mx-auto flex h-[50px] max-w-[1120px] items-center justify-between rounded-full px-4">
           <div className="sk-block sk-glass h-8 w-8 rounded-full" />
-          <div className="hidden items-center gap-5 md:flex">
+          <div className="flex items-center gap-5">
             <div className="sk-block sk-glass h-2.5 w-10" />
             <div className="sk-block sk-glass h-2.5 w-16" />
             <div className="sk-block sk-glass h-2.5 w-14" />
@@ -88,9 +88,6 @@ export function SiteSkeleton() {
               <div className="sk-block sk-glass h-6 w-10 rounded-full" />
               <div className="sk-block sk-glass h-7 w-16 rounded-full" />
             </div>
-          </div>
-          <div className="md:hidden">
-            <div className="sk-block sk-glass h-6 w-10 rounded-full" />
           </div>
         </nav>
       </header>
