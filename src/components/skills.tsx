@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { MotionReveal } from "./motion-reveal";
 
 const skillGroups: {
   key: "frontend" | "backend" | "data" | "cloud" | "ai";
@@ -107,14 +108,19 @@ export function Skills() {
       id="skills"
       className="mx-auto max-w-[1120px] scroll-mt-0 px-5 py-10 md:px-8 md:py-14"
     >
-      <div data-aos="fade-up">
+      <MotionReveal>
         <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
           {t("title")}
         </h2>
-      </div>
+      </MotionReveal>
 
       <div className="mt-10">
-        <dl data-aos="fade-right" data-aos-delay="100" className="space-y-8 md:space-y-10">
+        <MotionReveal
+          as="dl"
+          direction="right"
+          delay={0.1}
+          className="space-y-8 md:space-y-10"
+        >
           {skillGroups.map((g) => (
             <div
               key={g.key}
@@ -135,6 +141,8 @@ export function Skills() {
                         alt=""
                         width="16"
                         height="16"
+                        loading="lazy"
+                        decoding="async"
                         className="h-4 w-4 object-contain"
                       />
                     ) : (
@@ -146,7 +154,7 @@ export function Skills() {
               </dd>
             </div>
           ))}
-        </dl>
+        </MotionReveal>
       </div>
     </section>
   );

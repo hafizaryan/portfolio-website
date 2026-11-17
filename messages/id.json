@@ -13,9 +13,26 @@
     "contact": "Kontak"
   },
   "about": {
+    "kicker": "01 / Profil",
     "title": "Tentang",
+    "location": "Indonesia",
+    "role": "Web Developer · PT Pertamina Patra Niaga",
     "intro": "Saya Hafiz Aryan Siregar, web developer yang berfokus membangun aplikasi praktis untuk orang dan tim.",
-    "focus": "Pekerjaan saya mencakup pengembangan web, cloud computing, data, dan computer vision, dari ide awal hingga proyek siap digunakan."
+    "focus": "Pekerjaan saya mencakup pengembangan web, cloud computing, data, dan computer vision, dari ide awal hingga proyek siap digunakan.",
+    "highlights": {
+      "experience": {
+        "value": "3+ Tahun",
+        "label": "Pengembangan Web & Full-Stack"
+      },
+      "programs": {
+        "value": "2× Lulusan",
+        "label": "Bangkit & Coding Camp 2025"
+      },
+      "scope": {
+        "value": "End-to-End",
+        "label": "Web, Cloud, Data & AI/CV"
+      }
+    }
   },
   "hero": {
     "name": "Hafiz Aryan Siregar",

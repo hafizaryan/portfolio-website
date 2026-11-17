@@ -1,6 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
+import { MarqueeStrip } from "@/components/marquee-strip";
 import { About } from "@/components/about";
 import { Experience } from "@/components/experience";
 import { Education } from "@/components/education";
@@ -52,6 +53,7 @@ export default async function Home({
           }}
         />
         <Hero />
+        <MarqueeStrip />
         <About />
         <Experience />
         <Education />
