@@ -79,7 +79,7 @@ export function MobileDock() {
     <div className="fixed inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] z-50 px-4 md:hidden">
       <nav
         aria-label="Section navigation"
-        className="navbar-glass mx-auto grid max-w-[420px] grid-cols-4 gap-1 rounded-full p-1.5 text-white"
+        className="navbar-glass mx-auto grid max-w-[420px] grid-cols-4 gap-1 rounded-full p-1.5 text-ink-invert"
       >
         {ids.map((id) => {
           const isActive = active === id;
@@ -91,8 +91,8 @@ export function MobileDock() {
               className={
                 "flex flex-col items-center justify-center gap-0.5 rounded-full py-1.5 transition-colors duration-200 " +
                 (isActive
-                  ? "bg-white/15 text-white"
-                  : "text-white/60 active:bg-white/10")
+                  ? "bg-ink-invert/15 text-ink-invert"
+                  : "text-ink-invert/60 active:bg-ink-invert/10")
               }
             >
               {icons[id]}

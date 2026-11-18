@@ -48,6 +48,7 @@
     "lead": "A few things I've built, from idea to production.",
     "repo": "Repo",
     "demo": "Demo",
+    "viewMoreGithub": "View More Projects on GitHub",
     "foodinary": {
       "name": "Foodinary",
       "desc": "A web app that recognises a dish from a photo and guides you to cook Indonesian food at home."
@@ -59,6 +60,14 @@
     "lab": {
       "name": "Laboratory Management System",
       "desc": "A web application, built as an undergraduate thesis, that makes academic lab administration and scheduling easier to run."
+    },
+    "aurora": {
+      "name": "Aurora Liveness Detection",
+      "desc": "A web app that verifies a real person is in front of the camera, not a photo or video, with face liveness analysis running entirely in the browser."
+    },
+    "sitaris": {
+      "name": "Sitaris",
+      "desc": "A web app for managing laboratory inventory, including borrowing items and tracking stock, built for the Information Systems laboratory at UIN Suska Riau."
     }
   },
   "experience": {

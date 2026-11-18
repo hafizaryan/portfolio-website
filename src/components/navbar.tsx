@@ -61,7 +61,7 @@ export function Navbar() {
         (hidden ? " pointer-events-none" : "")
       }
     >
-      <nav className="navbar-glass mx-auto flex h-[50px] max-w-[1120px] items-center justify-between rounded-full px-4 text-white">
+      <nav className="navbar-glass mx-auto flex h-[50px] max-w-[1120px] items-center justify-between rounded-full px-4 text-ink-invert">
         <a href="#top" className="shrink-0" aria-label="Hafiz Aryan Siregar">
           <img
             src={icon.src}
@@ -83,19 +83,19 @@ export function Navbar() {
                 className={
                   "text-xs transition-colors " +
                   (isActive
-                    ? "font-semibold text-white"
-                    : "text-white/65 hover:text-white")
+                    ? "font-semibold text-ink-invert"
+                    : "text-ink-invert/65 hover:text-accent")
                 }
               >
                 {l.label}
               </a>
             );
           })}
-          <div className="flex items-center gap-2 border-l border-white/15 pl-3">
+          <div className="flex items-center gap-2 border-l border-ink-invert/15 pl-3">
             <LocaleSwitch />
             <a
               href="#contact"
-              className="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-[#090a0c] transition-colors hover:bg-white/85"
+              className="rounded-full bg-ink-invert px-3 py-1.5 text-xs font-medium text-ink transition-colors hover:bg-accent hover:text-ink-invert"
             >
               {t("contact")}
             </a>

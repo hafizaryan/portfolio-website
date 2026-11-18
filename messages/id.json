@@ -48,6 +48,7 @@
     "lead": "Beberapa yang pernah saya bangun, dari ide sampai produksi.",
     "repo": "Repo",
     "demo": "Demo",
+    "viewMoreGithub": "Lihat Proyek Lainnya di GitHub",
     "foodinary": {
       "name": "Foodinary",
       "desc": "Aplikasi web yang mengenali masakan dari foto dan memandu Anda memasak makanan Indonesia di rumah."
@@ -59,6 +60,14 @@
     "lab": {
       "name": "Sistem Manajemen Laboratorium",
       "desc": "Aplikasi web, dibuat sebagai proyek tesis, yang membuat administrasi dan penjadwalan laboratorium akademik lebih mudah dijalankan."
+    },
+    "aurora": {
+      "name": "Aurora Liveness Detection",
+      "desc": "Aplikasi web yang memastikan ada orang sungguhan di depan kamera, bukan foto atau video, dengan analisis liveness wajah yang berjalan sepenuhnya di browser."
+    },
+    "sitaris": {
+      "name": "Sitaris",
+      "desc": "Aplikasi web untuk mengelola inventaris laboratorium, termasuk peminjaman barang dan pelacakan stok, yang dibangun untuk laboratorium Sistem Informasi UIN Suska Riau."
     }
   },
   "experience": {
