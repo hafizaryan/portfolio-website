@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --base: #ffffff;
-  --surface: #f7f8f9;
-  --surface-raised: #ffffff;
-  --rule: #e5e7eb;
-  --rule-subtle: #f0f2f5;
-  --muted: #525866;
-  --ink: #0d0f12;
-  --ink-invert: #ffffff;
-  --grid-color: rgba(0, 0, 0, 0.035);
+  --base: #FFFFFF;
+  --surface: #F4F6FA;
+  --surface-raised: #FAFBFD;
+  --rule: #DDE2EC;
+  --rule-subtle: #EAEFF6;
+  --muted: #4A5573;
+  --ink: #0F1B3D;
+  --ink-invert: #FFFFFF;
+  --grid-color: rgba(15, 27, 61, 0.055);
 
-  /* Accent: oklch(0.58 0.2 28) */
-  --accent: oklch(0.58 0.2 28);
-  --accent-glow: oklch(0.58 0.2 28 / 0.18);
-  --accent-subtle: oklch(0.58 0.2 28 / 0.08);
+  /* Accent: Hot Pink (#FF3D8B) */
+  --accent: #FF3D8B;
+  --accent-glow: rgba(255, 61, 139, 0.18);
+  --accent-subtle: rgba(255, 61, 139, 0.10);
 
   /* Success */
   --success: oklch(0.6 0.15 155);
@@ -22,8 +22,8 @@
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 
-  --sk-base: #e7eaf0;
-  --sk-highlight: #f5f7fa;
+  --sk-base: #EAEEF5;
+  --sk-highlight: #FFFFFF;
 }
 
 @theme inline {
@@ -77,9 +77,9 @@ body {
 }
 
 
-/* Hero poster: latar hangat full-bleed, siluet, wordmark besar */
+/* Hero poster: latar putih full-bleed, siluet, wordmark besar */
 .hero-poster {
-  --hero-bg: #ffffff;
+  --hero-bg: #FFFFFF;
   background: var(--hero-bg);
   color: var(--ink);
 }
@@ -141,40 +141,41 @@ body {
 
 
 .contact-card {
-  background: #000000;
-  color: #ffffff;
+  background: #0F1B3D;
+  color: #FFFFFF;
 }
 
 .contact-card .text-muted {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.76);
 }
 
 .contact-card .border-rule {
-  border-color: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.24);
 }
 
 .site-footer {
-  color: #ffffff;
+  background-color: #0F1B3D;
+  color: #FFFFFF;
 }
 
 .site-footer .text-muted {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.76);
 }
 
 .site-footer button:hover {
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 .navbar-glass {
   position: relative;
   isolation: isolate;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(28, 28, 30, 0.40);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(15, 27, 61, 0.86);
   -webkit-backdrop-filter: blur(30px) saturate(180%);
   backdrop-filter: blur(30px) saturate(180%);
   box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.35),
-    0 2px 8px rgba(0, 0, 0, 0.2);
+    0 20px 50px rgba(15, 27, 61, 0.28),
+    0 2px 8px rgba(15, 27, 61, 0.16);
 }
 
 .navbar-glass::before {
@@ -197,117 +198,199 @@ body {
   color: var(--ink);
 }
 
+.projects-section {
+  width: 100%;
+}
+
+.project-header {
+  position: sticky;
+  top: 46px;
+  z-index: 1;
+  width: calc(100% - 2.5rem);
+  max-width: 1056px;
+  margin-inline: auto;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  margin-bottom: 0.5rem;
+}
+
 .project-stack {
+  position: relative;
+  z-index: 2;
   isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: calc(100% - 2.5rem);
+  max-width: 1056px;
+  margin-inline: auto;
+  /* Keep mobile sticky offset below wrapped 2-line header lead on 390px viewports */
+  --stack-top-base: 184px;
+  --stack-step: 0px;
 }
 
-.project-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 3rem;
+/* Raised cool-white surface (#FAFBFD) lifts cleanly off #FFFFFF base for all 5 project cards */
+.project-card {
+  position: sticky;
+  top: calc(
+    var(--stack-top-base, 184px) + var(--card-index, 0) * var(--stack-step, 0px)
+  );
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: 300px;
+  border-radius: 2rem;
+  border: 1px solid var(--rule);
+  background-color: var(--surface-raised);
+  color: var(--ink);
+  overflow: hidden;
+  transform-origin: center center;
+  transform: scale(var(--stack-scale, 1));
+  will-change: transform;
+  transition: border-color 300ms var(--ease-out);
 }
 
-.project-index {
+/* Navy top-edge depth shading reinforces card stacking order */
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 110px;
+  pointer-events: none;
+  z-index: 10;
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 27, 61, 0.28) 0%,
+    rgba(15, 27, 61, 0.10) 55%,
+    transparent 100%
+  );
+  opacity: var(--stack-shade, 0);
+}
+
+/* Mobile 1.25rem padding keeps card content comfortable on short viewports */
+.project-card-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  height: 100%;
+  padding: 1.25rem;
+}
+
+.project-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
   min-width: 0;
 }
 
-.project-stack,
-.project-card {
-  max-width: 100%;
+.project-card-media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 1rem;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--rule);
+  background-color: var(--surface);
 }
 
-.project-stack {
+.project-card-media:has(img) {
+  border-style: solid;
+  border-color: var(--rule);
+}
+
+.project-card-header {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  align-items: flex-start;
+  gap: 0.875rem;
 }
 
-.project-card {
-  position: sticky;
-  top: 80px;
-  width: 622px;
-  min-height: 369px;
-  background-color: var(--surface);
-  color: var(--ink);
-  transform-origin: top center;
+.project-card-index {
+  color: var(--accent);
 }
 
-.project-card {
-  box-shadow: 0 18px 50px rgba(13, 15, 18, 0.08);
-  transition:
-    border-color 300ms var(--ease-out),
-    box-shadow 300ms var(--ease-out);
+.project-card-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
 }
 
-.project-card--foodinary {
-  background-color: #e85d5d;
-  color: #ffffff;
+.project-card-body p {
+  max-width: 56ch;
 }
 
-.project-card--daisy {
-  background-color: #172554;
-  color: #ffffff;
-}
-
-.project-card--lab {
-  background-color: #3b82f6;
-  color: #ffffff;
-}
-
-.project-card--foodinary .text-muted,
-.project-card--daisy .text-muted,
-.project-card--lab .text-muted {
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.project-card--foodinary .border-rule,
-.project-card--daisy .border-rule,
-.project-card--lab .border-rule {
-  border-color: rgba(255, 255, 255, 0.35);
-}
-
-.project-card--foodinary .bg-base,
-.project-card--daisy .bg-base,
-.project-card--lab .bg-base {
-  background-color: rgba(0, 0, 0, 0.12);
-}
-
-.project-card--github {
-  background-color: var(--surface);
+.project-card a {
+  border-color: var(--rule);
+  background-color: var(--base);
   color: var(--ink);
 }
 
-@media (max-width: 899px) {
-  .project-card {
-    top: 80px;
-    width: 100%;
-    min-height: 369px;
-  }
+.project-card a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
-@media (min-width: 900px) {
-  .project-layout {
-    grid-template-columns: minmax(0, 0.34fr) minmax(0, 0.66fr);
-    gap: 4rem;
+@media (min-width: 768px) {
+  .project-header,
+  .project-stack {
+    width: calc(100% - 4rem);
   }
 
-  .project-index {
-    position: sticky;
-    top: 6rem;
-    align-self: flex-start;
+  .project-header {
+    padding-top: 24px;
+    padding-bottom: 20px;
+    margin-bottom: 0.5rem;
   }
 
   .project-stack {
-    width: 100%;
-    max-width: 622px;
-    justify-self: center;
+    --stack-top-base: 176px;
   }
 
+  .project-card,
+  .project-card-inner {
+    height: 340px;
+    min-height: 340px;
+  }
+
+  .project-card-media {
+    width: 100%;
+    height: auto;
+    align-self: center;
+    aspect-ratio: 16 / 9;
+  }
+
+  .project-card-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(260px, 45%, 434px);
+    align-items: stretch;
+    gap: 2.5rem;
+    padding: 3rem;
+  }
+
+  .project-card-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .project-card-title {
+    font-size: 1.875rem;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
 }
 
 ::selection {
-  background: var(--accent);
-  color: #ffffff;
+  background: #FF3D8B;
+  color: #FFFFFF;
 }
 
 /* Visible keyboard focus everywhere */
@@ -412,5 +495,11 @@ body {
   }
   .site-skeleton {
     transition-duration: 0.001ms !important;
+  }
+  .project-card {
+    transform: none;
+  }
+  .project-card::after {
+    opacity: 0;
   }
 }

@@ -18,7 +18,7 @@ const jetbrains = JetBrains_Mono({
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${schibsted.variable} ${jetbrains.variable}`}>
       <head>
         <link
           rel="stylesheet"
@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
         />
       </head>
-      <body className={`${schibsted.variable} ${jetbrains.variable}`}>
+      <body>
         {children}
         <SiteSkeleton />
         <GithubIoRedirect />

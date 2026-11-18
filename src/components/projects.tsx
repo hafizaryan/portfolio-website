@@ -1,50 +1,59 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 
-type ProjectKey = "foodinary" | "daisy" | "lab";
+type ProjectKey = "foodinary" | "daisy" | "lab" | "aurora" | "sitaris";
 
 type Project = {
   key: ProjectKey;
   repo?: string;
   demo?: string;
+  image?: string;
   tags: string[];
 };
 
+// Ordered newest to oldest.
 const projects: Project[] = [
+  {
+    // Repo privat & demo sistem internal: tanpa tombol Repo/Demo.
+    key: "aurora",
+    image: "/projects/aurora.png",
+    tags: ["Vue 3", "FastAPI", "MediaPipe", "Docker"],
+  },
   {
     key: "foodinary",
     repo: "https://github.com/foodinary-project",
     demo: "https://foodinary.vercel.app/",
+    image: "/projects/foodinary.jpg",
     tags: ["React", "FastAPI", "TensorFlow", "Cloud Run"],
+  },
+  {
+    // Repo privat: tanpa tombol Repo/Demo.
+    key: "lab",
+    image: "/projects/lab.jpg",
+    tags: ["PHP", "CodeIgniter", "MySQL", "RBAC Architecture"],
   },
   {
     key: "daisy",
     repo: "https://github.com/daisy-team",
     demo: "https://daisy-ai-system.vercel.app/",
+    image: "/projects/daisy.jpg",
     tags: ["Mobile", "TFLite", "FastAPI", "Computer Vision"],
   },
   {
-    key: "lab",
-    repo: "#",
-    demo: "#",
-    tags: ["PHP", "CodeIgniter", "MySQL", "RBAC Architecture"],
+    // Repo privat: tanpa tombol Repo/Demo.
+    key: "sitaris",
+    image: "/projects/sitaris.jpg",
+    tags: ["PHP", "CodeIgniter 4", "MySQL"],
   },
 ];
 
-// Jarak sticky dari atas viewport (match dengan `top-24` = 6rem = 96px).
-const STICKY_TOP = 80;
-
-// Seberapa besar bagian kartu yang masih terlihat agar dianggap "muncul".
-const ACTIVE_VISIBLE_RATIO = 0.5;
-
 export function Projects() {
   const t = useTranslations("projects");
+  const headerRef = useRef<HTMLDivElement>(null);
   const stackRef = useRef<HTMLDivElement>(null);
-  const [activeKey, setActiveKey] = useState<ProjectKey>(projects[0].key);
 
-  // Satu useEffect kecil: progres scale pada kartu yang sedang tertutup.
   useEffect(() => {
     const root = stackRef.current;
     if (!root) return;
@@ -54,155 +63,191 @@ export function Projects() {
     );
     if (cards.length === 0) return;
 
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (reduceMotion) return;
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+    let stickyTops: number[] = [];
+    let cardHeights: number[] = [];
     let frame = 0;
+
+    const measure = () => {
+      stickyTops = cards.map((card) => {
+        const parsed = Number.parseFloat(window.getComputedStyle(card).top);
+        return Number.isFinite(parsed) ? parsed : 0;
+      });
+      cardHeights = cards.map((card) => card.offsetHeight);
+    };
+
+    const resetStackStyles = () => {
+      if (headerRef.current) {
+        headerRef.current.style.transform = "";
+      }
+      for (const card of cards) {
+        card.style.setProperty("--stack-scale", "1");
+        card.style.setProperty("--stack-shade", "0");
+      }
+    };
 
     const update = () => {
       frame = 0;
 
-      // Kartu yang sedang "muncul": kartu pertama yang masih terlihat
-      // lebih dari setengahnya (belum tertutup kartu berikutnya).
-      let nextActive: ProjectKey = projects[projects.length - 1].key;
-      for (let i = 0; i < projects.length; i++) {
-        const card = cards[i];
-        const next = cards[i + 1];
-        if (!card) break;
-
-        const rect = card.getBoundingClientRect();
-        if (!next) {
-          nextActive = projects[i].key;
-          break;
-        }
-
-        const nextTop = next.getBoundingClientRect().top;
-        const visible =
-          Math.min(Math.max(nextTop - rect.top, 0), rect.height) / rect.height;
-        if (visible >= ACTIVE_VISIBLE_RATIO) {
-          nextActive = projects[i].key;
-          break;
-        }
+      // Skip scroll-linked transforms under reduced motion to respect user motion preferences.
+      if (motionQuery.matches) {
+        resetStackStyles();
+        return;
       }
-      setActiveKey((prev) => (prev === nextActive ? prev : nextActive));
+
+      // Batch all DOM geometry reads before writing CSS custom properties.
+      const rects = cards.map((card) => card.getBoundingClientRect());
+
+      // Keep the sticky header moving up with the last card once the stack unsticks.
+      const header = headerRef.current;
+      if (header) {
+        const lastIdx = cards.length - 1;
+        const overflow = rects[lastIdx].top - stickyTops[lastIdx];
+        header.style.transform =
+          overflow < 0 ? `translate3d(0, ${overflow}px, 0)` : "";
+      }
+
+      // Compute each card j's covering progress in [0, 1] as it travels from
+      // the bottom of card j - 1 up to its own computed sticky top.
+      const progress = new Array<number>(cards.length).fill(0);
+      for (let j = 1; j < cards.length; j++) {
+        const start = stickyTops[j - 1] + cardHeights[j - 1];
+        const end = stickyTops[j];
+        const distance = Math.max(1, start - end);
+        const raw = (start - rects[j].top) / distance;
+        progress[j] = Math.min(1, Math.max(0, raw));
+      }
 
       for (let i = 0; i < cards.length; i++) {
         const card = cards[i];
         const isLast = i === cards.length - 1;
 
-        // Kartu terakhir selalu penuh — tidak pernah diperkecil.
         if (isLast) {
-          card.style.setProperty("--stack-progress", "0");
+          card.style.setProperty("--stack-scale", "1");
+          card.style.setProperty("--stack-shade", "0");
           continue;
         }
 
-        // Seberapa jauh kartu berikutnya sudah menutupi kartu ini.
-        const next = cards[i + 1];
-        const nextTop = next.getBoundingClientRect().top;
-        const start = STICKY_TOP + card.offsetHeight; // mulai saat next menyentuh bawah kartu ini
-        const end = STICKY_TOP; // selesai saat next menumpuk penuh di top
+        let coverDepth = 0;
+        for (let j = i + 1; j < cards.length; j++) {
+          coverDepth += progress[j];
+        }
 
-        let progress = (start - nextTop) / (start - end);
-        progress = Math.min(1, Math.max(0, progress));
-        card.style.setProperty("--stack-progress", progress.toFixed(4));
+        // Scale and top-edge shading provide a sequential depth cue as newer cards cover older ones.
+        // Progressive scale:
+        // depth 0 -> 1.000, depth 1 -> 0.979 (~0.98), depth 2 -> 0.946 (~0.945),
+        // depth 3 -> 0.901, gently floored at 0.88.
+        const scale = Math.max(
+          0.88,
+          1 - 0.015 * coverDepth - 0.006 * coverDepth * coverDepth,
+        );
+
+        // Top-edge dark gradient opacity: 0 uncovered -> 0.7 at 1 card -> 1.0 at 2+ cards.
+        const nextProgress = progress[i + 1] ?? 0;
+        const shade = Math.min(
+          1,
+          0.7 * nextProgress + 0.3 * Math.max(0, coverDepth - 1),
+        );
+
+        card.style.setProperty("--stack-scale", scale.toFixed(4));
+        card.style.setProperty("--stack-shade", shade.toFixed(4));
       }
     };
 
-    const onScroll = () => {
+    const scheduleUpdate = () => {
       if (frame) return;
       frame = window.requestAnimationFrame(update);
     };
 
+    const onResize = () => {
+      measure();
+      scheduleUpdate();
+    };
+
+    const onMotionChange = () => {
+      scheduleUpdate();
+    };
+
+    measure();
     update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
+
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
+    motionQuery.addEventListener("change", onMotionChange);
+
+    const resizeObserver =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(() => {
+            measure();
+            scheduleUpdate();
+          })
+        : null;
+    if (resizeObserver) {
+      for (const card of cards) {
+        resizeObserver.observe(card);
+      }
+    }
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", onResize);
+      motionQuery.removeEventListener("change", onMotionChange);
+      resizeObserver?.disconnect();
       if (frame) window.cancelAnimationFrame(frame);
+      if (headerRef.current) headerRef.current.style.transform = "";
     };
   }, []);
 
   return (
     <section
       id="projects"
-      className="projects-section mx-auto max-w-[1120px] scroll-mt-0 px-5 py-12 md:px-8 md:py-16"
+      className="projects-section scroll-mt-0 py-12 md:py-20"
     >
-      <div className="project-layout">
-        <div className="project-index">
-          <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            {t("title")}
-          </h2>
-          <p className="mt-6 max-w-[32ch] text-muted">{t("lead")}</p>
-          <ol className="mt-10 hidden border-l border-rule min-[900px]:block">
-            {projects.map((project, index) => {
-              const isActive = project.key === activeKey;
-              return (
-                <li
-                  key={project.key}
-                  aria-current={isActive ? "true" : undefined}
-                  className={`flex items-center gap-3 py-3 pl-5 text-sm transition-colors ${
-                    isActive ? "text-ink" : "text-muted"
-                  }`}
-                >
-                  <span
-                    className={`font-mono text-[11px] ${
-                      isActive ? "text-ink" : ""
-                    }`}
-                  >
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span
-                    className={
-                      isActive ? "font-medium" : undefined
-                    }
-                  >
-                    {t(`${project.key}.name`)}
-                  </span>
-                </li>
-              );
-            })}
-          </ol>
-        </div>
+      <div ref={headerRef} className="project-header">
+        <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
+          {t("title")}
+        </h2>
+        <p className="mt-4 max-w-[44ch] text-muted">{t("lead")}</p>
+      </div>
 
-        <div ref={stackRef} className="project-stack">
-          {projects.map((p, idx) => {
-            const isLast = idx === projects.length - 1;
-            return (
-              <article
-                key={p.key}
-                data-stack-card
-                className={`project-card project-card--${p.key} group min-w-0 w-full origin-top overflow-hidden rounded-[1.75rem] border border-rule bg-surface p-6 transition-[border-color] duration-300 hover:border-ink/30 md:p-10`}
-                style={
-                  {
-                    transform:
-                      "scale(calc(1 - 0.02 * var(--stack-progress, 0)))",
-                    boxShadow:
-                      "0 calc(8px * var(--stack-progress, 0)) calc(24px * var(--stack-progress, 0)) rgba(0,0,0,calc(0.14 * var(--stack-progress, 0)))",
-                    top: `${80 + idx * 60}px`,
-                    zIndex: idx + 1,
-                    willChange: isLast ? undefined : "transform, box-shadow",
-                  } as React.CSSProperties
-                }
-              >
-                <div className="flex min-h-[321px] flex-col justify-between gap-8">
-                  <div className="flex flex-col items-start gap-5 md:flex-row md:items-start md:justify-between md:gap-6">
-                    <h3 className="text-xl font-semibold tracking-tight md:text-2xl">
-                      {t(`${p.key}.name`)}
-                    </h3>
-                    {(p.repo || p.demo) && (
-                      <div className="flex shrink-0 flex-wrap gap-2">
+      <div ref={stackRef} className="project-stack">
+        {projects.map((p, idx) => (
+          <article
+            key={p.key}
+            data-stack-card
+            className={`project-card project-card--${p.key}`}
+            style={
+              {
+                "--card-index": idx,
+                "--stack-scale": "1",
+                "--stack-shade": "0",
+                zIndex: idx + 1,
+              } as React.CSSProperties
+            }
+          >
+            <div className="project-card-inner">
+              <div className="project-card-content">
+                <div className="project-card-header">
+                  <div className="flex flex-col gap-1">
+                    <span className="project-card-index font-mono text-xs tracking-wider">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="project-card-title">{t(`${p.key}.name`)}</h3>
+                  </div>
+                  {(p.repo || p.demo) && (
+                    <div className="flex shrink-0 flex-wrap gap-2">
                       {p.repo && (
                         <a
                           href={p.repo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="rounded-md border border-rule bg-base px-3 py-1.5 text-sm font-medium transition-colors hover:border-ink hover:text-ink"
+                          className="project-card-action inline-flex min-h-[44px] items-center rounded-md border border-rule bg-base px-3.5 py-2 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
                         >
-                          <i className="fa-brands fa-github mr-2" aria-hidden="true" />
+                          <i
+                            className="fa-brands fa-github mr-2"
+                            aria-hidden="true"
+                          />
                           {t("repo")}
                         </a>
                       )}
@@ -211,57 +256,55 @@ export function Projects() {
                           href={p.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="rounded-md border border-rule bg-base px-3 py-1.5 text-sm font-medium transition-colors hover:border-ink hover:text-ink"
+                          className="project-card-action inline-flex min-h-[44px] items-center rounded-md border border-rule bg-base px-3.5 py-2 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
                         >
-                          <i className="fa-solid fa-globe mr-2" aria-hidden="true" />
+                          <i
+                            className="fa-solid fa-globe mr-2"
+                            aria-hidden="true"
+                          />
                           {t("demo")}
                         </a>
                       )}
-                      </div>
-                    )}
-                  </div>
-                  <div className="max-w-[54ch]">
-                    <p className="text-sm leading-6 text-muted md:text-[1rem]">
-                      {t(`${p.key}.desc`)}
-                    </p>
-                    <div className="mt-5 flex flex-wrap gap-1.5">
-                      {p.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded border border-rule bg-base px-2 py-0.5 font-mono text-[11px] text-muted"
-                        >
-                          {tag}
-                        </span>
-                      ))}
                     </div>
+                  )}
+                </div>
+
+                <div className="project-card-body">
+                  <p className="max-w-[54ch] text-sm leading-6 text-muted md:text-[1rem] md:leading-7">
+                    {t(`${p.key}.desc`)}
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-1.5">
+                    {p.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded border border-rule bg-base px-2 py-0.5 font-mono text-[11px] text-muted"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              </article>
-            );
-          })}
-          <article
-            data-stack-card
-            className="project-card project-card--github group min-w-0 w-full origin-top overflow-hidden rounded-[1.75rem] border border-rule p-6 transition-[border-color] duration-300 hover:border-ink/30 md:p-10"
-            style={
-              {
-                top: `${80 + projects.length * 60}px`,
-                zIndex: projects.length + 1,
-              } as React.CSSProperties
-            }
-          >
-            <div className="flex min-h-[321px] flex-col items-center justify-center gap-6 text-center">
-              <i className="fa-brands fa-github text-4xl" aria-hidden="true" />
-              <a
-                href="https://github.com/hafizaryan"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xl font-semibold tracking-tight underline-offset-4 hover:underline md:text-2xl"
-              >
-                View More Project on Github
-              </a>
+              </div>
+
+              <div className="project-card-media">
+                {p.image ? (
+                  <img
+                    src={p.image}
+                    alt={t(`${p.key}.name`)}
+                    width={1280}
+                    height={720}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <i
+                    className="fa-regular fa-image text-3xl opacity-50"
+                    aria-hidden="true"
+                  />
+                )}
+              </div>
             </div>
           </article>
-        </div>
+        ))}
       </div>
     </section>
   );

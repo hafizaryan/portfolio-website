@@ -56,7 +56,7 @@ export function Footer() {
     <>
       <footer
         ref={footerRef}
-        className="site-footer fixed inset-x-0 bottom-0 z-10 w-full border-t border-black bg-black text-white"
+        className="site-footer fixed inset-x-0 bottom-0 z-10 w-full border-t border-ink bg-ink text-ink-invert"
       >
       <div className="mx-auto flex max-w-[1120px] flex-col gap-4 px-5 py-10 text-sm text-muted pb-28 md:flex-row md:items-center md:justify-end md:px-8 md:pb-10">
         <p>© 2026 Hafiz Aryan Siregar. {t("rights")}</p>
@@ -71,7 +71,7 @@ export function Footer() {
             ? "Ganti ke Bahasa Indonesia"
             : "Switch to English"
         }
-        className="fixed bottom-24 right-6 z-[60] flex h-12 w-12 items-center justify-center rounded-full border border-white/25 bg-black font-mono text-xs font-semibold uppercase text-white shadow-lg transition-transform active:scale-95 md:hidden"
+        className="fixed bottom-24 right-6 z-[60] flex h-12 w-12 items-center justify-center rounded-full border border-ink-invert/25 bg-ink font-mono text-xs font-semibold uppercase text-ink-invert shadow-lg transition-colors active:scale-95 hover:border-accent hover:text-accent md:hidden"
       >
         {locale.toUpperCase()}
       </button>
@@ -87,7 +87,7 @@ export function Footer() {
             transition={{ type: "spring", stiffness: 360, damping: 26 }}
             whileHover={{ scale: 1.07 }}
             whileTap={{ scale: 0.94 }}
-            className="fixed bottom-6 right-6 z-[60] hidden h-12 w-12 items-center justify-center rounded-full border border-white/25 bg-black text-white shadow-lg md:flex"
+            className="fixed bottom-6 right-6 z-[60] hidden h-12 w-12 items-center justify-center rounded-full border border-ink-invert/25 bg-ink text-ink-invert shadow-lg transition-colors hover:border-accent hover:text-accent md:flex"
           >
             <svg
               width="18"
