@@ -1,29 +1,39 @@
 @import "tailwindcss";
 
-:root {
-  --base: #FFFFFF;
-  --surface: #F4F6FA;
-  --surface-raised: #FAFBFD;
-  --rule: #DDE2EC;
-  --rule-subtle: #EAEFF6;
-  --muted: #4A5573;
-  --ink: #0F1B3D;
-  --ink-invert: #FFFFFF;
-  --grid-color: rgba(15, 27, 61, 0.055);
+/* Keep all interface corners square, including Tailwind's radius utilities. */
+.rounded,
+.rounded-md,
+.rounded-lg,
+.rounded-xl,
+.rounded-2xl,
+.rounded-full,
+.rounded-\[2rem\] {
+  border-radius: 0;
+}
 
-  /* Accent: Hot Pink (#FF3D8B) */
-  --accent: #FF3D8B;
-  --accent-glow: rgba(255, 61, 139, 0.18);
-  --accent-subtle: rgba(255, 61, 139, 0.10);
+:root {
+  --base: #f3f2e3;
+  --surface: #e6e5c8;
+  --surface-raised: #faf9ee;
+  --rule: #c8c6a2;
+  --rule-subtle: #dedec2;
+  --muted: #4b553a;
+  --ink: #28301c;
+  --ink-invert: #f3f2e3;
+  --grid-color: rgba(40, 48, 28, 0.055);
+
+  --accent: #765e25;
+  --accent-glow: rgba(154, 126, 59, 0.18);
+  --accent-subtle: rgba(154, 126, 59, 0.10);
 
   /* Success */
-  --success: oklch(0.6 0.15 155);
-  --success-glow: oklch(0.6 0.15 155 / 0.18);
+  --success: #323d25;
+  --success-glow: rgba(50, 61, 37, 0.18);
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 
-  --sk-base: #EAEEF5;
-  --sk-highlight: #FFFFFF;
+  --sk-base: #d2cf9a;
+  --sk-highlight: #f3f2e3;
 }
 
 @theme inline {
@@ -79,7 +89,7 @@ body {
 
 /* Hero poster: latar putih full-bleed, siluet, wordmark besar */
 .hero-poster {
-  --hero-bg: #FFFFFF;
+  --hero-bg: var(--base);
   background: var(--hero-bg);
   color: var(--ink);
 }
@@ -141,48 +151,59 @@ body {
 
 
 .contact-card {
-  background: #0F1B3D;
-  color: #FFFFFF;
+  background: #323d25;
+  color: var(--ink-invert);
 }
 
 .contact-card .text-muted {
-  color: rgba(255, 255, 255, 0.76);
+  color: rgba(243, 242, 227, 0.8);
 }
 
 .contact-card .border-rule {
-  border-color: rgba(255, 255, 255, 0.24);
+  border-color: rgba(243, 242, 227, 0.24);
+}
+
+.contact-card a:hover,
+.site-footer a:hover,
+.navbar-glass a:hover {
+  color: #d2cf9a;
+}
+
+.navbar-glass a.bg-ink-invert:hover {
+  background-color: #d2cf9a;
+  color: var(--ink);
 }
 
 .site-footer {
-  background-color: #0F1B3D;
-  color: #FFFFFF;
+  background-color: var(--ink);
+  color: var(--ink-invert);
 }
 
 .site-footer .text-muted {
-  color: rgba(255, 255, 255, 0.76);
+  color: rgba(243, 242, 227, 0.8);
 }
 
 .site-footer button:hover {
-  color: #FFFFFF;
+  color: var(--ink-invert);
 }
 
 .navbar-glass {
   position: relative;
   isolation: isolate;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(15, 27, 61, 0.86);
+  border: 1px solid rgba(243, 242, 227, 0.14);
+  background: rgba(40, 48, 28, 0.94);
   -webkit-backdrop-filter: blur(30px) saturate(180%);
   backdrop-filter: blur(30px) saturate(180%);
   box-shadow:
-    0 20px 50px rgba(15, 27, 61, 0.28),
-    0 2px 8px rgba(15, 27, 61, 0.16);
+    0 20px 50px rgba(40, 48, 28, 0.28),
+    0 2px 8px rgba(40, 48, 28, 0.16);
 }
 
 .navbar-glass::before {
   position: absolute;
   inset: 1px;
   border-radius: inherit;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(243, 242, 227, 0.06);
   content: "";
   opacity: 1;
   pointer-events: none;
@@ -218,8 +239,8 @@ body {
   position: relative;
   z-index: 2;
   isolation: isolate;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-auto-rows: 1fr;
   gap: 20px;
   width: calc(100% - 2.5rem);
   max-width: 1056px;
@@ -229,7 +250,7 @@ body {
   --stack-step: 0px;
 }
 
-/* Raised cool-white surface (#FAFBFD) lifts cleanly off #FFFFFF base for all 5 project cards */
+/* Raised surface separates project cards from the cream background. */
 .project-card {
   position: sticky;
   top: calc(
@@ -239,18 +260,18 @@ body {
   max-width: 100%;
   height: auto;
   min-height: 300px;
-  border-radius: 2rem;
+  border-radius: 0;
   border: 1px solid var(--rule);
   background-color: var(--surface-raised);
   color: var(--ink);
   overflow: hidden;
-  transform-origin: center center;
+  transform-origin: top center;
   transform: scale(var(--stack-scale, 1));
   will-change: transform;
   transition: border-color 300ms var(--ease-out);
 }
 
-/* Navy top-edge depth shading reinforces card stacking order */
+/* Top-edge shading reinforces card stacking order. */
 .project-card::after {
   content: "";
   position: absolute;
@@ -260,8 +281,8 @@ body {
   z-index: 10;
   background: linear-gradient(
     to bottom,
-    rgba(15, 27, 61, 0.28) 0%,
-    rgba(15, 27, 61, 0.10) 55%,
+    rgba(40, 48, 28, 0.28) 0%,
+    rgba(40, 48, 28, 0.10) 55%,
     transparent 100%
   );
   opacity: var(--stack-shade, 0);
@@ -292,7 +313,7 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius: 1rem;
+  border-radius: 0;
   aspect-ratio: 16 / 9;
   border: 1px solid var(--rule);
   background-color: var(--surface);
@@ -308,10 +329,6 @@ body {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.875rem;
-}
-
-.project-card-index {
-  color: var(--accent);
 }
 
 .project-card-title {
@@ -350,6 +367,8 @@ body {
   }
 
   .project-stack {
+    display: flex;
+    flex-direction: column;
     --stack-top-base: 176px;
   }
 
@@ -357,6 +376,10 @@ body {
   .project-card-inner {
     height: 340px;
     min-height: 340px;
+  }
+
+  .project-card {
+    transform-origin: center center;
   }
 
   .project-card-media {
@@ -389,15 +412,15 @@ body {
 }
 
 ::selection {
-  background: #FF3D8B;
-  color: #FFFFFF;
+  background: #9a7e3b;
+  color: #28301c;
 }
 
 /* Visible keyboard focus everywhere */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 /* Skeleton loading screen */
@@ -421,7 +444,7 @@ body {
 @layer components {
   .sk-block {
     overflow: hidden;
-    border-radius: 6px;
+    border-radius: 0;
     background-color: var(--sk-base);
     background-image: linear-gradient(
       90deg,

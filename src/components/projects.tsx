@@ -229,12 +229,7 @@ export function Projects() {
             <div className="project-card-inner">
               <div className="project-card-content">
                 <div className="project-card-header">
-                  <div className="flex flex-col gap-1">
-                    <span className="project-card-index font-mono text-xs tracking-wider">
-                      {String(idx + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="project-card-title">{t(`${p.key}.name`)}</h3>
-                  </div>
+                  <h3 className="project-card-title">{t(`${p.key}.name`)}</h3>
                   {(p.repo || p.demo) && (
                     <div className="flex shrink-0 flex-wrap gap-2">
                       {p.repo && (
