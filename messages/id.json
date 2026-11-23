@@ -35,9 +35,21 @@
     }
   },
   "hero": {
+    "pauseMotion": "Jeda latar",
+    "resumeMotion": "Gerakkan latar",
+    "specialties": "Aplikasi web, cloud & computer vision.",
+    "getInTouch": "Hubungi saya",
+    "portfolio": "Portofolio pribadi",
     "name": "Hafiz Aryan Siregar",
     "taglineLead": "Membangun aplikasi web",
     "taglineAccent": "yang diandalkan orang di tempat kerja."
+  },
+  "achievements": {
+    "title": "Pencapaian",
+    "bangkit": "Lulusan Bangkit Academy",
+    "codingcamp": "Lulusan Coding Camp powered by DBS Foundation",
+    "degree": "Sarjana Komputer · UIN Suska Riau",
+    "experience": "3+ tahun membangun aplikasi web"
   },
   "recommendations": {
     "title": "Rekomendasi",

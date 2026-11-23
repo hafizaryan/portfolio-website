@@ -176,7 +176,7 @@ export function SiteSkeleton() {
         </div>
       </div>
 
-      {/* Mobile skeleton: wordmark penuh, tagline, tombol bahasa, & bottom dock */}
+      {/* Mobile skeleton: wordmark, tombol bahasa, dan bottom dock */}
       <div className="relative isolate mx-auto flex h-[100svh] max-w-[1120px] flex-col justify-end overflow-hidden px-5 pb-28 pt-24 md:hidden">
         <div
           aria-hidden="true"
@@ -186,12 +186,8 @@ export function SiteSkeleton() {
           <div className="sk-block h-[clamp(2rem,min(15.2vw,(100svh-390px)),5rem)] w-[49%] rounded-xl" />
         </div>
 
-        <div className="relative z-[2] mt-6 shrink-0 space-y-2.5">
-          <div className="sk-block h-6 w-[78%] max-w-[17rem]" />
-          <div className="sk-block h-6 w-[55%] max-w-[12rem]" />
-        </div>
       </div>
-      <div className="sk-block fixed bottom-24 right-6 h-12 w-12 rounded-full md:hidden" />
+      <div className="sk-block fixed top-[max(1rem,env(safe-area-inset-top))] right-5 h-12 w-12 rounded-full md:hidden" />
       <div className="fixed inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] px-4 md:hidden">
         <div className="mx-auto grid h-[60px] max-w-[420px] grid-cols-4 gap-1 rounded-full border border-rule/80 bg-surface/90 p-1.5">
           <div className="flex flex-col items-center justify-center gap-1 rounded-full bg-base/60 py-1">
@@ -213,7 +209,7 @@ export function SiteSkeleton() {
         </div>
       </div>
 
-      {/* Desktop hero skeleton: wordmark, tagline & scroll cue */}
+      {/* Desktop hero skeleton: wordmark */}
       <div className="relative isolate mx-auto hidden h-[100svh] max-w-[1120px] flex-col justify-end overflow-hidden px-8 pb-10 pt-24 md:flex">
         <div
           aria-hidden="true"
@@ -223,15 +219,6 @@ export function SiteSkeleton() {
           <div className="h-[clamp(2rem,min((100vw-64px)/5.75,(100svh-160px-16svh)),11.6rem)] w-[50%] rounded-2xl border-2 border-[var(--sk-base)] bg-base/40" />
         </div>
 
-        <div className="relative z-[2] mt-[2.5svh] shrink-0 space-y-2.5">
-          <div className="sk-block h-[clamp(1.1rem,3.4svh,1.65rem)] w-[22rem] max-w-[65%]" />
-          <div className="sk-block h-[clamp(1.1rem,3.4svh,1.65rem)] w-[14.5rem] max-w-[45%]" />
-        </div>
-
-        <div className="absolute bottom-10 right-8 z-[2] inline-flex items-center gap-3">
-          <div className="sk-block h-3 w-12" />
-          <div className="sk-block h-6 w-3.5 rounded-full" />
-        </div>
       </div>
     </div>
   );

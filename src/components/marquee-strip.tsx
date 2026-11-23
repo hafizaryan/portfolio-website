@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { setMarqueeStuck } from "@/lib/use-navbar-hidden";
 
 export function MarqueeStrip() {
+  const t = useTranslations("achievements");
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,16 +34,14 @@ export function MarqueeStrip() {
   }, []);
 
   const items = [
-    "Web Development",
-    "Cloud Computing",
-    "Data Engineering",
-    "Computer Vision",
-    "Full-Stack Architecture",
-    "AI Integration",
+    t("bangkit"),
+    t("codingcamp"),
+    t("degree"),
+    t("experience"),
   ];
 
   const renderGroup = (prefix: string) => (
-    <div className="flex shrink-0 items-center gap-8 pr-8">
+    <div aria-hidden={prefix === "b" || undefined} className="flex shrink-0 items-center gap-8 pr-8">
       {items.map((item) => (
         <span
           key={`${prefix}-${item}`}
@@ -58,7 +58,8 @@ export function MarqueeStrip() {
     <>
       <div ref={sentinelRef} aria-hidden="true" className="h-0 w-full" />
       <div
-        aria-hidden="true"
+        role="region"
+        aria-label={t("title")}
         className="sticky top-0 z-50 border-y border-rule-subtle bg-surface/85 backdrop-blur-md select-none"
       >
         <div className="marquee-mask relative overflow-hidden py-3.5">

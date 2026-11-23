@@ -9,7 +9,7 @@ export function Contact() {
       id="contact"
       className="mx-auto max-w-[1120px] scroll-mt-0 px-5 py-12 md:px-8 md:py-16"
     >
-      <div className="contact-card rounded-[2rem] p-8 md:p-12">
+      <div className="contact-card rounded-2xl p-8 md:p-12">
         <MotionReveal className="flex flex-col">
           <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
             {t("title")}

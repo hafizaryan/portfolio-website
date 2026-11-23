@@ -35,9 +35,21 @@
     }
   },
   "hero": {
+    "pauseMotion": "Pause background",
+    "resumeMotion": "Resume background",
+    "specialties": "Web applications, cloud & computer vision.",
+    "getInTouch": "Get in touch",
+    "portfolio": "Personal portfolio",
     "name": "Hafiz Aryan Siregar",
     "taglineLead": "Building web applications",
     "taglineAccent": "people rely on at work."
+  },
+  "achievements": {
+    "title": "Achievements",
+    "bangkit": "Bangkit Academy graduate",
+    "codingcamp": "Coding Camp powered by DBS Foundation graduate",
+    "degree": "Bachelor of Computer Science · UIN Suska Riau",
+    "experience": "3+ years building web applications"
   },
   "recommendations": {
     "title": "Recommendations",

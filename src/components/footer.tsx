@@ -71,7 +71,7 @@ export function Footer() {
             ? "Ganti ke Bahasa Indonesia"
             : "Switch to English"
         }
-        className="fixed bottom-24 right-6 z-[60] flex h-12 w-12 items-center justify-center rounded-full border border-ink-invert/25 bg-ink font-mono text-xs font-semibold uppercase text-ink-invert shadow-lg transition-colors active:scale-95 hover:border-accent hover:text-accent md:hidden"
+        className="fixed top-[max(1rem,env(safe-area-inset-top))] right-5 z-[60] flex h-12 w-12 items-center justify-center rounded-full border border-ink-invert/25 bg-ink font-mono text-xs font-semibold uppercase text-ink-invert shadow-lg transition-colors active:scale-95 hover:border-accent hover:text-accent md:hidden"
       >
         {locale.toUpperCase()}
       </button>

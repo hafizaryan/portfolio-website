@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { m, useScroll, useTransform } from "motion/react";
+import { m, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useSiteReady } from "@/lib/use-site-ready";
 import silhouette from "../assets/foto-profil-siluet-hero.png";
 
@@ -13,19 +13,18 @@ export function Hero() {
   const t = useTranslations("hero");
   const sectionRef = useRef<HTMLElement>(null);
   const ready = useSiteReady();
+  const reduceMotion = useReducedMotion();
 
-  // Scroll-linked depth parallax antar 3 layer (wordmark, siluet, tagline).
+  // Scroll-linked depth parallax antara wordmark dan siluet.
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
 
-  const wordmarkY = useTransform(scrollYProgress, [0, 1], [0, 70]);
+  const wordmarkY = useTransform(scrollYProgress, [0, 1], [0, 45]);
   const wordmarkOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.2]);
-  const silhouetteY = useTransform(scrollYProgress, [0, 1], [0, 30]);
+  const silhouetteY = useTransform(scrollYProgress, [0, 1], [0, 15]);
   const silhouetteScale = useTransform(scrollYProgress, [0, 1], [1, 1.03]);
-  const taglineY = useTransform(scrollYProgress, [0, 1], [0, -20]);
-  const taglineOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
     <section
@@ -33,30 +32,30 @@ export function Hero() {
       id="top"
       className="hero-poster relative isolate overflow-hidden"
     >
-      {/* Ambient breathing aura di belakang siluet */}
-      <m.div
-        aria-hidden="true"
-        animate={{ scale: [1, 1.08, 1], opacity: [0.35, 0.65, 0.35] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute left-1/2 top-[42%] z-0 h-[52svh] w-[52svh] -translate-x-1/2 -translate-y-1/2 rounded-full md:h-[64svh] md:w-[64svh]"
-        style={{
-          background:
-            "radial-gradient(circle, var(--accent-glow) 0%, transparent 70%)",
-        }}
-      />
+      <div aria-hidden="true" className="hero-paper" />
 
-      {/* Layer tengah (z-[1]): siluet foto di depan wordmark, di belakang tagline */}
+      <svg className="hero-contours" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        {[0, 1, 2, 3, 4, 5].map((line) => (
+          <path
+            key={line}
+            transform={`translate(${line * 22} ${line * -18})`}
+            d="M-180 680 C80 700 10 230 350 240 S620 580 900 340 S1280 30 1610 180"
+          />
+        ))}
+      </svg>
+
+      {/* Siluet foto di depan wordmark */}
       <m.div
-        style={{ y: silhouetteY, scale: silhouetteScale }}
-        className="hero-silhouette-wrap pointer-events-none absolute inset-x-0 bottom-[17rem] z-[1] flex justify-center md:bottom-0"
+        style={{ y: reduceMotion ? 0 : silhouetteY, scale: reduceMotion ? 1 : silhouetteScale }}
+        className="hero-silhouette-wrap pointer-events-none absolute inset-x-0 bottom-[max(5.75rem,calc(4.75rem+env(safe-area-inset-bottom)))] z-[20] flex justify-center md:bottom-0"
         aria-hidden="true"
       >
         <m.div
-          initial={{ opacity: 0, y: 36, scale: 0.95 }}
+          initial={{ y: 36, scale: 0.95 }}
           animate={
             ready
-              ? { opacity: 1, y: 0, scale: 1 }
-              : { opacity: 0, y: 36, scale: 0.95 }
+              ? { y: 0, scale: 1 }
+              : { y: 36, scale: 0.95 }
           }
           transition={{ duration: 0.8, ease: EASE_OUT }}
           className="flex justify-center"
@@ -66,83 +65,38 @@ export function Hero() {
             alt=""
             priority
             sizes="(min-width: 768px) 720px, 85vw"
-            className="hero-silhouette h-auto -scale-x-100 w-[min(130vw,calc(100svh-22rem))] max-w-none md:w-[min(720px,88svh)] md:translate-x-[8%] md:translate-y-[8%]"
+            className="hero-silhouette h-auto -scale-x-100 w-[min(145vw,78svh)] max-w-none md:w-[min(720px,88svh)] md:translate-x-[8%] md:translate-y-[8%]"
           />
         </m.div>
       </m.div>
 
-      {/* Tanpa z-index agar tidak membuat stacking context: wordmark bisa turun ke bawah siluet */}
-      <div className="relative mx-auto flex h-[100svh] max-w-[1120px] flex-col justify-end px-5 pb-28 pt-24 md:px-8 md:pb-10">
+      {/* Wordmark and portrait have separate layers to keep the lettering behind the photo. */}
+      <div className="hero-title-layout relative z-[10] mx-auto flex h-[100svh] max-w-[1120px] flex-col justify-end px-5 pb-[max(7rem,calc(6rem+env(safe-area-inset-bottom)))] pt-24 md:px-8 md:pb-10">
         {/* Layer belakang (z-0): wordmark "hafiz aryan" dengan editorial mask reveal */}
         <m.h1
-          style={{ y: wordmarkY, opacity: wordmarkOpacity }}
+          style={{ y: reduceMotion ? 0 : wordmarkY, opacity: reduceMotion ? 1 : wordmarkOpacity }}
           aria-label={t("name")}
-          className="hero-wordmark relative z-0 select-none whitespace-nowrap font-semibold lowercase text-accent"
+          className="hero-wordmark relative z-[10] select-none whitespace-nowrap font-semibold lowercase text-accent"
         >
-          <span aria-hidden="true">
-            <span className="inline-block overflow-hidden align-bottom pt-[0.12em] -mt-[0.12em] pb-[0.18em] -mb-[0.18em]">
-              <m.span
-                className="inline-block"
-                initial={{ y: "115%" }}
-                animate={ready ? { y: "0%" } : { y: "115%" }}
-                transition={{ duration: 0.7, delay: 0.06, ease: EASE_OUT }}
-              >
-                hafiz
-              </m.span>
-            </span>{" "}
-            <span className="inline-block overflow-hidden align-bottom pt-[0.12em] -mt-[0.12em] pb-[0.18em] -mb-[0.18em]">
-              <m.span
-                className="hero-outline-accent inline-block"
-                initial={{ y: "115%" }}
-                animate={ready ? { y: "0%" } : { y: "115%" }}
-                transition={{ duration: 0.7, delay: 0.16, ease: EASE_OUT }}
-              >
-                aryan
-              </m.span>
-            </span>
+          <span aria-hidden="true" className={ready ? "hero-writing is-ready" : "hero-writing"}>
+            {["hafiz", "aryan"].map((word, wordIndex) => (
+              <span key={word}>
+                {wordIndex > 0 && " "}
+                <span className="hero-writing-word">
+                  <span className="hero-writing-measure">{word}</span>
+                  <svg className="hero-writing-svg" width="100%" height="100%">
+                    <text x="0" y="0.8em" textLength="100%" lengthAdjust="spacingAndGlyphs">
+                      {Array.from(word).map((letter, index) => (
+                        <tspan key={index} style={{ animationDelay: `${(wordIndex * 5 + index) * 0.18}s` }}>{letter}</tspan>
+                      ))}
+                    </text>
+                  </svg>
+                </span>
+              </span>
+            ))}
           </span>
         </m.h1>
 
-        {/* Layer depan (z-[2]): tagline */}
-        <m.p
-          style={{ y: taglineY, opacity: taglineOpacity }}
-          className="hero-tagline relative z-[2] mt-6 max-w-[22ch] text-2xl font-semibold leading-tight tracking-tight"
-        >
-          <m.span
-            className="block"
-            initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
-            animate={
-              ready
-                ? { opacity: 1, y: 0, filter: "blur(0px)" }
-                : { opacity: 0, y: 16, filter: "blur(4px)" }
-            }
-            transition={{ duration: 0.6, delay: 0.28, ease: EASE_OUT }}
-          >
-            {t("taglineLead")}{" "}
-            <span className="text-accent">{t("taglineAccent")}</span>
-          </m.span>
-        </m.p>
-
-        {/* Scroll cue kontinu di sudut kanan bawah Hero (desktop) */}
-        <m.a
-          href="#about"
-          aria-label="Scroll to about section"
-          style={{ opacity: taglineOpacity }}
-          initial={{ opacity: 0 }}
-          animate={ready ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="absolute bottom-10 right-8 z-[2] hidden items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-muted transition-colors hover:text-accent md:inline-flex"
-        >
-          <span>Scroll</span>
-          <m.span
-            aria-hidden="true"
-            animate={{ y: [0, 5, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="inline-flex h-6 w-3.5 items-start justify-center rounded-full border border-current p-1"
-          >
-            <span className="h-1.5 w-0.5 rounded-full bg-current" />
-          </m.span>
-        </m.a>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { m, useReducedMotion } from "motion/react";
 import { MotionReveal } from "./motion-reveal";
 
 const skillGroups: {
@@ -102,6 +103,15 @@ const skillGroups: {
 
 export function Skills() {
   const t = useTranslations("skills");
+  const reduceMotion = useReducedMotion();
+  const reveal = {
+    hidden: { opacity: 0, y: reduceMotion ? 0 : 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.25, ease: [0.23, 1, 0.32, 1] as const },
+    },
+  };
 
   return (
     <section
@@ -115,24 +125,38 @@ export function Skills() {
       </MotionReveal>
 
       <div className="mt-10">
-        <MotionReveal
-          as="dl"
-          direction="right"
-          delay={0.1}
-          className="space-y-8 md:space-y-10"
-        >
-          {skillGroups.map((g) => (
-            <div
+        <dl className="space-y-8 md:space-y-10">
+          {skillGroups.map((g, groupIndex) => (
+            <m.div
               key={g.key}
+              initial={reduceMotion ? false : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    delayChildren: reduceMotion ? 0 : groupIndex * 0.08,
+                    staggerChildren: reduceMotion ? 0 : 0.1,
+                  },
+                },
+              }}
               className="grid grid-cols-1 gap-3 sm:grid-cols-[10rem_1fr] sm:gap-8"
             >
-              <dt className="font-medium">
+              <m.dt variants={reveal} className="font-medium">
                 {t(`groups.${g.key}`)}
-              </dt>
-              <dd className="flex flex-wrap gap-2">
+              </m.dt>
+              <m.dd
+                variants={{
+                  hidden: {},
+                  visible: { transition: { staggerChildren: reduceMotion ? 0 : 0.05 } },
+                }}
+                className="flex flex-wrap gap-2"
+              >
                 {g.items.map((item) => (
-                  <span
+                  <m.span
                     key={item.name}
+                    variants={reveal}
                     className="inline-flex cursor-default items-center gap-2 rounded-md border border-rule px-2.5 py-1.5 text-sm text-muted transition-colors hover:border-accent hover:text-accent"
                   >
                     {item.image ? (
@@ -149,12 +173,12 @@ export function Skills() {
                       <i className={`${item.icon} text-base`} aria-hidden="true" />
                     )}
                     {item.name}
-                  </span>
+                  </m.span>
                 ))}
-              </dd>
-            </div>
+              </m.dd>
+            </m.div>
           ))}
-        </MotionReveal>
+        </dl>
       </div>
     </section>
   );
