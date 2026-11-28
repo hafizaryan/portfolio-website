@@ -97,25 +97,6 @@ body {
   will-change: transform;
 }
 
-/* Flowing contours extend the paper folds around the portrait. */
-.hero-contours {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 0.7;
-  opacity: 0.2;
-  mask-image: linear-gradient(to bottom, transparent 8%, #000 30%, #000 55%, transparent 85%);
-}
-
-@media (max-width: 767px) {
-  .hero-contours { opacity: 0.14; }
-}
-
 @keyframes hero-paper-drift {
   from {
     transform: translate3d(-1%, -1.5%, 0) scale(1.015);
@@ -210,17 +191,24 @@ body {
   stroke-linejoin: round;
   filter: drop-shadow(0 -1px 0 rgba(250, 249, 238, 0.8));
 }
+/* Dash harus lebih panjang dari outline huruf terpanjang ("h" > 3em),
+   kalau tidak sisa outline-nya tidak pernah tergambar. */
 .hero-writing-svg tspan {
-  stroke-dasharray: 3em;
-  stroke-dashoffset: 3em;
+  stroke-dasharray: 6em;
+  stroke-dashoffset: 6em;
   opacity: 0;
 }
+/* Siklus 7s per huruf: tulis (0-20%), tahan, hapus (60-78%), jeda, ulang.
+   Delay per huruf (inline di hero.tsx) membuat tulis & hapus berjalan berurutan. */
 .hero-writing.is-ready tspan {
-  animation: hero-write 1.4s var(--ease-out) both;
+  animation: hero-write 7s var(--ease-out) infinite both;
 }
 @keyframes hero-write {
-  from { stroke-dashoffset: 3em; opacity: 1; }
-  to { stroke-dashoffset: 0; opacity: 1; }
+  0% { stroke-dashoffset: 6em; opacity: 1; }
+  20% { stroke-dashoffset: 0; opacity: 1; }
+  60% { stroke-dashoffset: 0; opacity: 1; }
+  78% { stroke-dashoffset: -6em; opacity: 1; }
+  100% { stroke-dashoffset: -6em; opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-writing-svg tspan,
