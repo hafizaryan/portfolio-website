@@ -1,13 +1,41 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { m, useReducedMotion, useScroll, useTransform } from "motion/react";
+import {
+  m,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+  type MotionValue,
+} from "motion/react";
 import { useSiteReady } from "@/lib/use-site-ready";
 import silhouette from "../assets/foto-profil-siluet-hero.png";
 
 const EASE_OUT: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const POINTER_SPRING = { stiffness: 110, damping: 20, mass: 0.6 };
+
+/**
+ * Satu layer parallax. scrollRange = geser Y (px) saat hero habis di-scroll;
+ * pointerDepth = geser (px) saat kursor di tepi hero. Layer jauh: scroll besar,
+ * pointer kecil/berlawanan. Layer dekat: scroll kecil, pointer besar.
+ */
+function useParallaxLayer(
+  scroll: MotionValue<number>,
+  pointerX: MotionValue<number>,
+  pointerY: MotionValue<number>,
+  scrollRange: number,
+  pointerDepth: number,
+) {
+  const x = useTransform(pointerX, (p) => p * pointerDepth);
+  const y = useTransform([scroll, pointerY], ([s, p]: number[]) =>
+    s * scrollRange + p * pointerDepth,
+  );
+  return { x, y };
+}
 
 export function Hero() {
   const t = useTranslations("hero");
@@ -15,16 +43,50 @@ export function Hero() {
   const ready = useSiteReady();
   const reduceMotion = useReducedMotion();
 
-  // Scroll-linked depth parallax antara wordmark dan siluet.
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
 
-  const wordmarkY = useTransform(scrollYProgress, [0, 1], [0, 45]);
+  // Posisi kursor relatif terhadap hero (-0.5..0.5), dihaluskan dengan spring.
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const smoothX = useSpring(pointerX, POINTER_SPRING);
+  const smoothY = useSpring(pointerY, POINTER_SPRING);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || reduceMotion) return;
+    // Hanya perangkat dengan mouse; layar sentuh cukup parallax scroll.
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+
+    const onMove = (e: PointerEvent) => {
+      const rect = section.getBoundingClientRect();
+      pointerX.set((e.clientX - rect.left) / rect.width - 0.5);
+      pointerY.set((e.clientY - rect.top) / rect.height - 0.5);
+    };
+    const onLeave = () => {
+      pointerX.set(0);
+      pointerY.set(0);
+    };
+
+    section.addEventListener("pointermove", onMove);
+    section.addEventListener("pointerleave", onLeave);
+    return () => {
+      section.removeEventListener("pointermove", onMove);
+      section.removeEventListener("pointerleave", onLeave);
+    };
+  }, [reduceMotion, pointerX, pointerY]);
+
+  const d = reduceMotion ? 0 : 1;
+  // Wrapper kertas dibuat lebih besar dari hero (-inset-24) supaya
+  // tepinya tidak terlihat saat digeser.
+  const paper = useParallaxLayer(scrollYProgress, smoothX, smoothY, 160 * d, -40 * d);
+  const wordmark = useParallaxLayer(scrollYProgress, smoothX, smoothY, 320 * d, 40 * d);
+  const silhouetteLayer = useParallaxLayer(scrollYProgress, smoothX, smoothY, 110 * d, 70 * d);
+
   const wordmarkOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.2]);
-  const silhouetteY = useTransform(scrollYProgress, [0, 1], [0, 15]);
-  const silhouetteScale = useTransform(scrollYProgress, [0, 1], [1, 1.03]);
+  const silhouetteScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
 
   return (
     <section
@@ -32,21 +94,22 @@ export function Hero() {
       id="top"
       className="hero-poster relative isolate overflow-hidden"
     >
-      <div aria-hidden="true" className="hero-paper" />
-
-      <svg className="hero-contours" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        {[0, 1, 2, 3, 4, 5].map((line) => (
-          <path
-            key={line}
-            transform={`translate(${line * 22} ${line * -18})`}
-            d="M-180 680 C80 700 10 230 350 240 S620 580 900 340 S1280 30 1610 180"
-          />
-        ))}
-      </svg>
+      {/* Wrapper parallax terpisah: .hero-paper sudah memakai transform untuk animasi drift. */}
+      <m.div
+        aria-hidden="true"
+        style={{ x: paper.x, y: paper.y }}
+        className="pointer-events-none absolute -inset-24 z-0"
+      >
+        <div className="hero-paper" />
+      </m.div>
 
       {/* Siluet foto di depan wordmark */}
       <m.div
-        style={{ y: reduceMotion ? 0 : silhouetteY, scale: reduceMotion ? 1 : silhouetteScale }}
+        style={{
+          x: silhouetteLayer.x,
+          y: silhouetteLayer.y,
+          scale: reduceMotion ? 1 : silhouetteScale,
+        }}
         className="hero-silhouette-wrap pointer-events-none absolute inset-x-0 bottom-[max(5.75rem,calc(4.75rem+env(safe-area-inset-bottom)))] z-[20] flex justify-center md:bottom-0"
         aria-hidden="true"
       >
@@ -74,7 +137,7 @@ export function Hero() {
       <div className="hero-title-layout relative z-[10] mx-auto flex h-[100svh] max-w-[1120px] flex-col justify-end px-5 pb-[max(7rem,calc(6rem+env(safe-area-inset-bottom)))] pt-24 md:px-8 md:pb-10">
         {/* Layer belakang (z-0): wordmark "hafiz aryan" dengan editorial mask reveal */}
         <m.h1
-          style={{ y: reduceMotion ? 0 : wordmarkY, opacity: reduceMotion ? 1 : wordmarkOpacity }}
+          style={{ x: wordmark.x, y: wordmark.y, opacity: reduceMotion ? 1 : wordmarkOpacity }}
           aria-label={t("name")}
           className="hero-wordmark relative z-[10] select-none whitespace-nowrap font-semibold lowercase text-accent"
         >

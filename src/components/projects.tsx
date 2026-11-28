@@ -31,7 +31,7 @@ const projects: Project[] = [
   {
     // Repo privat: tanpa tombol Repo/Demo.
     key: "lab",
-    image: "/projects/lab.jpg",
+    image: "/projects/ilmis-sso.png",
     tags: ["PHP", "CodeIgniter", "MySQL", "RBAC Architecture"],
   },
   {
